@@ -8,8 +8,28 @@ namespace Iface.Oik.SvgPlayground.Model
 {
   public class TmStatus : TmTag
   {
-    public bool         IsOn { get; set; }
-    public TmStatusFlag Flag { get; set; }
+    private bool         _isOn;
+    private TmStatusFlag _flag;
+
+    public bool IsOn
+    {
+      get => _isOn;
+      set
+      {
+        _isOn = value;
+        NotifyOnPropertyChanged();
+      }
+    }
+
+    public TmStatusFlag Flag
+    {
+      get => _flag;
+      set
+      {
+        _flag = value;
+        NotifyOnPropertyChanged();
+      }
+    }
 
     public bool IsUnreliable   => Flag.HasFlag(TmStatusFlag.Unreliable);
     public bool IsMalfunction  => Flag.HasFlag(TmStatusFlag.Malfunction);

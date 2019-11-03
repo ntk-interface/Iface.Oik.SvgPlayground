@@ -48,15 +48,16 @@
                      Margin="0,20,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,0,0,10">
                             <TextBlock Text="{Binding}"
                                        Width="100"
                                        VerticalAlignment="Center" />
-                            <TextBox Text="{Binding Value}"
+                            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                                      Width="50"
                                      VerticalAlignment="Center"
                                      Margin="10,0,0,0" />
-                            <TextBox Text="{Binding Unit}"
+                            <TextBox Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
                                      Width="50"
                                      VerticalAlignment="Center"
                                      Margin="10,0,0,0" />
@@ -71,10 +72,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-            <Button Command="{Binding UpdateCommand}"
-                    Content="Обновить с учетом сигналов и измерений"
-                    Margin="0,20,0,0" />
         </StackPanel>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto"

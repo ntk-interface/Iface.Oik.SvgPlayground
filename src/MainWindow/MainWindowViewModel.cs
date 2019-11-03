@@ -50,7 +50,6 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
 
     public ICommand OpenFileCommand { get; }
-    public ICommand UpdateCommand   { get; }
 
 
     public MainWindowViewModel()
@@ -58,7 +57,14 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       Title = "SVG";
 
       OpenFileCommand = new RelayCommand(_ => OpenFile());
-      UpdateCommand   = new RelayCommand(_ => Update());
+      
+      FixTextBoxFloatValue();
+    }
+
+
+    private static void FixTextBoxFloatValue()
+    {
+      FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
     }
 
 
@@ -150,6 +156,8 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
       TmStatuses.Add(tmStatus);
 
+      tmStatus.PropertyChanged += (s, ea) => Update();
+
       return TmStatuses.Count - 1;
     }
 
@@ -160,6 +168,8 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       var tmAnalog = new TmAnalog(ch, rtu, point);
 
       TmAnalogs.Add(tmAnalog);
+
+      tmAnalog.PropertyChanged += (s, ea) => Update();
 
       return TmAnalogs.Count - 1;
     }

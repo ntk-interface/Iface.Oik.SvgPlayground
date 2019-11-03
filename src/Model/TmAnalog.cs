@@ -11,9 +11,42 @@ namespace Iface.Oik.SvgPlayground.Model
     public static readonly string InvalidValueString = "???";
 
 
-    public float        Value { get; set; }
-    public string       Unit  { get; set; }
-    public TmAnalogFlag Flag  { get; set; }
+    private TmAnalogFlag _flag;
+    private float        _value;
+    private string       _unit;
+
+    
+    public float Value
+    {
+      get => _value;
+      set
+      {
+        _value = value;
+        NotifyOnPropertyChanged();
+      }
+    }
+
+    
+    public string Unit
+    {
+      get => _unit;
+      set
+      {
+        _unit = value;
+        NotifyOnPropertyChanged();
+      }
+    }
+
+
+    public TmAnalogFlag Flag
+    {
+      get => _flag;
+      set
+      {
+        _flag = value;
+        NotifyOnPropertyChanged();
+      }
+    }
 
 
     public bool IsUnreliable => Flag.HasFlag(TmAnalogFlag.Unreliable);

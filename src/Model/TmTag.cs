@@ -1,6 +1,9 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace Iface.Oik.SvgPlayground.Model
 {
-  public class TmTag
+  public class TmTag : INotifyPropertyChanged
   {
     public int Ch    { get; set; }
     public int Rtu   { get; set; }
@@ -30,6 +33,15 @@ namespace Iface.Oik.SvgPlayground.Model
           return string.Empty;
       }
       return $"{prefix}{Ch}:{Rtu}:{Point}";
+    }
+
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+
+    protected void NotifyOnPropertyChanged([CallerMemberName] string propertyName = null)
+    {
+      PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
   }
 }
