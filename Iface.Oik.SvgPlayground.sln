@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Iface.Oik.SvgPlayground", "src\Iface.Oik.SvgPlayground.csproj", "{900220FF-99A4-4420-980F-6D2042C0F688}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{900220FF-99A4-4420-980F-6D2042C0F688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{900220FF-99A4-4420-980F-6D2042C0F688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{900220FF-99A4-4420-980F-6D2042C0F688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{900220FF-99A4-4420-980F-6D2042C0F688}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

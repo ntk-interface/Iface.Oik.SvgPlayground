@@ -1,0 +1,3278 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="900"
+     height="300">
+
+    <title>ПС Демо 2 SVG</title>
+
+    <rect width="100%"
+          height="100%"
+          fill="#333333"/>
+
+    <!-- РПН -->
+    <g oik:oikelement="1"
+       transform="translate(70,265)">
+        <desc>
+            var ti = initTmAnalog(20, 3, 3, 'Измерение');
+            var defaultFill = getElementProperty('value', 'fill');
+
+            initTmAnalogDefaultCommands(ti);
+
+            function update() {
+            if (isTmAnalogUnreliable(ti)) {
+            setElementProperty('value', 'fill', 'white');
+            }
+            else {
+            setElementProperty('value', 'fill', defaultFill);
+            }
+            setElementProperty('value', 'text', getTmAnalogValue(ti));
+            }
+
+            return update;
+        </desc>
+        <text oik:oikid="value"
+              fill="#FFEB3B"
+              font-family="Arial"
+              font-size="12">
+            ???
+        </text>
+    </g>
+
+    <!-- РПН -->
+    <g oik:oikelement="1"
+       transform="translate(170,265)">
+        <desc>
+            var ti = initTmAnalog(20, 5, 3, 'Измерение');
+            var defaultFill = getElementProperty('value', 'fill');
+
+            initTmAnalogDefaultCommands(ti);
+
+            function update() {
+            if (isTmAnalogUnreliable(ti)) {
+            setElementProperty('value', 'fill', 'white');
+            }
+            else {
+            setElementProperty('value', 'fill', defaultFill);
+            }
+            setElementProperty('value', 'text', getTmAnalogValue(ti));
+            }
+
+            return update;
+        </desc>
+        <text oik:oikid="value"
+              fill="#FFEB3B"
+              font-family="Arial"
+              font-size="12">
+            ???
+        </text>
+    </g>
+			  
+    <g oik:oikelement="1"
+       transform="translate(50.5,40.5)">
+        <desc>
+			initOpenSvgDefaultCommands('ПС Демо1');
+		</desc>
+		<rect x="0"
+			  y="0"
+			  width="55"
+			  height="30"
+			  stroke="#000000"
+			  fill="#cccccc" />			  
+		<text x="10"
+			  y="20"
+			  fill="#000000"
+			  font-family="Arial"
+			  font-size="14">
+			ПС 1
+		</text>
+	</g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(0.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 1, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                initTmStatusDefaultCommands(ts);
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 1, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                initTmStatusDefaultCommands(ts);
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 1, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                initTmStatusDefaultCommands(ts);
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 1, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                initTmAnalogDefaultCommands(ti);
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 1, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                initTmAnalogDefaultCommands(ti);
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(100.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 2, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 2, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 2, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 2
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 2, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 2, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(200.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 3, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 3, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 3, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 3
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 3, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 3, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(300.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 4, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 4, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 4, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 4
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 4, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 4, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(400.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 5, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 5, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 5, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 5
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 5, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 5, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(500.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 1, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 1, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 1, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 6
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 1, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 1, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(600.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 2, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 2, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 2, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 7
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 2, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 2, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(700.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 3, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 3, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 3, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 8
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 3, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 3, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+
+    <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <g transform="translate(800.5,40.5)">
+        <g oik:oikelement="1"
+           transform="translate(74,100)">
+            <desc>
+                var ts = initTmStatus(20, 4, 1, 'Выключатель');
+                var fillColor = getElementProperty('breaker', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('breaker', 'fill', 'white');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('breaker', 'fill', fillColor);
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('breaker', 'fill', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="6"
+                  y1="0"
+                  x2="6"
+                  y2="2"
+                  stroke="#03a9f4"/>
+            <line x1="6"
+                  y1="14"
+                  x2="6"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- сам выключатель -->
+            <rect oik:oikid="breaker"
+                  x="0"
+                  y="2"
+                  width="12"
+                  height="12"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"/>
+            <!-- недостоверность -->
+            <text oik:oikid="unreliable"
+                  x="6"
+                  y="12"
+                  text-anchor="middle"
+                  fill="#03a9f4"
+                  font-family="Arial"
+                  font-size="10"
+                  display="none">
+                ?
+            </text>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="116"
+              x2="80"
+              y2="136"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,136)">
+            <desc>
+                var ts = initTmStatus(20, 4, 2, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <line x1="80"
+              y1="100"
+              x2="80"
+              y2="80"
+              stroke="#03a9f4"/>
+
+        <g oik:oikelement="1"
+           transform="translate(74,64)">
+            <desc>
+                var ts = initTmStatus(20, 4, 3, 'Разъединитель');
+                var fillColor = getElementProperty('knife', 'fill');
+
+                function update() {
+                if (isTmStatusUnreliable(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'block');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusMalfunction(ts)) {
+                setElementProperty('knife', 'display', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'block');
+                }
+                else if (isTmStatusIntermediate(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(45,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else if (isTmStatusOn(ts)) {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'none');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                else {
+                setElementProperty('knife', 'display', 'block');
+                setElementProperty('knife', 'transform', 'rotate(90,6,8)');
+                setElementProperty('unreliable', 'display', 'none');
+                setElementProperty('malfunction', 'display', 'none');
+                }
+                }
+
+                return update;
+            </desc>
+            <!-- коннекторы -->
+            <line x1="0"
+                  y1="0"
+                  x2="12"
+                  y2="0"
+                  stroke="#03a9f4"/>
+            <line x1="0"
+                  y1="16"
+                  x2="12"
+                  y2="16"
+                  stroke="#03a9f4"/>
+            <!-- нож -->
+            <line oik:oikid="knife"
+                  x1="6"
+                  y1="2"
+                  x2="6"
+                  y2="14"
+                  fill="#03a9f4"
+                  stroke="#03a9f4"
+                  transform="rotate(0,6,8)"/>
+            <!-- недостоверность -->
+            <g oik:oikid="unreliable"
+               display="none">
+                <rect x="0"
+                      y="2"
+                      width="12"
+                      height="12"
+                      fill="white"/>
+                <text x="6"
+                      y="12"
+                      text-anchor="middle"
+                      fill="#03a9f4"
+                      font-family="Arial"
+                      font-size="10">
+                    ?
+                </text>
+            </g>
+            <!-- неисправность -->
+            <line oik:oikid="malfunction"
+                  x1="0"
+                  y1="14"
+                  x2="12"
+                  y2="2"
+                  stroke="red"
+                  stroke-width="2"
+                  display="none"/>
+        </g>
+
+        <!-- стрелка наверх -->
+        <line x1="80"
+              y1="64"
+              x2="80"
+              y2="30"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="75"
+              y2="40"
+              stroke="#03a9f4"/>
+        <line x1="80"
+              y1="30"
+              x2="85"
+              y2="40"
+              stroke="#03a9f4"/>
+        <text x="60"
+              y="20"
+              fill="#ffffff"
+              font-family="Arial"
+              font-size="14">
+            ПС 9
+        </text>
+
+        <!-- шина -->
+        <line x1="80"
+              y1="152"
+              x2="80"
+              y2="170"
+              stroke="#03a9f4"/>
+        <rect x="0"
+              y="170"
+              width="100"
+              height="6"
+              fill="#03a9f4"/>
+        <circle cx="80"
+                cy="173"
+                r="2"
+                fill="#333333"/>
+
+        <!-- измерения -->
+        <g oik:oikelement="1"
+           transform="translate(5,100)">
+            <desc>
+                var ti = initTmAnalog(20, 4, 1, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+
+        <g oik:oikelement="1"
+           transform="translate(5,128)">
+            <desc>
+                var ti = initTmAnalog(20, 4, 2, 'Измерение');
+                var defaultFill = getElementProperty('value', 'fill');
+
+                function update() {
+                if (isTmAnalogUnreliable(ti)) {
+                setElementProperty('value', 'fill', 'white');
+                }
+                else {
+                setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                }
+
+                return update;
+            </desc>
+            <text oik:oikid="value"
+                  fill="#4caf50"
+                  font-family="Arial"
+                  font-size="12">
+                ???
+            </text>
+        </g>
+    </g>
+</svg>

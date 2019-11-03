@@ -1,0 +1,90 @@
+﻿<Window x:Class="Iface.Oik.SvgPlayground.MainWindow.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Iface.Oik.SvgPlayground.MainWindow"
+        mc:Ignorable="d"
+        Title="{Binding Title}"
+        Width="800"
+        Height="600">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <DockPanel>
+        <StackPanel MinWidth="300"
+                    Margin="20">
+            <Button Command="{Binding OpenFileCommand}"
+                    Content="Открыть SVG файл" />
+
+            <ListBox ItemsSource="{Binding TmStatuses}"
+                     BorderThickness="0"
+                     Margin="0,20,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}"
+                                       Width="80"
+                                       VerticalAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding IsOn}"
+                                      Content="включен"
+                                      Width="70"
+                                      VerticalAlignment="Center"
+                                      Margin="10,0,0,0" />
+                            <ComboBox ItemsSource="{Binding FlagsList}"
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      SelectedValue="{Binding Flag}"
+                                      Width="150"
+                                      VerticalAlignment="Center"
+                                      Margin="10,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <ListBox ItemsSource="{Binding TmAnalogs}"
+                     BorderThickness="0"
+                     Margin="0,20,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding}"
+                                       Width="100"
+                                       VerticalAlignment="Center" />
+                            <TextBox Text="{Binding Value}"
+                                     Width="50"
+                                     VerticalAlignment="Center"
+                                     Margin="10,0,0,0" />
+                            <TextBox Text="{Binding Unit}"
+                                     Width="50"
+                                     VerticalAlignment="Center"
+                                     Margin="10,0,0,0" />
+                            <ComboBox ItemsSource="{Binding FlagsList}"
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      SelectedValue="{Binding Flag}"
+                                      Width="150"
+                                      VerticalAlignment="Center"
+                                      Margin="10,0,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Command="{Binding UpdateCommand}"
+                    Content="Обновить с учетом сигналов и измерений"
+                    Margin="0,20,0,0" />
+        </StackPanel>
+
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Auto">
+            <Grid Margin="20"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <Image Source="{Binding SvgImage}"
+                       Stretch="None" />
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
+</Window>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="20"
+     height="20">
+
+    <title>Выключатель</title>
+
+    <g transform="translate(0.5,0.5)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 1, 'Выключатель');
+            var fillColor = getElementProperty('breaker', 'fill');
+
+            function update() {
+            	if (isTmStatusUnreliable(ts)) {
+            		setElementProperty('breaker', 'fill', 'white');
+            		setElementProperty('unreliable', 'display', 'block');
+            		setElementProperty('malfunction', 'display', 'none');
+            	}
+            	else if (isTmStatusMalfunction(ts)) {
+            		setElementProperty('breaker', 'fill', 'none');
+            		setElementProperty('unreliable', 'display', 'none');
+            		setElementProperty('malfunction', 'display', 'block');
+            	}
+            	else if (isTmStatusOn(ts)) {
+            		setElementProperty('breaker', 'fill', fillColor);
+            		setElementProperty('unreliable', 'display', 'none');
+            		setElementProperty('malfunction', 'display', 'none');
+            	}
+				else {
+            		setElementProperty('breaker', 'fill', 'none');
+            		setElementProperty('unreliable', 'display', 'none');
+            		setElementProperty('malfunction', 'display', 'none');
+            	}
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="breaker"
+              x="0"
+              y="0"
+              width="12"
+              height="12"
+              fill="#03a9f4"
+              stroke="#03a9f4"/>
+        <!-- недостоверность -->
+        <text oik:oikid="unreliable"
+              x="6"
+              y="10"
+              text-anchor="middle"
+              fill="#03a9f4"
+              font-family="Arial"
+              font-size="10"
+              display="none">
+            ?
+        </text>
+        <!-- неисправность -->
+        <line oik:oikid="malfunction"
+              x1="0"
+              y1="12"
+              x2="12"
+              y2="0"
+              stroke="red"
+              stroke-width="2"
+              display="none"/>
+    </g>
+</svg>
