@@ -16,10 +16,16 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 {
   public class MainWindowViewModel : INotifyPropertyChanged
   {
-    private SvgDocument   _svgDocument;
-    private List<Element> _elements = new List<Element>();
+    private const double ScaleStep = 1.5;
+
+
+    private          SvgDocument   _svgDocument;
+    private readonly List<Element> _elements = new List<Element>();
+
 
     private BitmapImage _svgImage;
+    private string      _title;
+    private double      _scale = 1;
 
     public BitmapImage SvgImage
     {
@@ -32,8 +38,6 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
-    private string _title;
-
     public string Title
     {
       get => _title;
@@ -45,11 +49,25 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public double Scale
+    {
+      get => _scale;
+      set
+      {
+        _scale = value;
+        Update();
+        NotifyOnPropertyChanged();
+      }
+    }
+
+
     public ObservableCollection<TmStatus> TmStatuses { get; } = new ObservableCollection<TmStatus>();
     public ObservableCollection<TmAnalog> TmAnalogs  { get; } = new ObservableCollection<TmAnalog>();
 
 
     public ICommand OpenFileCommand { get; }
+    public ICommand ZoomInCommand   { get; }
+    public ICommand ZoomOutCommand  { get; }
 
 
     public MainWindowViewModel()
@@ -57,7 +75,9 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       Title = "SVG";
 
       OpenFileCommand = new RelayCommand(_ => OpenFile());
-      
+      ZoomInCommand   = new RelayCommand(_ => ZoomIn());
+      ZoomOutCommand  = new RelayCommand(_ => ZoomOut());
+
       FixTextBoxFloatValue();
     }
 
@@ -137,15 +157,41 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       }
       try
       {
+        var bitmap = _svgDocument.Draw((int) (_svgDocument.Width  * Scale),
+                                       (int) (_svgDocument.Height * Scale));
         Application.Current
                    .Dispatcher
-                   ?.Invoke(new Action(() => SvgImage = BitmapUtil.ConvertBitmap(_svgDocument?.Draw())));
+                   ?.Invoke(new Action(() => SvgImage = BitmapUtil.ConvertBitmap(bitmap)));
       }
       catch (Exception ex)
       {
         SvgImage = null;
         MessageBox.Show("Ошибка при попытке отрисовки: " + ex.Message);
       }
+    }
+
+
+    private void ZoomIn()
+    {
+      Zoom(ScaleStep);
+    }
+
+
+    private void ZoomOut()
+    {
+      Zoom(1 / ScaleStep);
+    }
+
+
+    private void Zoom(double scale)
+    {
+      var tempScale = Scale * scale;
+      if (tempScale < 1.1f && tempScale > 0.9f && !tempScale.Equals(1.0f)) // округляем до единицы, если рядом
+      {
+        scale /= tempScale;
+      }
+
+      Scale *= scale;
     }
 
 

@@ -25,7 +25,7 @@
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding}"
                                        Width="80"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" />
                             <CheckBox IsChecked="{Binding IsOn}"
                                       Content="включен"
                                       Width="70"
@@ -76,11 +76,26 @@
 
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Auto">
-            <Grid Margin="20"
-                  HorizontalAlignment="Left"
-                  VerticalAlignment="Top">
+            <Grid Margin="20">
                 <Image Source="{Binding SvgImage}"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
                        Stretch="None" />
+                <Button Command="{Binding ZoomInCommand}"
+                        Content="+"
+                        Width="30"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Opacity=".9" />
+                <Button Command="{Binding ZoomOutCommand}"
+                        Content="-"
+                        Width="30"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,40,0,0"
+                        Opacity=".9" />
             </Grid>
         </ScrollViewer>
     </DockPanel>
