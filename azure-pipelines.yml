@@ -35,8 +35,30 @@ stages:
       inputs:
         command: publish
         publishWebProjects: false
-        arguments: '-c $(BuildConfiguration) -r win-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: True
+        arguments: '-c $(BuildConfiguration) -r win-x64 --self-contained false /p:CopyOutputSymbolsToPublishDirectory=false /p:PublishSingleFile=true -o $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
+        modifyOutputPath: false
 
     - publish: $(Build.ArtifactStagingDirectory)
       artifact: $(appName)
+
+
+- stage: Deploy
+  dependsOn:
+  - Build
+  jobs:
+  - deployment: Deploy
+    pool:
+      name: default
+    environment: $(deployMachine)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: WindowsMachineFileCopy@2
+            inputs:
+              SourcePath: $(Pipeline.Workspace)/$(appName)/a.zip
+              MachineNames: $(deployMachine)
+              AdminUserName: $(IFACE_USER)
+              AdminPassword: $(IFACE_PASSWORD)
+              TargetPath: $(deployPath)
