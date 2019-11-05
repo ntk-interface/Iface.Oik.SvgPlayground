@@ -1,0 +1,42 @@
+name: $(Year:yy).$(minorVersion)
+
+variables:
+  minorVersion: $[counter(variables['Year:yy'], 1)]
+  buildConfiguration: Release
+  appName: Iface.Oik.SvgPlayground
+  archiveName: $(appName).$(Build.BuildNumber)
+  deployMachine: IFSERVER2008
+  deployPath: ifhdd\home\Alexei\1
+
+
+trigger:
+- master
+
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool:
+      vmImage: windows-latest
+    steps:
+    - task: UseDotNet@2
+      displayName: Install .NET Core 3.0
+      inputs:
+        version: 3.0.100
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '-c $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: Publish
+      inputs:
+        command: publish
+        publishWebProjects: false
+        arguments: '-c $(BuildConfiguration) -r win-x64 /p:PublishSingleFile=true /p:PublishTrimmed=true -o $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: True
+
+    - publish: $(Build.ArtifactStagingDirectory)
+      artifact: $(appName)
