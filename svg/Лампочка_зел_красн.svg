@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="80"
+     height="80">
+
+    <title>Лампочка</title>
+	
+	<rect width="100%"
+	      height="100%"
+		  fill="gray" />
+
+    <g transform="translate(0.5,0.5)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(0, 1, 1, 'Лампочка');
+
+            function update() {
+            	if (isTmStatusUnreliable(ts)) {
+            		setElementProperty('lamp', 'fill', 'white');
+            	}
+            	else if (isTmStatusOn(ts)) {
+            		setElementProperty('lamp', 'fill', 'green');
+            	}
+				else {
+            		setElementProperty('lamp', 'fill', 'red');
+            	}
+            }
+
+            return update;
+        </desc>
+        <circle oik:oikid="lamp"
+                cx="40"
+                cy="40"
+			    r="30"
+                stroke="black"/>
+    </g>
+</svg>
