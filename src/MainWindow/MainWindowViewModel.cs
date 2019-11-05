@@ -151,6 +151,8 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
     private void Update()
     {
+      if (_svgDocument == null) return;
+      
       foreach (var element in _elements)
       {
         element.Update();
