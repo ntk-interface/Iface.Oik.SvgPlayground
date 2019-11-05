@@ -39,6 +39,10 @@ stages:
         zipAfterPublish: true
         modifyOutputPath: false
 
+    - script: 'RENAME a.zip $(archiveName).zip'
+      displayName: Rename archive
+      workingDirectory: $(Build.ArtifactStagingDirectory)
+
     - publish: $(Build.ArtifactStagingDirectory)
       artifact: $(appName)
 
@@ -57,7 +61,7 @@ stages:
           steps:
           - task: WindowsMachineFileCopy@2
             inputs:
-              SourcePath: $(Pipeline.Workspace)/$(appName)/a.zip
+              SourcePath: $(Pipeline.Workspace)/$(appName)/$(archiveName).zip
               MachineNames: $(deployMachine)
               AdminUserName: $(IFACE_USER)
               AdminPassword: $(IFACE_PASSWORD)

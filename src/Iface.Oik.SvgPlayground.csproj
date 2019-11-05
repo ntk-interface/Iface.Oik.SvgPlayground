@@ -11,4 +11,8 @@
       <PackageReference Include="Svg" Version="3.0.49" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Include="..\azure-pipelines.yml" />
+    </ItemGroup>
+
 </Project>
