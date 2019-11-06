@@ -40,17 +40,40 @@ namespace Iface.Oik.SvgPlayground.Model
       _scriptEngine = new Engine();
 
       _scriptEngine
-        .SetValue("setElementProperty",     new Action<string, string, string>(SetElementProperty))
-        .SetValue("getElementProperty",     new Func<string, string, string>(GetElementProperty))
-        .SetValue("initTmStatus",           new Func<int, int, int, string, int>(_owner.InitTmStatus))
-        .SetValue("initTmAnalog",           new Func<int, int, int, string, int>(_owner.InitTmAnalog))
-        .SetValue("getTmStatusStatus",      new Func<int, int>(_owner.GetTmStatusStatus))
-        .SetValue("isTmStatusUnreliable",   new Func<int, bool>(_owner.IsTmStatusUnreliable))
-        .SetValue("isTmStatusMalfunction",  new Func<int, bool>(_owner.IsTmStatusMalfunction))
-        .SetValue("isTmStatusIntermediate", new Func<int, bool>(_owner.IsTmStatusIntermediate))
-        .SetValue("isTmStatusOn",           new Func<int, bool>(_owner.IsTmStatusOn))
-        .SetValue("getTmAnalogValue",       new Func<int, string>(_owner.GetTmAnalogValue))
-        .SetValue("isTmAnalogUnreliable",   new Func<int, bool>(_owner.IsTmAnalogUnreliable))
+        .SetValue("setElementProperty",            new Action<string, string, string>(SetElementProperty))
+        .SetValue("getElementProperty",            new Func<string, string, string>(GetElementProperty))
+        .SetValue("initTmStatus",                  new Func<int, int, int, string, int>(_owner.InitTmStatus))
+        .SetValue("initTmAnalog",                  new Func<int, int, int, string, int>(_owner.InitTmAnalog))
+        .SetValue("getTmStatusStatus",             new Func<int, int>(_owner.GetTmStatusStatus))
+        .SetValue("isTmStatusUnreliable",          new Func<int, bool>(_owner.IsTmStatusUnreliable))
+        .SetValue("isTmStatusMalfunction",         new Func<int, bool>(_owner.IsTmStatusMalfunction))
+        .SetValue("isTmStatusIntermediate",        new Func<int, bool>(_owner.IsTmStatusIntermediate))
+        .SetValue("isTmStatusOn",                  new Func<int, bool>(_owner.IsTmStatusOn))
+        .SetValue("getTmAnalogValue",              new Func<int, string>(_owner.GetTmAnalogValue))
+        .SetValue("isTmAnalogUnreliable",          new Func<int, bool>(_owner.IsTmAnalogUnreliable))
+        .SetValue("initTmStatusDefaultCommands",   new Action<int>(InitTmStatusDefaultCommands))
+        .SetValue("initTmAnalogDefaultCommands",   new Action<int>(InitTmAnalogDefaultCommands))
+        .SetValue("initOpenSvgDefaultCommands",    new Action<string>(InitOpenSvgDefaultCommands))
+        .SetValue("initClickIntCommand",           new Action<int, int>(InitClickCommand))
+        .SetValue("initContextMenuIntCommand",     new Action<int, int, string>(InitContextMenuCommand))
+        .SetValue("initClickStringCommand",        new Action<int, string>(InitClickCommand))
+        .SetValue("initContextMenuStringCommand",  new Action<int, string, string>(InitContextMenuCommand))
+        .SetValue("initEmptyContextMenuCommand",   new Action(InitEmptyContextMenuCommand))
+        .SetValue("NONE",                          ElementCommandType.None)
+        .SetValue("OPEN_SVG_IN_THIS_TAB",          ElementCommandType.OpenSvgInThisTab)
+        .SetValue("OPEN_SVG_IN_NEW_TAB",           ElementCommandType.OpenSvgInNewTab)
+        .SetValue("SHOW_TM_STATUS",                ElementCommandType.ShowTmStatus)
+        .SetValue("TELECONTROL",                   ElementCommandType.Telecontrol)
+        .SetValue("SWITCH_TM_STATUS_MANUALLY",     ElementCommandType.SwitchTmStatusManually)
+        .SetValue("ACK_TM_STATUS",                 ElementCommandType.AckTmStatus)
+        .SetValue("OPEN_TM_STATUS_EVENTS_ARCHIVE", ElementCommandType.OpenTmStatusEventsArchive)
+        .SetValue("COPY_TM_STATUS_TO_CLIPBOARD",   ElementCommandType.CopyTmStatusToClipboard)
+        .SetValue("SHOW_TM_ANALOG",                ElementCommandType.ShowTmAnalog)
+        .SetValue("SET_TM_ANALOG_MANUALLY",        ElementCommandType.SetTmAnalogManually)
+        .SetValue("OPEN_TM_ANALOG_ALARMS",         ElementCommandType.OpenTmAnalogAlarms)
+        .SetValue("OPEN_TM_ANALOG_CHART",          ElementCommandType.OpenTmAnalogChart)
+        .SetValue("OPEN_TM_ANALOG_EVENTS_ARCHIVE", ElementCommandType.OpenTmAnalogEventsArchive)
+        .SetValue("COPY_TM_ANALOG_TO_CLIPBOARD",   ElementCommandType.CopyTmAnalogToClipboard)
         .Execute(_script, new ParserOptions {Tolerant = true});
 
       _isUpdatable = _scriptEngine.Global.HasProperty("update");
@@ -94,6 +117,47 @@ namespace Iface.Oik.SvgPlayground.Model
       if (!_elementsWithId.TryGetValue(id, out var element)) return null;
 
       return SvgUtil.GetElementProperty(element, property);
+    }
+
+
+    // эти команды никак не будут использованы в эмуляторе, описаны для совместимости
+    private void InitTmStatusDefaultCommands(int parameter)
+    {
+    }
+
+
+    private void InitTmAnalogDefaultCommands(int parameter)
+    {
+    }
+
+
+    private void InitOpenSvgDefaultCommands(string parameter)
+    {
+    }
+
+
+    private void InitClickCommand(int type, int parameter)
+    {
+    }
+
+
+    private void InitClickCommand(int type, string parameter)
+    {
+    }
+
+
+    private void InitEmptyContextMenuCommand()
+    {
+    }
+
+
+    private void InitContextMenuCommand(int type, int parameter, string caption = null)
+    {
+    }
+
+
+    private void InitContextMenuCommand(int type, string parameter, string caption = null)
+    {
     }
   }
 }

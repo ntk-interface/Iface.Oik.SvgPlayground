@@ -199,7 +199,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
     public int InitTmStatus(int ch, int rtu, int point, string _ = null)
     {
-      // todo al не добавлять дублирующиеся адреса, просто возвращать уже имеющийся индекс
+      // todo не добавлять дублирующиеся адреса, просто возвращать уже имеющийся индекс
       var tmStatus = new TmStatus(ch, rtu, point);
 
       TmStatuses.Add(tmStatus);
@@ -212,7 +212,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
     public int InitTmAnalog(int ch, int rtu, int point, string _ = null)
     {
-      // todo al не добавлять дублирующиеся адреса, просто возвращать уже имеющийся индекс
+      // todo не добавлять дублирующиеся адреса, просто возвращать уже имеющийся индекс
       var tmAnalog = new TmAnalog(ch, rtu, point);
 
       TmAnalogs.Add(tmAnalog);

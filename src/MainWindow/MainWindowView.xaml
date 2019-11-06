@@ -11,92 +11,112 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <DockPanel>
-        <StackPanel MinWidth="300"
-                    Margin="20">
-            <Button Command="{Binding OpenFileCommand}"
-                    Content="Открыть SVG файл" />
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="370" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-            <ListBox ItemsSource="{Binding TmStatuses}"
-                     BorderThickness="0"
-                     Margin="0,20,0,0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}"
-                                       Width="80"
-                                       VerticalAlignment="Center" />
-                            <CheckBox IsChecked="{Binding IsOn}"
-                                      Content="включен"
-                                      Width="70"
-                                      VerticalAlignment="Center"
-                                      Margin="10,0,0,0" />
-                            <ComboBox ItemsSource="{Binding FlagsList}"
-                                      DisplayMemberPath="Value"
-                                      SelectedValuePath="Key"
-                                      SelectedValue="{Binding Flag}"
-                                      Width="150"
-                                      VerticalAlignment="Center"
-                                      Margin="10,0,0,0" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0"
+                        Command="{Binding OpenFileCommand}"
+                        Content="Открыть SVG файл"
+                        Width="200"
+                        HorizontalAlignment="Left" />
 
-            <ListBox ItemsSource="{Binding TmAnalogs}"
-                     BorderThickness="0"
-                     Margin="0,20,0,0">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="0,0,0,10">
-                            <TextBlock Text="{Binding}"
-                                       Width="100"
-                                       VerticalAlignment="Center" />
-                            <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
-                                     Width="50"
-                                     VerticalAlignment="Center"
-                                     Margin="10,0,0,0" />
-                            <TextBox Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
-                                     Width="50"
-                                     VerticalAlignment="Center"
-                                     Margin="10,0,0,0" />
-                            <ComboBox ItemsSource="{Binding FlagsList}"
-                                      DisplayMemberPath="Value"
-                                      SelectedValuePath="Key"
-                                      SelectedValue="{Binding Flag}"
-                                      Width="150"
-                                      VerticalAlignment="Center"
-                                      Margin="10,0,0,0" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </StackPanel>
+                <ItemsControl Grid.Row="1"
+                              ItemsSource="{Binding TmStatuses}"
+                              BorderThickness="0"
+                              Margin="0,20,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,0,0,10">
+                                <TextBlock Text="{Binding}"
+                                           Width="90"
+                                           VerticalAlignment="Center" />
+                                <CheckBox IsChecked="{Binding IsOn}"
+                                          Content="включен"
+                                          Width="90"
+                                          VerticalAlignment="Center"
+                                          Margin="10,0,0,0" />
+                                <ComboBox ItemsSource="{Binding FlagsList}"
+                                          DisplayMemberPath="Value"
+                                          SelectedValuePath="Key"
+                                          SelectedValue="{Binding Flag}"
+                                          Width="150"
+                                          VerticalAlignment="Center"
+                                          Margin="10,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
-        <ScrollViewer VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Auto">
-            <Grid Margin="20">
-                <Image Source="{Binding SvgImage}"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       Stretch="None" />
-                <Button Command="{Binding ZoomInCommand}"
-                        Content="+"
-                        Width="30"
-                        Height="30"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Opacity=".9" />
-                <Button Command="{Binding ZoomOutCommand}"
-                        Content="-"
-                        Width="30"
-                        Height="30"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Top"
-                        Margin="0,40,0,0"
-                        Opacity=".9" />
+                <ItemsControl Grid.Row="2"
+                              ItemsSource="{Binding TmAnalogs}"
+                              BorderThickness="0"
+                              Margin="0,20,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"
+                                        Margin="0,0,0,10">
+                                <TextBlock Text="{Binding}"
+                                           Width="90"
+                                           VerticalAlignment="Center" />
+                                <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                                         Width="40"
+                                         VerticalAlignment="Center"
+                                         Margin="10,0,0,0" />
+                                <TextBox Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
+                                         Width="40"
+                                         VerticalAlignment="Center"
+                                         Margin="10,0,0,0" />
+                                <ComboBox ItemsSource="{Binding FlagsList}"
+                                          DisplayMemberPath="Value"
+                                          SelectedValuePath="Key"
+                                          SelectedValue="{Binding Flag}"
+                                          Width="150"
+                                          VerticalAlignment="Center"
+                                          Margin="10,0,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
         </ScrollViewer>
-    </DockPanel>
+
+        <Grid Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Auto">
+                <Grid Margin="10">
+                    <Image Source="{Binding SvgImage}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Stretch="None" />
+                </Grid>
+            </ScrollViewer>
+            <Button Command="{Binding ZoomInCommand}"
+                    Content="+"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,10,10,0"
+                    Opacity=".9" />
+            <Button Command="{Binding ZoomOutCommand}"
+                    Content="-"
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="0,50,10,0"
+                    Opacity=".9" />
+        </Grid>
+    </Grid>
 </Window>
