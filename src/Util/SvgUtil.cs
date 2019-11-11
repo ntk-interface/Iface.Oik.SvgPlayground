@@ -83,6 +83,10 @@ namespace Iface.Oik.SvgPlayground.Util
 
       switch (property.ToLower())
       {
+        case "stroke":
+          element.Stroke = CreateColor(value);
+          return true;
+        
         case "fill":
           element.Fill = CreateColor(value);
           return true;
@@ -135,6 +139,9 @@ namespace Iface.Oik.SvgPlayground.Util
 
       switch (property.ToLower())
       {
+        case "stroke":
+          return (element.Stroke as SvgColourServer)?.ToString();
+        
         case "fill":
           return (element.Fill as SvgColourServer)?.ToString();
 
