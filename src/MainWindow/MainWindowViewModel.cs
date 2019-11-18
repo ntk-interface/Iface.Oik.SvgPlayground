@@ -19,6 +19,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     private const double ScaleStep = 1.5;
 
 
+    private          string        _svgFilename;
     private          SvgDocument   _svgDocument;
     private readonly List<Element> _elements = new List<Element>();
 
@@ -65,18 +66,20 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     public ObservableCollection<TmAnalog> TmAnalogs  { get; } = new ObservableCollection<TmAnalog>();
 
 
-    public ICommand OpenFileCommand { get; }
-    public ICommand ZoomInCommand   { get; }
-    public ICommand ZoomOutCommand  { get; }
+    public ICommand OpenFileCommand   { get; }
+    public ICommand ReloadFileCommand { get; }
+    public ICommand ZoomInCommand     { get; }
+    public ICommand ZoomOutCommand    { get; }
 
 
     public MainWindowViewModel()
     {
       Title = "SVG";
 
-      OpenFileCommand = new RelayCommand(_ => OpenFile());
-      ZoomInCommand   = new RelayCommand(_ => ZoomIn());
-      ZoomOutCommand  = new RelayCommand(_ => ZoomOut());
+      OpenFileCommand   = new RelayCommand(_ => OpenFile());
+      ReloadFileCommand = new RelayCommand(_ => ReloadFile());
+      ZoomInCommand     = new RelayCommand(_ => ZoomIn());
+      ZoomOutCommand    = new RelayCommand(_ => ZoomOut());
 
       FixTextBoxFloatValue();
     }
@@ -99,10 +102,25 @@ namespace Iface.Oik.SvgPlayground.MainWindow
         return;
       }
 
+      OpenFile(openFileDialog.FileName);
+    }
+
+
+    private void ReloadFile()
+    {
+      OpenFile(_svgFilename);
+    }
+
+
+    private void OpenFile(string filename)
+    {
+      if (filename == null) return;
+
+      _svgFilename = filename;
       try
       {
         ClearEverything();
-        _svgDocument = SvgDocument.Open(openFileDialog.FileName);
+        _svgDocument = SvgDocument.Open(filename);
         Title        = SvgUtil.FindTitleElement(_svgDocument)?.Content ?? "SVG";
         ParseElements();
         Update();
@@ -152,7 +170,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     private void Update()
     {
       if (_svgDocument == null) return;
-      
+
       foreach (var element in _elements)
       {
         element.Update();
