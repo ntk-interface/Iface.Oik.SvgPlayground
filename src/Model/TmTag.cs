@@ -36,6 +36,14 @@ namespace Iface.Oik.SvgPlayground.Model
     }
 
 
+    public bool AddrEquals(int ch, int rtu, int point)
+    {
+      return Ch    == ch  &&
+             Rtu   == rtu &&
+             Point == point;
+    }
+
+
     public event PropertyChangedEventHandler PropertyChanged;
 
 

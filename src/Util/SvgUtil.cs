@@ -41,7 +41,7 @@ namespace Iface.Oik.SvgPlayground.Util
         {
           return element;
         }
-        var nestedElement = FindDescriptionElement(element);
+        var nestedElement = FindTitleElement(element);
         if (nestedElement != null)
         {
           return nestedElement;

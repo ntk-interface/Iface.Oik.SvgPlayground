@@ -215,9 +215,44 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    private int FindTmStatus(int ch, int rtu, int point)
+    {
+      var index = 0;
+      foreach (var tmStatus in TmStatuses)
+      {
+        if (tmStatus.AddrEquals(ch, rtu, point))
+        {
+          return index;
+        }
+        index++;
+      }
+      return -1;
+    }
+
+
+    private int FindTmAnalog(int ch, int rtu, int point)
+    {
+      var index = 0;
+      foreach (var tmAnalog in TmAnalogs)
+      {
+        if (tmAnalog.AddrEquals(ch, rtu, point))
+        {
+          return index;
+        }
+        index++;
+      }
+      return -1;
+    }
+
+
     public int InitTmStatus(int ch, int rtu, int point, string _ = null)
     {
-      // todo не добавлять дублирующиеся адреса, просто возвращать уже имеющийся индекс
+      var existingTmStatusIndex = FindTmStatus(ch, rtu, point);
+      if (existingTmStatusIndex >= 0)
+      {
+        return existingTmStatusIndex;
+      }
+      
       var tmStatus = new TmStatus(ch, rtu, point);
 
       TmStatuses.Add(tmStatus);
