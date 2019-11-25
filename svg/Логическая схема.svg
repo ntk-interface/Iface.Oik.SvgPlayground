@@ -1,13 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:oik="http://iface.ru/oik_svg"
-     width="400"
-     height="400">
-
-    <title>Логическая схема</title>
-
-    <g transform="translate(10,10)"
-       oik:oikelement="1">
-        <desc>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:oik="http://iface.ru/oik_svg"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="500"
+   height="300"
+   version="1.1"
+   id="svg132"
+   sodipodi:docname="Логическая схема.svg"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)">
+  <metadata
+     id="metadata138">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Логическая схема</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs136" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="1138"
+     id="namedview134"
+     showgrid="true"
+     inkscape:zoom="1"
+     inkscape:cx="338.45293"
+     inkscape:cy="127.47109"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg132">
+    <inkscape:grid
+       type="xygrid"
+       id="grid140" />
+  </sodipodi:namedview>
+  <title
+     id="title2">Логическая схема</title>
+  <g
+     transform="translate(10,50)"
+     oik:oikelement="1"
+     id="g14">
+    <desc
+       id="desc4">
             var ts = initTmStatus(20, 1, 1);
             var tsOnValue = 1;
             var output = initVariable('B1');
@@ -31,25 +83,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">переключатель дистанционное</tspan>
-        </text>
-    </g>
-    
-    <g transform="translate(10,40)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect6" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text12">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan8">ЛР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan10">переключатель дистанционное</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,80)"
+     oik:oikelement="1"
+     id="g26">
+    <desc
+       id="desc16">
             var ts = initTmStatus(20, 1, 2);
             var tsOnValue = 1;
             var output = initVariable('B2');
@@ -73,25 +137,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">привод готов</tspan>
-        </text>
-    </g>
-    
-    <g transform="translate(10,70)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect18" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text24">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan20">ЛР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan22">привод готов</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,110)"
+     oik:oikelement="1"
+     id="g38">
+    <desc
+       id="desc28">
             var ts = initTmStatus(20, 1, 3);
             var tsOnValue = 0;
             var output = initVariable('B3');
@@ -115,25 +191,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЗН В на 1ШР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">отключен</tspan>
-        </text>
-    </g>
-    
-    <g transform="translate(10,100)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect30" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text36">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan32">ЗН В на 1ШР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan34">отключен</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,140)"
+     oik:oikelement="1"
+     id="g50">
+    <desc
+       id="desc40">
             var ts = initTmStatus(20, 1, 4);
             var tsOnValue = 0;
             var output = initVariable('B4');
@@ -157,25 +245,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЗН В на 2ШР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">отключен</tspan>
-        </text>
-    </g>
-
-    <g transform="translate(10,130)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect42" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text48">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan44">ЗН В на 2ШР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan46">отключен</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,170)"
+     oik:oikelement="1"
+     id="g62">
+    <desc
+       id="desc52">
             var ts = initTmStatus(20, 1, 5);
             var tsOnValue = 0;
             var output = initVariable('B5');
@@ -199,25 +299,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЗН В на ОР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">отключен</tspan>
-        </text>
-    </g>
-
-    <g transform="translate(10,160)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect54" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text60">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan56">ЗН В на ОР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan58">отключен</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,200)"
+     oik:oikelement="1"
+     id="g74">
+    <desc
+       id="desc64">
             var ts = initTmStatus(20, 1, 6);
             var tsOnValue = 0;
             var output = initVariable('B6');
@@ -241,25 +353,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">отключен</tspan>
-        </text>
-    </g>
-
-    <g transform="translate(10,190)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect66" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text72">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan68">ЛР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan70">отключен</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,230)"
+     oik:oikelement="1"
+     id="g86">
+    <desc
+       id="desc76">
             var ts = initTmStatus(20, 1, 6);
             var tsOnValue = 1;
             var output = initVariable('B7');
@@ -283,25 +407,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">включен</tspan>
-        </text>
-    </g>
-
-    <g transform="translate(10,220)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect78" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text84">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan80">ЛР-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan82">включен</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(10,260)"
+     oik:oikelement="1"
+     id="g98">
+    <desc
+       id="desc88">
             var ts = initTmStatus(20, 1, 7);
             var tsOnValue = 0;
             var output = initVariable('B8');
@@ -325,25 +461,37 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="150"
-              height="30"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text y="3"
-              font-size="10"
-              dy="0">
-            <tspan x="5" dy="10">В-110 Сургут 2</tspan>
-            <tspan x="5" dy="10">отключен</tspan>
-        </text>
-    </g>
-    
-    <g transform="translate(200,10)"
-       oik:oikelement="1">
-        <desc>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="200"
+       height="30"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect90" />
+    <text
+       y="3"
+       font-size="12"
+       dy="0"
+       id="text96">
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan92">В-110 Сургут 2</tspan>
+      <tspan
+         x="5"
+         dy="10"
+         id="tspan94">отключен</tspan>
+    </text>
+  </g>
+  <g
+     transform="translate(250,55)"
+     oik:oikelement="1"
+     id="g106">
+    <desc
+       id="desc100">
             var inputs = [
                 initVariable('B1'),
                 initVariable('B2')
@@ -368,25 +516,31 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="30"
-              height="40"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text x="15"
-              y="26"
-              text-anchor="middle"
-              font-size="16">
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="30"
+       height="50"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect102" />
+    <text
+       x="15"
+       y="31"
+       text-anchor="middle"
+       font-size="16"
+       id="text104">
             &amp;
         </text>
-    </g>
-
-    <g transform="translate(260,60)"
-       oik:oikelement="1">
-        <desc>
+  </g>
+  <g
+     transform="translate(320,70)"
+     oik:oikelement="1"
+     id="g114">
+    <desc
+       id="desc108">
             var inputs = [
                 initVariable('M1'),
                 initVariable('B3'),
@@ -415,25 +569,31 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="30"
-              height="120"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text x="15"
-              y="65"
-              text-anchor="middle"
-              font-size="16">
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="30"
+       height="120"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect110" />
+    <text
+       x="15"
+       y="65"
+       text-anchor="middle"
+       font-size="16"
+       id="text112">
             &amp;
         </text>
-    </g>
-
-    <g transform="translate(260,190)"
-       oik:oikelement="1">
-        <desc>
+  </g>
+  <g
+     transform="translate(320,220)"
+     oik:oikelement="1"
+     id="g122">
+    <desc
+       id="desc116">
             var inputs = [
                 initVariable('M1'),
                 initVariable('B7'),
@@ -459,25 +619,32 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="30"
-              height="60"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text x="15"
-              y="35"
-              text-anchor="middle"
-              font-size="16">
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="30"
+       height="70"
+       stroke="black"
+       fill="none"
+       fill-opacity=".25"
+       id="rect118" />
+    <text
+       x="15"
+       y="40"
+       text-anchor="middle"
+       font-size="16"
+       id="text120">
             &amp;
         </text>
-    </g>
-
-    <g transform="translate(320,165)"
-       oik:oikelement="1">
-        <desc>
+  </g>
+  <g
+     transform="matrix(1,0,0,1.2857143,390,159.5)"
+     oik:oikelement="1"
+     id="g130"
+     style="stroke-width:0.88191706">
+    <desc
+       id="desc124">
             var inputs = [
                 initVariable('M2'),
                 initVariable('M3')
@@ -502,19 +669,116 @@
 
             return update;
         </desc>
-        <rect oik:oikid="rect"
-              x="0"
-              y="0"
-              width="30"
-              height="40"
-              stroke="black"
-              fill="none"
-              fill-opacity=".25"/>
-        <text x="15"
-              y="26"
-              text-anchor="middle"
-              font-size="16">
-            1
-        </text>
-    </g>
+    <rect
+       oik:oikid="rect"
+       x="0"
+       y="0"
+       width="30"
+       height="70"
+       id="rect126"
+       style="fill:none;fill-opacity:0.25;stroke:#000000;stroke-width:0.8491869" />
+    <text
+       x="15"
+       y="40"
+       font-size="16"
+       id="text128"
+       style="font-size:16px;text-anchor:middle;stroke-width:0.8491869">1</text>
+  </g>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 210.5,64.5 c 40,0 40,0 40,0"
+     id="path142"
+     inkscape:connector-curvature="0" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path144"
+     d="m 210.5,94.5 c 40,0 40,0 40,0"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path144-1"
+     d="m 280.5,79.5 c 40,0 40,0 40,0"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 210.5,124.5 c 110,0 110,0 110,0"
+     id="path161"
+     inkscape:connector-curvature="0" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path163"
+     d="m 210.5,154.5 c 110,0 110,0 110,0"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 210.5,274.5 c 110,0 110,0 110,0"
+     id="path165"
+     inkscape:connector-curvature="0" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path167"
+     d="m 210.5,244.5 c 110,0 110,0 110,0"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 305.5,79.5 c 0,150 0,150 0,150"
+     id="path169"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 305.5,229.5 c 15,0 15,0 15,0"
+     id="path171"
+     inkscape:connector-curvature="0" />
+  <circle
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00199997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path173"
+     cx="305.5"
+     cy="79.5"
+     r="2.5" />
+  <circle
+     r="2.5"
+     cy="274.5"
+     cx="290.5"
+     id="circle175"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.00199997;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 290.5,184.5 c 0,90 0,90 0,90"
+     id="path169-4"
+     inkscape:connector-curvature="0" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path192"
+     d="m 290.5,184.5 c 30,0 30,0 30,0"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path194"
+     d="m 350.5,174.5 c 40,0 40,0 40,0"
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 210.5,184.5 c 65.00001,0 65.00001,0 65.00001,0"
+     id="path196"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 275.5,169.5 c 45,0 45,0 45,0"
+     id="path198"
+     inkscape:connector-curvature="0" />
+  <path
+     inkscape:connector-curvature="0"
+     id="path200"
+     d="m 275.5,169.5 c 0,15 0,15 0,15"
+     style="fill:none;stroke:#000000;stroke-width:0.99999994px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 350.5,234.5 c 40,0 40,0 40,0"
+     id="path202"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 420.5,204.5 c 40,0 40,0 40,0"
+     id="path204"
+     inkscape:connector-curvature="0" />
 </svg>
