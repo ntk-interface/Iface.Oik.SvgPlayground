@@ -15,4 +15,10 @@
       <None Include="..\azure-pipelines.yml" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Include="..\svg\Логическая схема.svg">
+        <Link>Логическая схема.svg</Link>
+      </Content>
+    </ItemGroup>
+
 </Project>

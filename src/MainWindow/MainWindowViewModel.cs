@@ -64,6 +64,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
     public ObservableCollection<TmStatus> TmStatuses { get; } = new ObservableCollection<TmStatus>();
     public ObservableCollection<TmAnalog> TmAnalogs  { get; } = new ObservableCollection<TmAnalog>();
+    public ObservableCollection<Variable> Variables  { get; } = new ObservableCollection<Variable>();
 
 
     public ICommand OpenFileCommand   { get; }
@@ -245,6 +246,36 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    private int FindVariable(string id)
+    {
+      var index = 0;
+      foreach (var variable in Variables)
+      {
+        if (variable.Id == id)
+        {
+          return index;
+        }
+        index++;
+      }
+      return -1;
+    }
+
+
+    public int InitVariable(string id, string _ = null)
+    {
+      var existingVariable = FindVariable(id);
+      if (existingVariable >= 0)
+      {
+        return existingVariable;
+      }
+
+      var variable = new Variable(id);
+      Variables.Add(variable);
+
+      return Variables.Count - 1;
+    }
+
+
     public int InitTmStatus(int ch, int rtu, int point, string _ = null)
     {
       var existingTmStatusIndex = FindTmStatus(ch, rtu, point);
@@ -252,7 +283,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       {
         return existingTmStatusIndex;
       }
-      
+
       var tmStatus = new TmStatus(ch, rtu, point);
 
       TmStatuses.Add(tmStatus);
@@ -265,7 +296,12 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
     public int InitTmAnalog(int ch, int rtu, int point, string _ = null)
     {
-      // todo не добавлять дублирующиеся адреса, просто возвращать уже имеющийся индекс
+      var existingTmAnalogIndex = FindTmAnalog(ch, rtu, point);
+      if (existingTmAnalogIndex >= 0)
+      {
+        return existingTmAnalogIndex;
+      }
+
       var tmAnalog = new TmAnalog(ch, rtu, point);
 
       TmAnalogs.Add(tmAnalog);
@@ -350,6 +386,45 @@ namespace Iface.Oik.SvgPlayground.MainWindow
         return TmAnalog.InvalidValueString;
       }
       return tmAnalog.ValueWithUnitString;
+    }
+
+
+    public bool IsVariableUnreliable(int idx)
+    {
+      var variable = Variables.ElementAtOrDefault(idx);
+      if (variable == null)
+      {
+        return false;
+      }
+      return variable.IsUnreliable;
+    }
+
+
+    public bool IsVariableOn(int idx)
+    {
+      var variable = Variables.ElementAtOrDefault(idx);
+      if (variable == null)
+      {
+        return false;
+      }
+      return variable.IsOn;
+    }
+
+
+    public void SetVariable(int idx, bool? isOn)
+    {
+      var variable = Variables.ElementAtOrDefault(idx);
+      if (variable == null)
+      {
+        return;
+      }
+      if (!isOn.HasValue)
+      {
+        variable.IsUnreliable = true;
+        return;
+      }
+      variable.IsUnreliable = false;
+      variable.IsOn         = isOn.Value;
     }
 
 

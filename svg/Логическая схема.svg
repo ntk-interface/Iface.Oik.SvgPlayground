@@ -1,0 +1,520 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="400"
+     height="400">
+
+    <title>Логическая схема</title>
+
+    <g transform="translate(10,10)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 1);
+            var tsOnValue = 1;
+            var output = initVariable('B1');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">переключатель дистанционное</tspan>
+        </text>
+    </g>
+    
+    <g transform="translate(10,40)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 2);
+            var tsOnValue = 1;
+            var output = initVariable('B2');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">привод готов</tspan>
+        </text>
+    </g>
+    
+    <g transform="translate(10,70)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 3);
+            var tsOnValue = 0;
+            var output = initVariable('B3');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЗН В на 1ШР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">отключен</tspan>
+        </text>
+    </g>
+    
+    <g transform="translate(10,100)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 4);
+            var tsOnValue = 0;
+            var output = initVariable('B4');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЗН В на 2ШР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">отключен</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(10,130)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 5);
+            var tsOnValue = 0;
+            var output = initVariable('B5');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЗН В на ОР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">отключен</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(10,160)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 6);
+            var tsOnValue = 0;
+            var output = initVariable('B6');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">отключен</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(10,190)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 6);
+            var tsOnValue = 1;
+            var output = initVariable('B7');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">ЛР-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">включен</tspan>
+        </text>
+    </g>
+
+    <g transform="translate(10,220)"
+       oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(20, 1, 7);
+            var tsOnValue = 0;
+            var output = initVariable('B8');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+                if ((tsOnValue === 1 &amp;&amp; isTmStatusOn(ts)) || (tsOnValue === 0  &amp;&amp; !isTmStatusOn(ts))) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="150"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text y="3"
+              font-size="10"
+              dy="0">
+            <tspan x="5" dy="10">В-110 Сургут 2</tspan>
+            <tspan x="5" dy="10">отключен</tspan>
+        </text>
+    </g>
+    
+    <g transform="translate(200,10)"
+       oik:oikelement="1">
+        <desc>
+            var inputs = [
+                initVariable('B1'),
+                initVariable('B2')
+            ];
+            var output = initVariable('M1');
+
+            function update() {
+                var isOk = true;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (!isVariableOn(inputs[i])) {
+                        isOk = false;    
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="30"
+              height="40"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text x="15"
+              y="26"
+              text-anchor="middle"
+              font-size="16">
+            &amp;
+        </text>
+    </g>
+
+    <g transform="translate(260,60)"
+       oik:oikelement="1">
+        <desc>
+            var inputs = [
+                initVariable('M1'),
+                initVariable('B3'),
+                initVariable('B4'),
+                initVariable('B5'),
+                initVariable('B6'),
+                initVariable('B8')
+            ];
+            var output = initVariable('M2');
+
+            function update() {
+                var isOk = true;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (!isVariableOn(inputs[i])) {
+                        isOk = false;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="30"
+              height="120"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text x="15"
+              y="65"
+              text-anchor="middle"
+              font-size="16">
+            &amp;
+        </text>
+    </g>
+
+    <g transform="translate(260,190)"
+       oik:oikelement="1">
+        <desc>
+            var inputs = [
+                initVariable('M1'),
+                initVariable('B7'),
+                initVariable('B8')
+            ];
+            var output = initVariable('M3');
+
+            function update() {
+                var isOk = true;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (!isVariableOn(inputs[i])) {
+                        isOk = false;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="30"
+              height="60"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text x="15"
+              y="35"
+              text-anchor="middle"
+              font-size="16">
+            &amp;
+        </text>
+    </g>
+
+    <g transform="translate(320,165)"
+       oik:oikelement="1">
+        <desc>
+            var inputs = [
+                initVariable('M2'),
+                initVariable('M3')
+            ];
+            var output = initVariable('E1');
+
+            function update() {
+                var isOk = false;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (isVariableOn(inputs[i])) {
+                        isOk = true;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="30"
+              height="40"
+              stroke="black"
+              fill="none"
+              fill-opacity=".25"/>
+        <text x="15"
+              y="26"
+              text-anchor="middle"
+              font-size="16">
+            1
+        </text>
+    </g>
+</svg>
