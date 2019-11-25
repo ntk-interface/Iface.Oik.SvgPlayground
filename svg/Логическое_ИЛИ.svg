@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="30"
+     height="100">
+    <g oik:oikelement="1">
+        <desc>
+            var inputs = [
+                initVariable('B1'),
+                initVariable('B2'),
+                initVariable('B3')
+            ];
+            var output = initVariable('M1');
+
+            function update() {
+                var isOk = false;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (isVariableOn(inputs[i])) {
+                        isOk = true;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="30"
+              height="100"
+              stroke="black"
+              fill="none"
+              fill-opacity=".2"/>
+        <text x="15"
+              y="56"
+              text-anchor="middle"
+              font-size="16">
+            1
+        </text>
+    </g>
+</svg>

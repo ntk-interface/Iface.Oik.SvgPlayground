@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:oik="http://iface.ru/oik_svg"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="550"
+   height="300"
+   viewBox="0 0 145.52083 79.375002"
+   version="1.1"
+   id="svg902"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="Логический_пример.svg">
+  <defs
+     id="defs896">
+    <marker
+       inkscape:stockid="TriangleOutL"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="TriangleOutL"
+       style="overflow:visible"
+       inkscape:isstock="true">
+      <path
+         id="path1127"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(0.8)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.4529461"
+     inkscape:cx="411.08628"
+     inkscape:cy="86.150844"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     units="px"
+     inkscape:window-width="1264"
+     inkscape:window-height="1002"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:snap-grids="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1447" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata899">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-217.62497)">
+    <g
+       id="g114"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,228.07601)">
+      <desc
+         id="desc106">
+            var ts = initTmStatus(1, 1, 1);
+            var tsOnValue = 1;
+            var output = initVariable('B1');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect108"
+         height="30"
+         width="200"
+         y="0"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000" />
+      <text
+         id="text110"
+         xml:space="preserve"
+         font-size="12"
+         y="13"
+         x="5"
+         style="font-size:12px">ЛР-110</text>
+      <text
+         id="text112"
+         xml:space="preserve"
+         font-size="12"
+         y="26"
+         x="5"
+         style="font-size:12px">переключатель дистанц.</text>
+    </g>
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,236.01351)"
+       oik:oikelement="1"
+       id="g137">
+      <desc
+         id="desc129">
+            var ts = initTmStatus(1, 1, 2);
+            var tsOnValue = 1;
+            var output = initVariable('B2');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         style="fill:none;fill-opacity:0.2;stroke:#000000"
+         oik:oikid="rect"
+         x="0"
+         y="0"
+         width="200"
+         height="30"
+         id="rect131" />
+      <text
+         style="font-size:12px"
+         x="5"
+         y="13"
+         font-size="12"
+         xml:space="preserve"
+         id="text133">ЛР-110</text>
+      <text
+         style="font-size:12px"
+         x="5"
+         y="26"
+         font-size="12"
+         xml:space="preserve"
+         id="text135">привод готов</text>
+    </g>
+    <g
+       id="g147"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,243.95101)">
+      <desc
+         id="desc139">
+            var ts = initTmStatus(1, 1, 3);
+            var tsOnValue = 0;
+            var output = initVariable('B3');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect141"
+         height="30"
+         width="200"
+         y="0"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000" />
+      <text
+         id="text143"
+         xml:space="preserve"
+         font-size="12"
+         y="13"
+         x="5"
+         style="font-size:12px">ЗН В НА 1ШР-110 Сургут 2</text>
+      <text
+         id="text145"
+         xml:space="preserve"
+         font-size="12"
+         y="26"
+         x="5"
+         style="font-size:12px">отключен</text>
+    </g>
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,251.88851)"
+       oik:oikelement="1"
+       id="g157">
+      <desc
+         id="desc149">
+            var ts = initTmStatus(1, 1, 4);
+            var tsOnValue = 0;
+            var output = initVariable('B4');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         style="fill:none;fill-opacity:0.2;stroke:#000000"
+         oik:oikid="rect"
+         x="0"
+         y="0"
+         width="200"
+         height="30"
+         id="rect151" />
+      <text
+         style="font-size:12px"
+         x="5"
+         y="13"
+         font-size="12"
+         xml:space="preserve"
+         id="text153">ЗН В НА 2ШР-110 Сургут 2</text>
+      <text
+         style="font-size:12px"
+         x="5"
+         y="26"
+         font-size="12"
+         xml:space="preserve"
+         id="text155">отключен</text>
+    </g>
+    <g
+       id="g167"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,259.82601)">
+      <desc
+         id="desc159">
+            var ts = initTmStatus(1, 1, 5);
+            var tsOnValue = 0;
+            var output = initVariable('B5');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect161"
+         height="30"
+         width="200"
+         y="0"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000" />
+      <text
+         id="text163"
+         xml:space="preserve"
+         font-size="12"
+         y="13"
+         x="5"
+         style="font-size:12px">ЗН В НА ОР-110 Сургут 2</text>
+      <text
+         id="text165"
+         xml:space="preserve"
+         font-size="12"
+         y="26"
+         x="5"
+         style="font-size:12px">отключен</text>
+    </g>
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,267.76351)"
+       oik:oikelement="1"
+       id="g177">
+      <desc
+         id="desc169">
+            var ts = initTmStatus(1, 1, 6);
+            var tsOnValue = 0;
+            var output = initVariable('B6');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         style="fill:none;fill-opacity:0.2;stroke:#000000"
+         oik:oikid="rect"
+         x="0"
+         y="0"
+         width="200"
+         height="30"
+         id="rect171" />
+      <text
+         style="font-size:12px"
+         x="5"
+         y="13"
+         font-size="12"
+         xml:space="preserve"
+         id="text173">ЛР-110 Сургут 2</text>
+      <text
+         style="font-size:12px"
+         x="5"
+         y="26"
+         font-size="12"
+         xml:space="preserve"
+         id="text175">отключен</text>
+    </g>
+    <g
+       id="g187"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,275.70101)">
+      <desc
+         id="desc179">
+            var ts = initTmStatus(1, 1, 6);
+            var tsOnValue = 1;
+            var output = initVariable('B7');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect181"
+         height="30"
+         width="200"
+         y="0"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000" />
+      <text
+         id="text183"
+         xml:space="preserve"
+         font-size="12"
+         y="13"
+         x="5"
+         style="font-size:12px">ЛР-110 Сургут 2</text>
+      <text
+         id="text185"
+         xml:space="preserve"
+         font-size="12"
+         y="26"
+         x="5"
+         style="font-size:12px">включен</text>
+    </g>
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,2.778125,283.63851)"
+       oik:oikelement="1"
+       id="g197">
+      <desc
+         id="desc189">
+            var ts = initTmStatus(1, 1, 7);
+            var tsOnValue = 0;
+            var output = initVariable('B8');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         style="fill:none;fill-opacity:0.2;stroke:#000000"
+         oik:oikid="rect"
+         x="0"
+         y="0"
+         width="200"
+         height="30"
+         id="rect191" />
+      <text
+         style="font-size:12px"
+         x="5"
+         y="13"
+         font-size="12"
+         xml:space="preserve"
+         id="text193">В-110 Сургут 2</text>
+      <text
+         style="font-size:12px"
+         x="5"
+         y="26"
+         font-size="12"
+         xml:space="preserve"
+         id="text195">отключен</text>
+    </g>
+    <g
+       id="g3908"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,66.278124,229.39893)">
+      <desc
+         id="desc3902">
+            var inputs = [
+                initVariable('B1'),
+                initVariable('B2')
+            ];
+            var output = initVariable('M1');
+
+            function update() {
+                var isOk = true;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (!isVariableOn(inputs[i])) {
+                        isOk = false;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect3904"
+         height="50.000008"
+         width="30"
+         y="0"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:1" />
+      <text
+         id="text3906"
+         font-size="16"
+         y="30.81641"
+         x="14.289062"
+         style="font-size:16px;text-anchor:middle">&amp;</text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.694791,232.04476 c 10.583333,0 10.583333,0 10.583333,0"
+       id="path3922"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3924"
+       d="m 55.694791,239.98226 c 10.583333,0 10.583333,0 10.583333,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       id="g3908-1"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.27560764,84.798957,233.36768)"
+       style="stroke-width:0.97979587">
+      <desc
+         id="desc3902-3">
+            var inputs = [
+                initVariable('M1'),
+                initVariable('B3'),
+                initVariable('B4'),
+                initVariable('B5'),
+                initVariable('B6'),
+                initVariable('B8')
+            ];
+            var output = initVariable('M2');
+
+            function update() {
+                var isOk = true;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (!isVariableOn(inputs[i])) {
+                        isOk = false;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect3904-9"
+         height="119.9802"
+         width="30.020205"
+         y="0.0098863039"
+         x="-0.010101062"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:0.97979581" />
+      <text
+         id="text3906-1"
+         font-size="16"
+         y="65.816406"
+         x="14.289062"
+         style="font-size:16px;text-anchor:middle;stroke-width:0.97979587">&amp;</text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path78"
+       d="m 74.215624,236.01351 c 10.583333,0 10.583333,0 10.583333,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.694788,247.91976 c 29.104166,0 29.104166,0 29.104166,0"
+       id="path80"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g98"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,84.798957,277.02393)">
+      <desc
+         id="desc92">
+            var inputs = [
+                initVariable('M1'),
+                initVariable('B7'),
+                initVariable('B8')
+            ];
+            var output = initVariable('M3');
+
+            function update() {
+                var isOk = true;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (!isVariableOn(inputs[i])) {
+                        isOk = false;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect94"
+         height="65.000015"
+         width="30"
+         y="-15.000009"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000;stroke-width:1" />
+      <text
+         id="text96"
+         font-size="16"
+         y="23.316404"
+         x="14.289062"
+         style="font-size:16px;text-anchor:middle">&amp;</text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path100"
+       d="m 55.694791,287.60726 c 29.104166,0 29.104166,0 29.104166,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.694791,279.66976 c 29.104166,0 29.104166,0 29.104166,0"
+       id="path102"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path104"
+       d="m 80.830207,275.70101 c 3.968749,0 3.968749,0 3.968749,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 80.830207,275.70101 c 0,-39.6875 0,-39.6875 0,-39.6875"
+       id="path106"
+       inkscape:connector-curvature="0" />
+    <circle
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26511249;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="path108"
+       cx="76.861458"
+       cy="287.60727"
+       r="0.66145831" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.694789,271.73226 c 17.197919,0 17.197919,0 17.197919,0"
+       id="path110"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 72.892707,271.73226 c 0,-11.90625 0,-11.90625 0,-11.90625"
+       id="path112"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 72.892707,259.82601 c 11.90625,0 11.90625,0 11.90625,0"
+       id="path114"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path116"
+       d="m 68.923957,255.85726 c 15.874996,0 15.874996,0 15.874996,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path118"
+       d="m 68.923957,263.79477 c 0,-7.93751 0,-7.93751 0,-7.93751"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 55.69479,263.79476 c 13.229167,0 13.229167,0 13.229167,0"
+       id="path120"
+       inkscape:connector-curvature="0" />
+    <circle
+       r="0.66145831"
+       cy="236.0135"
+       cx="80.830208"
+       id="circle122"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26511249;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 66.278125,251.88851 c 18.52083,0 18.52083,0 18.52083,0"
+       id="path124"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 66.278124,255.95418 c 0,-4.06567 0,-4.06567 0,-4.06567"
+       id="path126"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path128"
+       d="m 55.69479,255.85726 c 10.583334,0 10.583334,0 10.583334,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path130"
+       d="m 76.861457,287.60725 c 0,-23.8125 0,-23.8125 0,-23.8125"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path132"
+       d="m 76.861457,263.79476 c 7.9375,0 7.9375,0 7.9375,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       id="g160"
+       oik:oikelement="1"
+       transform="matrix(0.26458333,0,0,0.26458333,103.31979,259.82601)">
+      <desc
+         id="desc154">
+            var inputs = [
+                initVariable('M2'),
+                initVariable('M3')
+            ];
+            var output = initVariable('E1');
+
+            function update() {
+                var isOk = false;
+                for (var i = 0; i &lt; inputs.length; i++) {
+                    if (isVariableUnreliable(inputs[i])) {
+                        setElementProperty('rect', 'fill', '#000000');
+                        setVariable(output, null);
+                        return;
+                    }
+                    if (isVariableOn(inputs[i])) {
+                        isOk = true;
+                    }
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+      <rect
+         id="rect156"
+         height="100"
+         width="30"
+         y="0"
+         x="0"
+         oik:oikid="rect"
+         style="fill:none;fill-opacity:0.2;stroke:#000000" />
+      <text
+         id="text158"
+         font-size="16"
+         y="56"
+         x="15"
+         style="font-size:16px;text-anchor:middle">1</text>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path174"
+       d="m 92.736459,263.79476 c 10.583331,0 10.583331,0 10.583331,0"
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 92.736457,275.70101 c 10.583333,0 10.583333,0 10.583333,0"
+       id="path176"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g1233">
+      <path
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
+         d="m 111.25781,272.92383 v 0.26367 h 10.58203 v -0.26367 z"
+         id="path178"
+         inkscape:connector-curvature="0" />
+      <path
+         inkscape:connector-curvature="0"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.21166666pt;stroke-opacity:1"
+         d="m 123.06194,273.05518 -1.83092,1.05833 v -2.11666 z"
+         id="path1239" />
+    </g>
+    <text
+       id="text1273"
+       xml:space="preserve"
+       font-size="12"
+       y="231.70805"
+       x="84.37986"
+       style="font-size:3.17499995px;stroke-width:0.26458332">включение разрешено</text>
+    <text
+       style="font-size:3.17499995px;stroke-width:0.26458332"
+       x="84.37986"
+       y="293.54633"
+       font-size="12"
+       xml:space="preserve"
+       id="text1276">отключение разрешено</text>
+  </g>
+</svg>

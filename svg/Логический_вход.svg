@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="200"
+     height="30">
+    <g oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(1, 1, 1);
+            var tsOnValue = 1;
+            var output = initVariable('B1');
+
+            function update() {
+                var isOk;
+                if (isTmStatusUnreliable(ts)) {
+                    setElementProperty('rect', 'fill', '#000000');
+                    setVariable(output, null);
+                    return;
+                }
+				var isTsOn = isTmStatusOn(ts);
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                    isOk = true;
+                }
+                else {
+                    isOk = false;
+                }
+                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                setVariable(output, isOk);
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="rect"
+              x="0"
+              y="0"
+              width="200"
+              height="30"
+              stroke="black"
+              fill="none"
+              fill-opacity=".2"/>
+        <text x="5"
+              y="13"
+              font-size="12"
+			  xml:space="preserve">ЛР-110</text>
+        <text x="5"
+              y="26"
+              font-size="12"
+			  xml:space="preserve">включен</text>
+    </g>
+</svg>
