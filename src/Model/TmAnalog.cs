@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using Iface.Oik.SvgPlayground.Util;
 
@@ -15,7 +16,7 @@ namespace Iface.Oik.SvgPlayground.Model
     private float        _value;
     private string       _unit;
 
-    
+
     public float Value
     {
       get => _value;
@@ -26,7 +27,7 @@ namespace Iface.Oik.SvgPlayground.Model
       }
     }
 
-    
+
     public string Unit
     {
       get => _unit;
@@ -51,6 +52,7 @@ namespace Iface.Oik.SvgPlayground.Model
 
     public bool IsUnreliable => Flag.HasFlag(TmAnalogFlag.Unreliable);
 
+    public string ValueString         => Value.ToString(CultureInfo.InvariantCulture);
     public string ValueWithUnitString => $"{Value} {Unit}";
 
 

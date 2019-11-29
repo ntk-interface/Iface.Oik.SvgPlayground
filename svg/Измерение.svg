@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="100"
+     height="20">
+
+    <g oik:oikelement="1">
+        <desc>
+            var ti = initTmAnalog(1, 1, 1, 'Измерение');
+            var defaultFill = getElementProperty('value', 'fill');
+
+            function update() {
+				if (isTmAnalogUnreliable(ti)) {
+					setElementProperty('value', 'fill', 'white');
+				}
+				else {
+					setElementProperty('value', 'fill', defaultFill);
+				}
+				setElementProperty('value', 'text', getTmAnalogValue(ti));
+            }
+
+            return update;
+        </desc>
+        <text oik:oikid="value"
+              x="0"
+              y="14"
+              fill="#0000ff"
+              font-family="Arial"
+              font-size="12">
+            ??? ???
+        </text>
+    </g>
+</svg>

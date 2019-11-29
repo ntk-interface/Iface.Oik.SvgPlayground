@@ -40,6 +40,7 @@ namespace Iface.Oik.SvgPlayground.Model
       _scriptEngine = new Engine();
 
       _scriptEngine
+        .SetValue("logMessage",                    new Action<string>(LogMessage))
         .SetValue("setElementProperty",            new Action<string, string, string>(SetElementProperty))
         .SetValue("getElementProperty",            new Func<string, string, string>(GetElementProperty))
         .SetValue("initTmStatus",                  new Func<int, int, int, string, int>(_owner.InitTmStatus))
@@ -51,6 +52,8 @@ namespace Iface.Oik.SvgPlayground.Model
         .SetValue("isTmStatusIntermediate",        new Func<int, bool>(_owner.IsTmStatusIntermediate))
         .SetValue("isTmStatusOn",                  new Func<int, bool>(_owner.IsTmStatusOn))
         .SetValue("getTmAnalogValue",              new Func<int, string>(_owner.GetTmAnalogValue))
+        .SetValue("getTmAnalogValueFloat",         new Func<int, float>(_owner.GetTmAnalogValueFloat))
+        .SetValue("getTmAnalogValueWithoutUnit",   new Func<int, string>(_owner.GetTmAnalogValueWithoutUnit))
         .SetValue("isTmAnalogUnreliable",          new Func<int, bool>(_owner.IsTmAnalogUnreliable))
         .SetValue("isVariableUnreliable",          new Func<int, bool>(_owner.IsVariableUnreliable))
         .SetValue("isVariableOn",                  new Func<int, bool>(_owner.IsVariableOn))
@@ -162,6 +165,18 @@ namespace Iface.Oik.SvgPlayground.Model
 
     private void InitContextMenuCommand(int type, string parameter, string caption = null)
     {
+    }
+
+
+    private void LogMessage(string message)
+    {
+      Console.WriteLine($"{message} ({ToString()})");
+    }
+
+
+    public override string ToString()
+    {
+      return $"{_svgElement}";
     }
   }
 }

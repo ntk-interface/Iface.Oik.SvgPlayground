@@ -389,6 +389,28 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public float GetTmAnalogValueFloat(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return 0;
+      }
+      return tmAnalog.Value;
+    }
+
+
+    public string GetTmAnalogValueWithoutUnit(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return TmAnalog.InvalidValueString;
+      }
+      return tmAnalog.ValueString;
+    }
+
+
     public bool IsVariableUnreliable(int idx)
     {
       var variable = Variables.ElementAtOrDefault(idx);

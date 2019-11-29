@@ -88,10 +88,13 @@ namespace Iface.Oik.SvgPlayground.Util
           return true;
         
         case "fill":
+        {
           element.Fill = CreateColor(value);
           return true;
+        }
 
         case "fill-opacity":
+        {
           if (!float.TryParse(value, out var floatValue))
           {
             Console.WriteLine("Invalid fill opacity");
@@ -99,8 +102,10 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           element.FillOpacity = floatValue;
           return true;
+        }
 
         case "display":
+        {
           if (!(element is SvgVisualElement visualElement))
           {
             Console.WriteLine("Not a visual element");
@@ -108,23 +113,99 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           visualElement.Display = value;
           return true;
+      }
 
-        case "transform":
-          element.Transforms = new SvgTransformConverter().ConvertFrom(value) as SvgTransformCollection;
-          return true;
-
-        case "text":
-          if (!(element is SvgText textElement))
+        case "x":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
           {
-            Console.WriteLine("Cannot set text to not text");
+            Console.WriteLine("Invalid x");
             return false;
           }
-          textElement.Text = value;
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return false;
+          }
+          rectElement.X = new SvgUnit(SvgUnitType.Pixel, floatValue);
           return true;
+        }
+
+        case "y":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid y");
+            return false;
+          }
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return false;
+          }
+          rectElement.Y = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+      }
+
+        case "width":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid width");
+            return false;
+          }
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return false;
+          }
+          rectElement.Width = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+        }
+
+        case "height":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid height");
+            return false;
+          }
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return false;
+          }
+          rectElement.Height = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+        }
+
+        case "transform":
+        {
+          element.Transforms = new SvgTransformConverter().ConvertFrom(value) as SvgTransformCollection;
+          return true;
+        }
+
+        case "text":
+        {
+          switch (element)
+          {
+            case SvgText textElement:
+              textElement.Text = value;
+              return true;
+            case SvgTextSpan textSpanElement:
+              textSpanElement.Text = value;
+              return true;
+            default:
+              Console.WriteLine("Cannot set text to not text");
+              return false;
+          }
+        }
 
         default:
+        {
           Console.WriteLine($"Unknown property {property}");
           return false;
+        }
       }
     }
 
