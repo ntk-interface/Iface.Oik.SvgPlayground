@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="30"
+     height="100">
+
+    <title>Столбиковый индикатор</title>
+
+    <g oik:oikelement="1">
+        <desc>
+            var ti    = initTmAnalog(1, 1, 1, 'Измерение');
+            var min   = 35;
+            var max   = 40;
+            var alarm = 38;
+            var defaultColor = 'green';
+            
+            var defaultHeight = getElementProperty('value', 'height');
+
+            function update()
+            {
+                var value = getTmAnalogValueFloat(ti);
+
+                var percentage = (value - min) / (max - min);
+                if (percentage &gt; 1) percentage = 1;
+                if (percentage &lt; 0) percentage = 0;
+
+                var height = defaultHeight * percentage;
+                var y      = defaultHeight - height;
+
+                setElementProperty('value', 'y', y);
+                setElementProperty('value', 'height', height);
+
+                if (isTmAnalogUnreliable(ti))
+                {
+                    setElementProperty('value', 'fill', 'white');
+                }
+                else
+                {
+                    if (value > alarm &amp;&amp; !isTmAnalogUnreliable(ti))
+                    {
+                        setElementProperty('value', 'fill', '#f44336');
+                    }
+                    else
+                    {
+                        setElementProperty('value', 'fill', defaultColor);
+                    }
+                }
+            }
+
+            return update;
+        </desc>
+        <rect oik:oikid="value"
+              x="0"
+              y="0"
+              width="30"
+              height="100"
+              fill="green"/>
+        <rect width="30"
+              height="100"
+              fill="none"
+              stroke="black"/>
+        <line x1="0"
+              y1="25"
+              x2="5"
+              y2="25"
+              stroke="black"/>
+        <line x1="0"
+              y1="50"
+              x2="5"
+              y2="50"
+              stroke="black"/>
+        <line x1="0"
+              y1="75"
+              x2="5"
+              y2="75"
+              stroke="black"/>
+    </g>
+</svg>

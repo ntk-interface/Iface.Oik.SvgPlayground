@@ -221,33 +221,85 @@ namespace Iface.Oik.SvgPlayground.Util
       switch (property.ToLower())
       {
         case "stroke":
+        {
           return (element.Stroke as SvgColourServer)?.ToString();
+        }
         
         case "fill":
+        {
           return (element.Fill as SvgColourServer)?.ToString();
+        }
 
         case "fill-opacity":
+        {
           return element.FillOpacity.ToString(CultureInfo.InvariantCulture);
+        }
+        
+        case "x":
+        {
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return null;
+          }
+          return rectElement.X.Value.ToString(CultureInfo.InvariantCulture);
+        }
+        
+        case "y":
+        {
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return null;
+          }
+          return rectElement.Y.Value.ToString(CultureInfo.InvariantCulture);
+        }
+        
+        case "width":
+        {
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return null;
+          }
+          return rectElement.Width.Value.ToString(CultureInfo.InvariantCulture);
+        }
+        
+        case "height":
+        {
+          if (!(element is SvgRectangle rectElement))
+          {
+            Console.WriteLine("Not a rectangle");
+            return null;
+          }
+          return rectElement.Height.Value.ToString(CultureInfo.InvariantCulture);
+        }
 
         case "display":
+        {
           if (!(element is SvgVisualElement visualElement))
           {
             Console.WriteLine("Cannot get display from not visual element");
             return null;
           }
           return visualElement.Display;
+        }
 
         case "text":
+        {
           if (!(element is SvgText textElement))
           {
             Console.WriteLine("Cannot get text from not text");
             return null;
           }
           return textElement.Text;
+        }
 
         default:
+        {
           Console.WriteLine($"Unknown property {property}");
           return null;
+        }
       }
     }
 
