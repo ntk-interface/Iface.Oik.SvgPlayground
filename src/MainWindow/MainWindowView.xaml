@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="{Binding Title}"
         Width="1000"
-        Height="600">
+        Height="600"
+        Background="#FFF3F3F3">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
