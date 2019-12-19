@@ -25,7 +25,7 @@
             else {
             setElementProperty('value', 'fill', defaultFill);
             }
-            setElementProperty('value', 'text', getTmAnalogValue(ti));
+            setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
             }
 
             return update;
@@ -54,7 +54,7 @@
             else {
             setElementProperty('value', 'fill', defaultFill);
             }
-            setElementProperty('value', 'text', getTmAnalogValue(ti));
+            setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
             }
 
             return update;
@@ -402,7 +402,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -430,7 +430,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -758,7 +758,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -784,7 +784,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -1112,7 +1112,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -1138,7 +1138,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -1466,7 +1466,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -1492,7 +1492,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -1820,7 +1820,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -1846,7 +1846,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -2174,7 +2174,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -2200,7 +2200,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -2528,7 +2528,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -2554,7 +2554,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -2882,7 +2882,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -2908,7 +2908,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -3236,7 +3236,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;
@@ -3262,7 +3262,7 @@
                 else {
                 setElementProperty('value', 'fill', defaultFill);
                 }
-                setElementProperty('value', 'text', getTmAnalogValue(ti));
+                setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
                 }
 
                 return update;

@@ -378,18 +378,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
-    public string GetTmAnalogValue(int idx)
-    {
-      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
-      if (tmAnalog == null)
-      {
-        return TmAnalog.InvalidValueString;
-      }
-      return tmAnalog.ValueWithUnitString;
-    }
-
-
-    public float GetTmAnalogValueFloat(int idx)
+    public float GetTmAnalogValue(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
       if (tmAnalog == null)
@@ -400,7 +389,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
-    public string GetTmAnalogValueWithoutUnit(int idx)
+    public string GetTmAnalogValueString(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
       if (tmAnalog == null)
@@ -408,6 +397,28 @@ namespace Iface.Oik.SvgPlayground.MainWindow
         return TmAnalog.InvalidValueString;
       }
       return tmAnalog.ValueString;
+    }
+
+
+    public string GetTmAnalogUnit(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return string.Empty;
+      }
+      return tmAnalog.Unit;
+    }
+
+
+    public string GetTmAnalogValueWithUnitString(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return TmAnalog.InvalidValueString;
+      }
+      return tmAnalog.ValueWithUnitString;
     }
 
 

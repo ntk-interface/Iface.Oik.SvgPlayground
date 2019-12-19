@@ -17,7 +17,7 @@
 
             function update()
             {
-                var value = getTmAnalogValueFloat(ti);
+                var value = getTmAnalogValue(ti);
 
                 var percentage = (value - min) / (max - min);
                 if (percentage &gt; 1) percentage = 1;
