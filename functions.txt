@@ -1,0 +1,27 @@
+logMessage                         - вывести сообщение для отладки
+setElementProperty                 - установить значение свойства элемента SVG
+getElementProperty                 - получить значение свойства элемента SVG
+initTmStatus                       - инициализировать телесигнал
+initTmAnalog                       - инициализировать телеизмерение
+initVariable                       - инициализировать внутреннюю переменную схемы
+getTmStatusStatus                  - получить состояние телесигнала (0 или 1)
+isTmStatusUnreliable               - является телесигнал недостоверным
+isTmStatusMalfunction              - является ли состояние телесигнала неиспранвым
+isTmStatusIntermediate             - является ли состояние телесигнала промежуточным
+isTmStatusOn                       - является ли состояние телесигнала включенным
+getTmAnalogValue                   - получить значение телеизмерения в виде числа
+getTmAnalogValueString             - получить значение телеизмерения в виде строки (значение)
+getTmAnalogValueWithUnitString     - получить значение телеизмерения в виде строки (значение + единица измерения)
+getTmAnalogUnit                    - получить единицу измерения телеизмерения
+isTmAnalogUnreliable               - является ли значение телеизмерения недостоверным
+isVariableUnreliable               - является ли состояние внутренней переменной схемы недостоверным
+isVariableOn                       - является ли состояние внутренней переменной схемы включенным
+setVariable                        - установить значение внутренней переменной схемы
+initTmStatusDefaultCommands        - инициализировать команды по умолчанию для телесигнала
+initTmAnalogDefaultCommands        - инициализировать команды по умолчанию для телеизмерения
+initOpenSvgDefaultCommands
+initClickIntCommand
+initContextMenuIntCommand
+initClickStringCommand
+initContextMenuStringCommand
+initEmptyContextMenuCommand
