@@ -4,14 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Iface.Oik.SvgPlayground.MainWindow"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
         Title="{Binding Title}"
         Width="1000"
         Height="600"
         Background="#FFF3F3F3">
-    <Window.DataContext>
-        <local:MainWindowViewModel />
-    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="370" />
@@ -31,13 +30,13 @@
                         Content="Открыть SVG файл"
                         Width="200"
                         HorizontalAlignment="Left" />
-                
+
                 <Button Grid.Row="1"
                         Command="{Binding ReloadFileCommand}"
                         Content="Обновить открытый файл"
                         Width="200"
                         HorizontalAlignment="Left"
-                        Margin="0,10,0,0"/>
+                        Margin="0,10,0,0" />
 
                 <ItemsControl Grid.Row="2"
                               ItemsSource="{Binding TmStatuses}"
@@ -103,12 +102,8 @@
         <Grid Grid.Column="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto">
-                <Grid Margin="10">
-                    <Image Source="{Binding SvgImage}"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Stretch="None" />
-                </Grid>
+                <skia:SKElement x:Name="Canvas"
+                                PaintSurface="OnPaintSurface" />
             </ScrollViewer>
             <Button Command="{Binding ZoomInCommand}"
                     Content="+"

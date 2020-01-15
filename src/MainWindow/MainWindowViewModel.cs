@@ -6,10 +6,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 using Iface.Oik.SvgPlayground.Model;
 using Iface.Oik.SvgPlayground.Util;
 using Microsoft.Win32;
+using SkiaSharp;
 using Svg;
 
 namespace Iface.Oik.SvgPlayground.MainWindow
@@ -19,24 +19,16 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     private const double ScaleStep = 1.5;
 
 
+    private readonly MainWindowView _view;
+    
+
     private          string        _svgFilename;
     private          SvgDocument   _svgDocument;
     private readonly List<Element> _elements = new List<Element>();
 
 
-    private BitmapImage _svgImage;
     private string      _title;
     private double      _scale = 1;
-
-    public BitmapImage SvgImage
-    {
-      get => _svgImage;
-      set
-      {
-        _svgImage = value;
-        NotifyOnPropertyChanged();
-      }
-    }
 
 
     public string Title
@@ -73,8 +65,10 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     public ICommand ZoomOutCommand    { get; }
 
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(MainWindowView view)
     {
+      _view = view;
+      
       Title = "SVG";
 
       OpenFileCommand   = new RelayCommand(_ => OpenFile());
@@ -139,8 +133,6 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       TmStatuses.Clear();
       TmAnalogs.Clear();
       _elements.Clear();
-
-      SvgImage = null;
     }
 
 
@@ -178,15 +170,32 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       }
       try
       {
-        var bitmap = _svgDocument.Draw((int) (_svgDocument.Width  * Scale),
-                                       (int) (_svgDocument.Height * Scale));
-        Application.Current
-                   .Dispatcher
-                   ?.Invoke(new Action(() => SvgImage = BitmapUtil.ConvertBitmap(bitmap)));
+        InvalidateCanvas();
       }
       catch (Exception ex)
       {
-        SvgImage = null;
+        MessageBox.Show("Ошибка при попытке отрисовки: " + ex.Message);
+      }
+    }
+
+
+    private void InvalidateCanvas()
+    {
+      Application.Current
+                 .Dispatcher
+                 ?.Invoke(() => _view?.InvalidateCanvas());
+    }
+
+
+
+    public void OnCanvasPaintSurface(SKCanvas canvas)
+    {
+      try
+      {
+        SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, canvas, (float) Scale);
+      }
+      catch (Exception ex)
+      {
         MessageBox.Show("Ошибка при попытке отрисовки: " + ex.Message);
       }
     }
