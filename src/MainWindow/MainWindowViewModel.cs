@@ -323,6 +323,17 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public string GetTmStatusCaption(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return "???";
+      }
+      return tmStatus.StatusCaption;
+    }
+
+
     public bool IsTmStatusOn(int idx)
     {
       var tmStatus = TmStatuses.ElementAtOrDefault(idx);

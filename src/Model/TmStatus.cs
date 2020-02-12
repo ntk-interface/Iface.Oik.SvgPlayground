@@ -45,6 +45,19 @@ namespace Iface.Oik.SvgPlayground.Model
       Enum.GetValues(typeof(TmStatusFlag))
           .Cast<Enum>()
           .Select(e => new KeyValuePair<string, string>(e.ToString(), e.GetDescription()));
+
+
+    public string StatusCaption
+    {
+      get
+      {
+        if (IsIntermediate) return "Промеж.";
+        if (IsMalfunction) return "Неиспр.";
+        if (IsUnreliable) return "Недост.";
+        if (IsOn) return "ВКЛ";
+        return "ОТКЛ";
+      }
+    }
   }
 
 
