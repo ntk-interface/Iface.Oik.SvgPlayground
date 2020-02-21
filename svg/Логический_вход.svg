@@ -1,29 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:oik="http://iface.ru/oik_svg"
-     width="200"
+     width="300"
      height="30">
     <g oik:oikelement="1">
         <desc>
-            var ts = initTmStatus(1, 1, 1);
+            var ts        = initTmStatus(1, 1, 1);
             var tsOnValue = 1;
-            var output = initVariable('B1');
+            var output    = initVariable('B1');
 
-            function update() {
+            initTmStatusDefaultCommands(ts);
+
+            function update()
+            {
+                var statusCaption = getTmStatusCaption(ts);
+                var isTsOn        = isTmStatusOn(ts);
+                var isUnreliable  = false;
+                var isManuallySet = false;
                 var isOk;
-                if (isTmStatusUnreliable(ts)) {
-                    setElementProperty('rect', 'fill', '#000000');
-                    setVariable(output, null);
-                    return;
-                }
-				var isTsOn = isTmStatusOn(ts);
-                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0  &amp;&amp; !isTsOn)) {
+                if ((tsOnValue === 1 &amp;&amp; isTsOn) || (tsOnValue === 0 &amp;&amp; !isTsOn))
+                {
                     isOk = true;
                 }
-                else {
+                else
+                {
                     isOk = false;
                 }
-                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                if (isTmStatusUnreliable(ts) || isTmStatusMalfunction(ts))
+                {
+                    isUnreliable = true;
+                    statusCaption += '?';
+                }
+                if (isTmStatusManuallySet(ts))
+                {
+                    isManuallySet = true;
+                }
+                var fillColor = (isOk &amp;&amp; !isUnreliable)
+                        ? (isManuallySet) ? '#ffeb3b' : '#4caf50'
+                        : '#f44336';
+                setElementProperty('rect', 'fill', fillColor);
+                setElementProperty('status-caption', 'text', statusCaption);
                 setVariable(output, isOk);
+                setVariableUnreliable(output, isUnreliable);
+                setVariableManuallySet(output, isManuallySet);
             }
 
             return update;
@@ -31,18 +49,26 @@
         <rect oik:oikid="rect"
               x="0"
               y="0"
-              width="200"
+              width="300"
               height="30"
               stroke="black"
               fill="none"
               fill-opacity=".2"/>
         <text x="5"
-              y="13"
+              y="12"
               font-size="12"
-			  xml:space="preserve">ЛР-110</text>
-        <text x="5"
-              y="26"
+              xml:space="preserve">ЛР-110</text>
+        <text oik:oikid="status-caption"
+              x="295"
+              y="12"
+              text-anchor="end"
               font-size="12"
-			  xml:space="preserve">включен</text>
+              xml:space="preserve">??? ??? ???</text>
+        <text x="295"
+              y="25"
+              text-anchor="end"
+              font-size="12"
+              fill="#666"
+              xml:space="preserve">д.б. включен</text>
     </g>
 </svg>

@@ -378,6 +378,17 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public bool IsTmStatusManuallySet(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      return tmStatus.IsManuallySet;
+    }
+
+
     public bool IsTmAnalogUnreliable(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
@@ -444,6 +455,17 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public bool IsVariableManuallySet(int idx)
+    {
+      var variable = Variables.ElementAtOrDefault(idx);
+      if (variable == null)
+      {
+        return false;
+      }
+      return variable.IsManuallySet;
+    }
+
+
     public bool IsVariableOn(int idx)
     {
       var variable = Variables.ElementAtOrDefault(idx);
@@ -455,20 +477,36 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
-    public void SetVariable(int idx, bool? isOn)
+    public void SetVariable(int idx, bool isOn)
     {
       var variable = Variables.ElementAtOrDefault(idx);
       if (variable == null)
       {
         return;
       }
-      if (!isOn.HasValue)
+      variable.IsOn = isOn;
+    }
+
+
+    public void SetVariableUnreliable(int idx, bool isUnreliable)
+    {
+      var variable = Variables.ElementAtOrDefault(idx);
+      if (variable == null)
       {
-        variable.IsUnreliable = true;
         return;
       }
-      variable.IsUnreliable = false;
-      variable.IsOn         = isOn.Value;
+      variable.IsUnreliable = isUnreliable;
+    }
+
+
+    public void SetVariableManuallySet(int idx, bool isManuallySet)
+    {
+      var variable = Variables.ElementAtOrDefault(idx);
+      if (variable == null)
+      {
+        return;
+      }
+      variable.IsManuallySet = isManuallySet;
     }
 
 

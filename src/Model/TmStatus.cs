@@ -34,6 +34,7 @@ namespace Iface.Oik.SvgPlayground.Model
     public bool IsUnreliable   => Flag.HasFlag(TmStatusFlag.Unreliable);
     public bool IsMalfunction  => Flag.HasFlag(TmStatusFlag.Malfunction);
     public bool IsIntermediate => Flag.HasFlag(TmStatusFlag.Intermediate);
+    public bool IsManuallySet  => Flag.HasFlag(TmStatusFlag.IsManuallySet);
 
 
     public TmStatus(int ch, int rtu, int point) : base(ch, rtu, point)
@@ -64,9 +65,10 @@ namespace Iface.Oik.SvgPlayground.Model
   [Flags]
   public enum TmStatusFlag
   {
-    [Description("-")]             None         = 0,
-    [Description("Недостоверный")] Unreliable   = 1,
-    [Description("Неисправный")]   Malfunction  = 2,
-    [Description("Промежуточное")] Intermediate = 4,
+    [Description("-")]             None          = 0,
+    [Description("Недостоверный")] Unreliable    = 1,
+    [Description("Неисправный")]   Malfunction   = 2,
+    [Description("Промежуточное")] Intermediate  = 4,
+    [Description("Уст. вручную")]  IsManuallySet = 8,
   }
 }

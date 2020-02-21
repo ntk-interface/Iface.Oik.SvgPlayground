@@ -11,20 +11,33 @@
             ];
             var output = initVariable('M1');
 
-            function update() {
-                var isOk = true;
-                for (var i = 0; i &lt; inputs.length; i++) {
-                    if (isVariableUnreliable(inputs[i])) {
-                        setElementProperty('rect', 'fill', '#000000');
-                        setVariable(output, null);
-                        return;
-                    }
-                    if (!isVariableOn(inputs[i])) {
+            function update()
+            {
+                var isOk          = true;
+                var isUnreliable  = false;
+                var isManuallySet = false;
+                for (var i = 0; i &lt; inputs.length; i++)
+                {
+                    if (!isVariableOn(inputs[i]))
+                    {
                         isOk = false;
                     }
+                    if (isVariableManuallySet(inputs[i]))
+                    {
+                        isManuallySet = true;
+                    }
+                    if (isVariableUnreliable(inputs[i]))
+                    {
+                        isUnreliable = true;
+                    }
                 }
-                setElementProperty('rect', 'fill', (isOk) ? '#4caf50' : '#f44336');
+                var fillColor = (isOk &amp;&amp; !isUnreliable)
+                        ? (isManuallySet) ? '#ffeb3b' : '#4caf50'
+                        : '#f44336';
+                setElementProperty('rect', 'fill', fillColor);
                 setVariable(output, isOk);
+                setVariableUnreliable(output, isUnreliable);
+                setVariableManuallySet(output, isManuallySet);
             }
 
             return update;
