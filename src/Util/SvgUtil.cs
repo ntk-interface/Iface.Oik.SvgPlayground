@@ -86,7 +86,7 @@ namespace Iface.Oik.SvgPlayground.Util
         case "stroke":
           element.Stroke = CreateColor(value);
           return true;
-        
+
         case "fill":
         {
           element.Fill = CreateColor(value);
@@ -113,7 +113,71 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           visualElement.Display = value;
           return true;
-      }
+        }
+
+        case "x1":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid x1");
+            return false;
+          }
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return false;
+          }
+          lineElement.StartX = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+        }
+
+        case "x2":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid x2");
+            return false;
+          }
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return false;
+          }
+          lineElement.EndX = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+        }
+
+        case "y1":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid y1");
+            return false;
+          }
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return false;
+          }
+          lineElement.StartY = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+        }
+
+        case "y2":
+        {
+          if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
+          {
+            Console.WriteLine("Invalid y2");
+            return false;
+          }
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return false;
+          }
+          lineElement.EndY = new SvgUnit(SvgUnitType.Pixel, floatValue);
+          return true;
+        }
 
         case "x":
         {
@@ -145,7 +209,7 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           rectElement.Y = new SvgUnit(SvgUnitType.Pixel, floatValue);
           return true;
-      }
+        }
 
         case "width":
         {
@@ -224,7 +288,7 @@ namespace Iface.Oik.SvgPlayground.Util
         {
           return (element.Stroke as SvgColourServer)?.ToString();
         }
-        
+
         case "fill":
         {
           return (element.Fill as SvgColourServer)?.ToString();
@@ -234,7 +298,47 @@ namespace Iface.Oik.SvgPlayground.Util
         {
           return element.FillOpacity.ToString(CultureInfo.InvariantCulture);
         }
-        
+
+        case "x1":
+        {
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return null;
+          }
+          return lineElement.StartX.Value.ToString(CultureInfo.InvariantCulture);
+        }
+
+        case "x2":
+        {
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return null;
+          }
+          return lineElement.EndX.Value.ToString(CultureInfo.InvariantCulture);
+        }
+
+        case "y1":
+        {
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return null;
+          }
+          return lineElement.StartY.Value.ToString(CultureInfo.InvariantCulture);
+        }
+
+        case "y2":
+        {
+          if (!(element is SvgLine lineElement))
+          {
+            Console.WriteLine("Not a line");
+            return null;
+          }
+          return lineElement.EndY.Value.ToString(CultureInfo.InvariantCulture);
+        }
+
         case "x":
         {
           if (!(element is SvgRectangle rectElement))
@@ -244,7 +348,7 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           return rectElement.X.Value.ToString(CultureInfo.InvariantCulture);
         }
-        
+
         case "y":
         {
           if (!(element is SvgRectangle rectElement))
@@ -254,7 +358,7 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           return rectElement.Y.Value.ToString(CultureInfo.InvariantCulture);
         }
-        
+
         case "width":
         {
           if (!(element is SvgRectangle rectElement))
@@ -264,7 +368,7 @@ namespace Iface.Oik.SvgPlayground.Util
           }
           return rectElement.Width.Value.ToString(CultureInfo.InvariantCulture);
         }
-        
+
         case "height":
         {
           if (!(element is SvgRectangle rectElement))
