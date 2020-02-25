@@ -19,10 +19,6 @@ stages:
     pool:
       vmImage: windows-latest
     steps:
-    - task: UseDotNet@2
-      displayName: Install .NET Core 3.0
-      inputs:
-        version: 3.0.100
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
