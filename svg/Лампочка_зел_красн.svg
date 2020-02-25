@@ -4,10 +4,6 @@
      height="80">
 
     <title>Лампочка</title>
-	
-	<rect width="100%"
-	      height="100%"
-		  fill="gray" />
 
     <g transform="translate(0.5,0.5)"
        oik:oikelement="1">

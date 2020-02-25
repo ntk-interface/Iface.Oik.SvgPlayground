@@ -31,7 +31,10 @@
                         isUnreliable = true;
                     }
                 }
-                var fillColor = (isOk &amp;&amp; !isUnreliable)
+                if (isUnreliable) {
+                  isOk = false;
+                }
+                var fillColor = (isOk)
                         ? (isManuallySet) ? '#ffeb3b' : '#4caf50'
                         : '#f44336';
                 setElementProperty('rect', 'fill', fillColor);
