@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="20"
+     height="200">
+
+    <title>Колба</title>
+
+    <g transform="translate(0.0,0.0)"
+       oik:oikelement="1">
+        <desc>
+            var ti  = initTmAnalog(20, 3, 1, 'колба');
+            var min = -4;
+            var max = 4;
+
+            var defaultHeight = 200;
+
+            function update()
+            {
+                var value = getTmAnalogValue(ti);
+                var percentage = (value - min) / (max - min);
+                var y = defaultHeight * (1 - percentage);
+                
+                if (isTmAnalogUnreliable(ti))
+                {
+                    setElementProperty('level', 'display', 'none');
+                }
+                else if (percentage &lt; 0 || percentage &gt; 1)
+                {
+                    setElementProperty('level', 'display', 'none');
+                }
+                else
+                {
+                    setElementProperty('level', 'y1', y);
+                    setElementProperty('level', 'y2', y);
+                    setElementProperty('level', 'display', 'block');
+                }
+            }
+
+            return update;
+        </desc>
+        <g>
+            <rect y="0"
+                  x="00"
+                  height="200"
+                  width="20"
+                  fill="none"
+                  stroke="black"/>
+
+            <line oik:oikid="level"
+                  x1="0"
+                  y1="100"
+                  x2="20"
+                  y2="100"
+                  stroke="red"
+                  stroke-width="3"/>
+
+
+            <line x1="0"
+                  y1="100"
+                  x2="8"
+                  y2="100"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="125"
+                  x2="5"
+                  y2="125"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="150"
+                  x2="5"
+                  y2="150"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="175"
+                  x2="5"
+                  y2="175"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="200"
+                  x2="5"
+                  y2="200"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="75"
+                  x2="5"
+                  y2="75"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="50"
+                  x2="5"
+                  y2="50"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="25"
+                  x2="5"
+                  y2="25"
+                  stroke="black"/>
+            <line x1="0"
+                  y1="0"
+                  x2="5"
+                  y2="0"
+                  stroke="black"/>
+
+
+        </g>
+    </g>
+</svg>

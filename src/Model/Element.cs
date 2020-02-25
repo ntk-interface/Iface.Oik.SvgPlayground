@@ -58,6 +58,8 @@ namespace Iface.Oik.SvgPlayground.Model
         .SetValue("getTmAnalogValueString",         new Func<int, string>(_owner.GetTmAnalogValueString))
         .SetValue("getTmAnalogValueWithUnitString", new Func<int, string>(_owner.GetTmAnalogValueWithUnitString))
         .SetValue("isTmAnalogUnreliable",           new Func<int, bool>(_owner.IsTmAnalogUnreliable))
+        .SetValue("isTmAnalogAlarmAlert",           new Func<int, bool>(_owner.IsTmAnalogAlarmAlert))
+        .SetValue("isTmAnalogAlarmWarning",         new Func<int, bool>(_owner.IsTmAnalogAlarmWarning))
         .SetValue("isVariableUnreliable",           new Func<int, bool>(_owner.IsVariableUnreliable))
         .SetValue("isVariableManuallySet",          new Func<int, bool>(_owner.IsVariableManuallySet))
         .SetValue("isVariableOn",                   new Func<int, bool>(_owner.IsVariableOn))

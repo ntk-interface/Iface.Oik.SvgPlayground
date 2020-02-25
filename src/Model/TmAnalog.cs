@@ -50,7 +50,9 @@ namespace Iface.Oik.SvgPlayground.Model
     }
 
 
-    public bool IsUnreliable => Flag.HasFlag(TmAnalogFlag.Unreliable);
+    public bool IsUnreliable  => Flag.HasFlag(TmAnalogFlag.Unreliable);
+    public bool IsAlarmLevel3 => Flag.HasFlag(TmAnalogFlag.AlarmLevel3);
+    public bool IsAlarmLevel4 => Flag.HasFlag(TmAnalogFlag.AlarmLevel4);
 
     public string ValueString         => Value.ToString(CultureInfo.InvariantCulture);
     public string ValueWithUnitString => $"{Value} {Unit}";
@@ -71,7 +73,9 @@ namespace Iface.Oik.SvgPlayground.Model
   [Flags]
   public enum TmAnalogFlag
   {
-    [Description("-")]             None       = 0,
-    [Description("Недостоверный")] Unreliable = 1,
+    [Description("-")]                None        = 0,
+    [Description("Недостоверный")]    Unreliable  = 1,
+    [Description("Уставка предупр.")] AlarmLevel3 = 2,
+    [Description("Уставка тревога")]  AlarmLevel4 = 4,
   }
 }

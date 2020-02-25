@@ -1,32 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:oik="http://iface.ru/oik_svg"
-     width="100"
+     width="90"
      height="20">
 
     <g oik:oikelement="1">
         <desc>
             var ti = initTmAnalog(1, 1, 1, 'Измерение');
-            var defaultFill = getElementProperty('value', 'fill');
 
-            function update() {
-				if (isTmAnalogUnreliable(ti)) {
-					setElementProperty('value', 'fill', 'white');
-				}
-				else {
-					setElementProperty('value', 'fill', defaultFill);
-				}
-				setElementProperty('value', 'text', getTmAnalogValueWithUnitString(ti));
+            var defaultFill = getElementProperty('value', 'fill');
+            setElementProperty('unit', 'text', getTmAnalogUnit(ti));
+
+            function update()
+            {
+                if (isTmAnalogUnreliable(ti))
+                {
+                    setElementProperty('value', 'fill', 'white');
+                }
+                else if (isTmAnalogAlarmAlert(ti))
+                {
+                    setElementProperty('value', 'fill', '#ff0000');
+                }
+                else if (isTmAnalogAlarmWarning(ti))
+                {
+                    setElementProperty('value', 'fill', 'yellow');
+                }
+                else
+                {
+                    setElementProperty('value', 'fill', defaultFill);
+                }
+                setElementProperty('value', 'text', getTmAnalogValueString(ti));
             }
 
             return update;
         </desc>
+        <rect x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              fill="none"
+              stroke="none"/>
         <text oik:oikid="value"
-              x="0"
+              x="55"
               y="14"
-              fill="#0000ff"
+              text-anchor="end"
+              fill="#00ff00"
+              font-family="Arial"
+              font-size="12"
+              font-weight="bold">
+            ????,???
+        </text>
+        <text oik:oikid="unit"
+              x="60"
+              y="14"
+              fill="#ffbe00"
               font-family="Arial"
               font-size="12">
-            ??? ???
+            ????
         </text>
     </g>
 </svg>

@@ -408,6 +408,28 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public bool IsTmAnalogAlarmAlert(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      return tmAnalog.IsAlarmLevel4;
+    }
+
+
+    public bool IsTmAnalogAlarmWarning(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      return tmAnalog.IsAlarmLevel3;
+    }
+
+
     public float GetTmAnalogValue(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
