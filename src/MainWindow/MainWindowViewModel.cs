@@ -71,6 +71,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     public ICommand ReloadFileCommand { get; }
     public ICommand ZoomInCommand     { get; }
     public ICommand ZoomOutCommand    { get; }
+    public ICommand Zoom1Command      { get; }
 
 
     public MainWindowViewModel()
@@ -81,6 +82,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       ReloadFileCommand = new RelayCommand(_ => ReloadFile());
       ZoomInCommand     = new RelayCommand(_ => ZoomIn());
       ZoomOutCommand    = new RelayCommand(_ => ZoomOut());
+      Zoom1Command      = new RelayCommand(_ => Zoom1());
 
       FixTextBoxFloatValue();
     }
@@ -201,6 +203,12 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     private void ZoomOut()
     {
       Zoom(1 / ScaleStep);
+    }
+
+
+    private void Zoom1()
+    {
+      Zoom(1 / Scale);
     }
 
 
