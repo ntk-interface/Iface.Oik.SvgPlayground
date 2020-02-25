@@ -121,7 +121,7 @@ namespace Iface.Oik.SvgPlayground.Model
     {
       if (!_elementsWithId.TryGetValue(id, out var element)) return;
 
-      SvgUtil.SetElementProperty(element, property, value);
+      element?.SetProperty(property, value);
     }
 
 
@@ -129,7 +129,19 @@ namespace Iface.Oik.SvgPlayground.Model
     {
       if (!_elementsWithId.TryGetValue(id, out var element)) return null;
 
-      return SvgUtil.GetElementProperty(element, property);
+      return element?.GetProperty(property);
+    }
+
+
+    private void LogMessage(string message)
+    {
+      Console.WriteLine($"{message} ({ToString()})");
+    }
+
+
+    public override string ToString()
+    {
+      return $"{_svgElement}";
     }
 
 
@@ -171,18 +183,6 @@ namespace Iface.Oik.SvgPlayground.Model
 
     private void InitContextMenuCommand(int type, string parameter, string caption = null)
     {
-    }
-
-
-    private void LogMessage(string message)
-    {
-      Console.WriteLine($"{message} ({ToString()})");
-    }
-
-
-    public override string ToString()
-    {
-      return $"{_svgElement}";
     }
   }
 }
