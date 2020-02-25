@@ -9,7 +9,9 @@
        oik:oikelement="1">
         <desc>
             var ts = initTmStatus(20, 1, 2, 'Разъединитель');
+
             var fillColor = getElementProperty('knife', 'fill');
+            initTmStatusDefaultCommands();
 
             function update() {
                 if (isTmStatusUnreliable(ts)) {

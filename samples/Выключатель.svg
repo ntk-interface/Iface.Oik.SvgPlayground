@@ -9,7 +9,9 @@
        oik:oikelement="1">
         <desc>
             var ts = initTmStatus(20, 1, 1, 'Выключатель');
+
             var fillColor = getElementProperty('breaker', 'fill');
+			initTmStatusDefaultCommands();
 
             function update() {
             	if (isTmStatusUnreliable(ts)) {

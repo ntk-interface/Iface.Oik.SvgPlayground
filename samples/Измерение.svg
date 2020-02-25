@@ -9,6 +9,7 @@
 
             var defaultFill = getElementProperty('value', 'fill');
             setElementProperty('unit', 'text', getTmAnalogUnit(ti));
+            initTmAnalogDefaultCommands();
 
             function update()
             {

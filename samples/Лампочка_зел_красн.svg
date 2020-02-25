@@ -10,6 +10,8 @@
         <desc>
             var ts = initTmStatus(0, 1, 1, 'Лампочка');
 
+            initTmStatusDefaultCommands();
+
             function update() {
             	if (isTmStatusUnreliable(ts)) {
             		setElementProperty('lamp', 'fill', 'white');
