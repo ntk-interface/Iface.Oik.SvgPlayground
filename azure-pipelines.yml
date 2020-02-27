@@ -6,7 +6,6 @@ variables:
   buildConfiguration: Release
   appName: Iface.Oik.SvgPlayground
   archiveName: $(appName).$(Build.BuildNumber)
-  github: alexeid1337
 
 
 trigger:
@@ -57,7 +56,7 @@ stages:
           steps:
           - task: GithubRelease@0
             inputs:
-              gitHubConnection: $(github)
-              repositoryName: $(github)/$(appName)
+              gitHubConnection: GitHub
+              repositoryName: $(Build.Repository.Name)
               tagSource: manual
               tag: $(Build.BuildNumber)
