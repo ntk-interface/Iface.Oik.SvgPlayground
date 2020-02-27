@@ -1,12 +1,12 @@
-name: $(Year:yy).$(minorVersion)
+name: $(majorVersion).$(minorVersion)
 
 variables:
-  minorVersion: $[counter(variables['Year:yy'], 1)]
+  majorVersion: $(Year:yy)
+  minorVersion: $[counter(variables['majorVersion'], 1)]
   buildConfiguration: Release
   appName: Iface.Oik.SvgPlayground
   archiveName: $(appName).$(Build.BuildNumber)
-  deployMachine: IFSERVER2008
-  deployPath: ifhdd\home\Alexei\1
+  github: alexeid1337
 
 
 trigger:
@@ -49,16 +49,15 @@ stages:
   jobs:
   - deployment: Deploy
     pool:
-      name: default
-    environment: $(deployMachine)
+      vmImage: windows-latest
+    environment: GitHub
     strategy:
       runOnce:
         deploy:
           steps:
-          - task: WindowsMachineFileCopy@2
+          - task: GithubRelease@0
             inputs:
-              SourcePath: $(Pipeline.Workspace)/$(appName)/$(archiveName).zip
-              MachineNames: $(deployMachine)
-              AdminUserName: $(IFACE_USER)
-              AdminPassword: $(IFACE_PASSWORD)
-              TargetPath: $(deployPath)
+              gitHubConnection: $(github)
+              repositoryName: $(github)/$(appName)
+              tagSource: manual
+              tag: $(Build.BuildNumber)
