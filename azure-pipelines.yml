@@ -3,7 +3,7 @@ name: $(majorVersion).$(minorVersion)
 variables:
   majorVersion: $(Year:yy)
   minorVersion: $[counter(variables['majorVersion'], 1)]
-  buildConfiguration: Release
+  buildConfiguration: Release 
   appName: Iface.Oik.SvgPlayground
   archiveName: $(appName).$(Build.BuildNumber)
 
