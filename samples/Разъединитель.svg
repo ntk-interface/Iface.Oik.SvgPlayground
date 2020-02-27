@@ -11,7 +11,7 @@
             var ts = initTmStatus(20, 1, 2, 'Разъединитель');
 
             var fillColor = getElementProperty('knife', 'fill');
-            initTmStatusDefaultCommands();
+            initTmStatusDefaultCommands(ts);
 
             function update() {
                 if (isTmStatusUnreliable(ts)) {

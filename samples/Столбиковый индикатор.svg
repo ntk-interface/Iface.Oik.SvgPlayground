@@ -14,7 +14,7 @@
             var defaultColor = 'green';
             
             var defaultHeight = getElementProperty('value', 'height');
-            initTmAnalogDefaultCommands();
+            initTmAnalogDefaultCommands(ti);
 
             function update()
             {

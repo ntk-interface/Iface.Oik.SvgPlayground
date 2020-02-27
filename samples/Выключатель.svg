@@ -11,7 +11,7 @@
             var ts = initTmStatus(20, 1, 1, 'Выключатель');
 
             var fillColor = getElementProperty('breaker', 'fill');
-			initTmStatusDefaultCommands();
+			initTmStatusDefaultCommands(ts);
 
             function update() {
             	if (isTmStatusUnreliable(ts)) {
