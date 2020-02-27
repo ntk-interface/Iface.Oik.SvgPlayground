@@ -10,6 +10,8 @@ using System.Windows.Media.Imaging;
 using Iface.Oik.SvgPlayground.Model;
 using Iface.Oik.SvgPlayground.Util;
 using Microsoft.Win32;
+using SkiaSharp;
+using SkiaSharp.Views.Desktop;
 using Svg;
 
 namespace Iface.Oik.SvgPlayground.MainWindow
@@ -17,6 +19,9 @@ namespace Iface.Oik.SvgPlayground.MainWindow
   public class MainWindowViewModel : INotifyPropertyChanged
   {
     private const double ScaleStep = 1.5;
+    
+    
+    private readonly MainWindowView _view;
 
 
     private          string        _svgFilename;
@@ -24,19 +29,8 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     private readonly List<Element> _elements = new List<Element>();
 
 
-    private BitmapImage _svgImage;
     private string      _title;
     private double      _scale = 1;
-
-    public BitmapImage SvgImage
-    {
-      get => _svgImage;
-      set
-      {
-        _svgImage = value;
-        NotifyOnPropertyChanged();
-      }
-    }
 
 
     public string Title
@@ -74,8 +68,10 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     public ICommand Zoom1Command      { get; }
 
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(MainWindowView view)
     {
+      _view = view;
+      
       Title = "SVG";
 
       OpenFileCommand   = new RelayCommand(_ => OpenFile());
@@ -141,8 +137,6 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       TmStatuses.Clear();
       TmAnalogs.Clear();
       _elements.Clear();
-
-      SvgImage = null;
     }
 
 
@@ -178,17 +172,27 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       {
         element.Update();
       }
+      
+      InvalidateCanvas();
+    }
+
+
+    private void InvalidateCanvas()
+    {
+      Application.Current
+                 .Dispatcher
+                 ?.Invoke(() => _view?.InvalidateCanvas());
+    }
+
+
+    public void OnCanvasPaintSurface(SKCanvas canvas)
+    {
       try
       {
-        var bitmap = _svgDocument.Draw((int) (_svgDocument.Width  * Scale),
-                                       (int) (_svgDocument.Height * Scale));
-        Application.Current
-                   .Dispatcher
-                   ?.Invoke(new Action(() => SvgImage = BitmapUtil.ConvertBitmap(bitmap)));
+        SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, canvas, (float) Scale);
       }
       catch (Exception ex)
       {
-        SvgImage = null;
         MessageBox.Show("Ошибка при попытке отрисовки: " + ex.Message);
       }
     }

@@ -3,15 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         xmlns:local="clr-namespace:Iface.Oik.SvgPlayground.MainWindow"
         mc:Ignorable="d"
         Title="{Binding Title}"
         Width="1000"
         Height="600"
-        Background="#FFF3F3F3">
-    <Window.DataContext>
-        <local:MainWindowViewModel />
-    </Window.DataContext>
+        Background="#FFF3F3F3"
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="370" />
@@ -104,10 +103,8 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto">
                 <Grid Margin="10">
-                    <Image Source="{Binding SvgImage}"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Top"
-                           Stretch="None" />
+                    <skia:SKElement x:Name="Canvas" 
+                                    PaintSurface="OnPaintSurface" />
                 </Grid>
             </ScrollViewer>
             <Button Command="{Binding ZoomInCommand}"
@@ -116,7 +113,7 @@
                     Height="30"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0,10,20,0"
+                    Margin="0,10,10,0"
                     Opacity=".9" />
             <Button Command="{Binding ZoomOutCommand}"
                     Content="-"
@@ -124,7 +121,7 @@
                     Height="30"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0,50,20,0"
+                    Margin="0,50,10,0"
                     Opacity=".9" />
             <Button Command="{Binding Zoom1Command}"
                     Content="1:1"
@@ -132,7 +129,7 @@
                     Height="30"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0,90,20,0"
+                    Margin="0,90,10,0"
                     Opacity=".9" />
         </Grid>
     </Grid>
