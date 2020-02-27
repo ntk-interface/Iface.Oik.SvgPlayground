@@ -40,23 +40,3 @@ stages:
 
     - publish: $(Build.ArtifactStagingDirectory)
       artifact: $(appName)
-
-
-- stage: Deploy
-  dependsOn:
-  - Build
-  jobs:
-  - deployment: Deploy
-    pool:
-      vmImage: windows-latest
-    environment: GitHub
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - task: GithubRelease@0
-            inputs:
-              gitHubConnection: GitHub
-              repositoryName: $(Build.Repository.Name)
-              tagSource: manual
-              tag: $(Build.BuildNumber)
