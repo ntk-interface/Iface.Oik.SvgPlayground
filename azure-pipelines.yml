@@ -59,4 +59,4 @@ stages:
               repositoryName: $(Build.Repository.Name)
               tagSource: manual
               tag: $(Build.BuildNumber)
-              assets: $(Build.ArtifactStagingDirectory)/*.zip
+              assets: $(Pipeline.Workspace)/$(appName)/**.*
