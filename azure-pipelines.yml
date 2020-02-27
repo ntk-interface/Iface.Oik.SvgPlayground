@@ -1,7 +1,7 @@
 name: $(majorVersion).$(minorVersion)
 
 variables:
-  majorVersion: 20
+  majorVersion: $(Date:yy)
   minorVersion: $[counter(variables['majorVersion'], 1)]
   buildConfiguration: Release 
   appName: Iface.Oik.SvgPlayground
@@ -60,3 +60,4 @@ stages:
               repositoryName: $(Build.Repository.Name)
               tagSource: manual
               tag: $(Build.BuildNumber)
+              assets: $(Build.ArtifactStagingDirectory)
