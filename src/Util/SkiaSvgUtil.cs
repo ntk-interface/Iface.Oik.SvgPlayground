@@ -8,6 +8,8 @@ namespace Iface.Oik.SvgPlayground.Util
   {
     public static void PaintSvgDocumentToSkiaCanvas(SvgDocument svgDocument,
                                                     SKCanvas    canvas,
+                                                    float       x,
+                                                    float       y,
                                                     float       scale)
     {
       if (svgDocument == null) return;
@@ -17,8 +19,10 @@ namespace Iface.Oik.SvgPlayground.Util
       using (var skSvg = new SKSvg())
       {
         skSvg.FromSvgDocument(svgDocument);
-        var matrix = new SKMatrix();
-        matrix.SetScaleTranslate(scale, scale, 0, 0);
+        var matrix = SKMatrix.MakeIdentity();
+        SKMatrix.Concat(ref matrix,
+                        SKMatrix.MakeTranslation(x, y),
+                        SKMatrix.MakeScale(scale, scale));
         var image = SKImage.FromPicture(skSvg.Picture,
                                         new SKSizeI((int) (skSvg.Picture.CullRect.Width  * scale),
                                                     (int) (skSvg.Picture.CullRect.Height * scale)),

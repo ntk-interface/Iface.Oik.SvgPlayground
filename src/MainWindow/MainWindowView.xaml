@@ -11,6 +11,18 @@
         Height="600"
         Background="#FFF3F3F3"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
+
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="CanvasButton">
+            <Setter Property="Width" Value="30" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="Opacity" Value=".9" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="370" />
@@ -30,13 +42,13 @@
                         Content="Открыть SVG файл"
                         Width="200"
                         HorizontalAlignment="Left" />
-                
+
                 <Button Grid.Row="1"
                         Command="{Binding ReloadFileCommand}"
                         Content="Обновить открытый файл"
                         Width="200"
                         HorizontalAlignment="Left"
-                        Margin="0,10,0,0"/>
+                        Margin="0,10,0,0" />
 
                 <ItemsControl Grid.Row="2"
                               ItemsSource="{Binding TmStatuses}"
@@ -103,34 +115,39 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto">
                 <Grid Margin="10">
-                    <skia:SKElement x:Name="Canvas" 
+                    <skia:SKElement x:Name="Canvas"
                                     PaintSurface="OnPaintSurface" />
                 </Grid>
             </ScrollViewer>
             <Button Command="{Binding ZoomInCommand}"
                     Content="+"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Margin="0,10,10,0"
-                    Opacity=".9" />
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,10,10,0" />
             <Button Command="{Binding ZoomOutCommand}"
                     Content="-"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Margin="0,50,10,0"
-                    Opacity=".9" />
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,50,10,0" />
             <Button Command="{Binding Zoom1Command}"
                     Content="1:1"
-                    Width="30"
-                    Height="30"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Margin="0,90,10,0"
-                    Opacity=".9" />
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,90,10,0" />
+            
+            <Button Command="{Binding MoveUpCommand}"
+                    Content="↑"
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,10,100,0" />
+            <Button Command="{Binding MoveRightCommand}"
+                    Content="→"
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,50,60,0" />
+            <Button Command="{Binding MoveDownCommand}"
+                    Content="↓"
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,50,100,0" />
+            <Button Command="{Binding MoveLeftCommand}"
+                    Content="←"
+                    Style="{StaticResource CanvasButton}"
+                    Margin="0,50,140,0" />
         </Grid>
     </Grid>
 </Window>

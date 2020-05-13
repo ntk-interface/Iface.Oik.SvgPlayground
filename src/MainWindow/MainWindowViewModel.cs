@@ -18,19 +18,20 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 {
   public class MainWindowViewModel : INotifyPropertyChanged
   {
-    private const double ScaleStep = 1.5;
-    
-    
-    private readonly MainWindowView _view;
+    private const float ScaleStep = 1.5f;
+    private const float MoveStep  = 50f;
 
+    private readonly MainWindowView _view;
 
     private          string        _svgFilename;
     private          SvgDocument   _svgDocument;
     private readonly List<Element> _elements = new List<Element>();
 
+    private string _title;
 
-    private string      _title;
-    private double      _scale = 1;
+    private float _scale = 1;
+    private float _x     = 0;
+    private float _y     = 0;
 
 
     public string Title
@@ -39,18 +40,6 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       set
       {
         _title = value;
-        NotifyOnPropertyChanged();
-      }
-    }
-
-
-    public double Scale
-    {
-      get => _scale;
-      set
-      {
-        _scale = value;
-        Update();
         NotifyOnPropertyChanged();
       }
     }
@@ -66,12 +55,16 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     public ICommand ZoomInCommand     { get; }
     public ICommand ZoomOutCommand    { get; }
     public ICommand Zoom1Command      { get; }
+    public ICommand MoveUpCommand     { get; }
+    public ICommand MoveRightCommand  { get; }
+    public ICommand MoveDownCommand   { get; }
+    public ICommand MoveLeftCommand   { get; }
 
 
     public MainWindowViewModel(MainWindowView view)
     {
       _view = view;
-      
+
       Title = "SVG";
 
       OpenFileCommand   = new RelayCommand(_ => OpenFile());
@@ -79,6 +72,10 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       ZoomInCommand     = new RelayCommand(_ => ZoomIn());
       ZoomOutCommand    = new RelayCommand(_ => ZoomOut());
       Zoom1Command      = new RelayCommand(_ => Zoom1());
+      MoveUpCommand     = new RelayCommand(_ => MoveUp());
+      MoveRightCommand  = new RelayCommand(_ => MoveRight());
+      MoveDownCommand   = new RelayCommand(_ => MoveDown());
+      MoveLeftCommand   = new RelayCommand(_ => MoveLeft());
 
       FixTextBoxFloatValue();
     }
@@ -172,7 +169,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       {
         element.Update();
       }
-      
+
       InvalidateCanvas();
     }
 
@@ -189,7 +186,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     {
       try
       {
-        SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, canvas, (float) Scale);
+        SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, canvas, _x, _y, _scale);
       }
       catch (Exception ex)
       {
@@ -212,19 +209,54 @@ namespace Iface.Oik.SvgPlayground.MainWindow
 
     private void Zoom1()
     {
-      Zoom(1 / Scale);
+      Zoom(1 / _scale);
     }
 
 
-    private void Zoom(double scale)
+    private void Zoom(float scale)
     {
-      var tempScale = Scale * scale;
+      var tempScale = _scale * scale;
       if (tempScale < 1.1f && tempScale > 0.9f && !tempScale.Equals(1.0f)) // округляем до единицы, если рядом
       {
         scale /= tempScale;
       }
 
-      Scale *= scale;
+      _scale *= scale;
+
+      Update();
+    }
+
+
+    private void MoveUp()
+    {
+      Move(0, -MoveStep);
+    }
+
+
+    private void MoveRight()
+    {
+      Move(MoveStep, 0);
+    }
+
+
+    private void MoveDown()
+    {
+      Move(0, +MoveStep);
+    }
+
+
+    private void MoveLeft()
+    {
+      Move(-MoveStep, 0);
+    }
+
+
+    private void Move(float x, float y)
+    {
+      _x += x;
+      _y += y;
+      
+      Update();
     }
 
 
