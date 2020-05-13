@@ -10,7 +10,4 @@
       <PackageReference Include="SkiaSharp.Views.WPF" Version="1.68.1.1" />
       <PackageReference Include="Svg.Skia" Version="0.1.5" />
     </ItemGroup>
-    <ItemGroup>
-      <None Include="..\azure-pipelines.yml" />
-    </ItemGroup>
 </Project>
