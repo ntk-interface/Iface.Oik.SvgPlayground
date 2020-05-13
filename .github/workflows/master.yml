@@ -10,7 +10,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
         
@@ -19,7 +19,7 @@ jobs:
 
     - name: Prepare version number
       id: version
-      run: echo "::set-output name=id::$(date +'%y').${{github.run_number}}"
+      run: echo "::set-output name=id::20.${{github.run_number}}"
 
     - name: Prepare release names
       id: release
