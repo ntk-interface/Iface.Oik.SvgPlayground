@@ -52,6 +52,8 @@ namespace Iface.Oik.SvgPlayground.Model
         .SetValue("isTmStatusMalfunction",          new Func<int, bool>(_owner.IsTmStatusMalfunction))
         .SetValue("isTmStatusIntermediate",         new Func<int, bool>(_owner.IsTmStatusIntermediate))
         .SetValue("isTmStatusManuallySet",          new Func<int, bool>(_owner.IsTmStatusManuallySet))
+        .SetValue("isTmStatusUnderMaintenance",     new Func<int, bool>(_owner.IsTmStatusUnderMaintenance))
+        .SetValue("isTmStatusUnderCheckup",         new Func<int, bool>(_owner.IsTmStatusUnderCheckup))
         .SetValue("isTmStatusOn",                   new Func<int, bool>(_owner.IsTmStatusOn))
         .SetValue("getTmAnalogValue",               new Func<int, float>(_owner.GetTmAnalogValue))
         .SetValue("getTmAnalogUnit",                new Func<int, string>(_owner.GetTmAnalogUnit))

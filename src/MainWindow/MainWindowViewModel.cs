@@ -433,6 +433,28 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public bool IsTmStatusUnderMaintenance(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      return tmStatus.IsUnderMaintenance;
+    }
+
+
+    public bool IsTmStatusUnderCheckup(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      return tmStatus.IsUnderCheckup;
+    }
+
+
     public bool IsTmAnalogUnreliable(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
