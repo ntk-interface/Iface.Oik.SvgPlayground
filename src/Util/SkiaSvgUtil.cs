@@ -19,10 +19,10 @@ namespace Iface.Oik.SvgPlayground.Util
       using (var skSvg = new SKSvg())
       {
         skSvg.FromSvgDocument(svgDocument);
-        var matrix = SKMatrix.MakeIdentity();
+        var matrix = SKMatrix.CreateIdentity();
         SKMatrix.Concat(ref matrix,
-                        SKMatrix.MakeTranslation(x, y),
-                        SKMatrix.MakeScale(scale, scale));
+                        SKMatrix.CreateTranslation(x, y),
+                        SKMatrix.CreateScale(scale, scale));
         var image = SKImage.FromPicture(skSvg.Picture,
                                         new SKSizeI((int) (skSvg.Picture.CullRect.Width  * scale),
                                                     (int) (skSvg.Picture.CullRect.Height * scale)),
