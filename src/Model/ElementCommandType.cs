@@ -4,8 +4,8 @@ namespace Iface.Oik.SvgPlayground.Model
   public enum ElementCommandType
   {
     None = 0,
-    OpenSvgInThisTab,
-    OpenSvgInNewTab,
+    OpenDocumentInThisTab,
+    OpenDocumentInNewTab,
     ShowTmStatus,
     Telecontrol,
     SwitchTmStatusManually,
@@ -15,6 +15,7 @@ namespace Iface.Oik.SvgPlayground.Model
     ShowTmAnalog,
     Teleregulation,
     SetTmAnalogManually,
+    OpenTmAnalogTechProperties,
     OpenTmAnalogAlarms,
     OpenTmAnalogChart,
     OpenTmAnalogEventsArchive,
