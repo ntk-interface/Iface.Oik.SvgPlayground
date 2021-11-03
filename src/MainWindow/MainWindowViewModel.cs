@@ -156,7 +156,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
       catch (Exception ex)
       {
         _elements.Clear();
-        MessageBox.Show("Ошибка при разборе SVG, схема не будет оживлена: " + ex.Message);
+        MessageBox.Show("Ошибка при разборе SVG, схема не будет оживлена: " + Environment.NewLine + ex.Message);
       }
     }
 
@@ -255,7 +255,7 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     {
       _x += x;
       _y += y;
-      
+
       Update();
     }
 
