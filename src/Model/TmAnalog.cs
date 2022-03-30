@@ -50,9 +50,17 @@ namespace Iface.Oik.SvgPlayground.Model
     }
 
 
-    public bool IsUnreliable  => Flag.HasFlag(TmAnalogFlag.Unreliable);
-    public bool IsAlarmLevel3 => Flag.HasFlag(TmAnalogFlag.AlarmLevel3);
-    public bool IsAlarmLevel4 => Flag.HasFlag(TmAnalogFlag.AlarmLevel4);
+    public bool IsUnreliable      => Flag.HasFlag(TmStatusFlag.Unreliable);
+    public bool IsManuallySet     => Flag.HasFlag(TmStatusFlag.IsManuallySet);
+    public bool IsManuallyBlocked => Flag.HasFlag(TmStatusFlag.IsManuallyBlocked);
+    public bool IsAbnormal        => Flag.HasFlag(TmStatusFlag.IsAbnormal);
+    
+    public bool IsAlarmLevel1 => Flag.HasFlag(TmAnalogFlag.IsAlarmLevel1);
+    public bool IsAlarmLevel2 => Flag.HasFlag(TmAnalogFlag.IsAlarmLevel2);
+    public bool IsAlarmLevel3 => Flag.HasFlag(TmAnalogFlag.IsAlarmLevel3);
+    public bool IsAlarmLevel4 => Flag.HasFlag(TmAnalogFlag.IsAlarmLevel4);
+    
+    public bool IsUnacked => Flag.HasFlag(TmStatusFlag.IsUnacked);
 
     public string ValueString         => Value.ToString(CultureInfo.InvariantCulture);
     public string ValueWithUnitString => $"{Value} {Unit}";
@@ -73,9 +81,14 @@ namespace Iface.Oik.SvgPlayground.Model
   [Flags]
   public enum TmAnalogFlag
   {
-    [Description("-")]                None        = 0,
-    [Description("Недостоверный")]    Unreliable  = 1,
-    [Description("Уставка предупр.")] AlarmLevel3 = 2,
-    [Description("Уставка тревога")]  AlarmLevel4 = 4,
+    [Description("-")]                None              = 0x0000,
+    [Description("Недостоверно")]     Unreliable        = 0x0001,
+    [Description("Уст. вручную")]     IsManuallySet     = 0x0002,
+    [Description("Заблокировано")]    IsManuallyBlocked = 0x0004,
+    [Description("Ненорм. режим")]    IsAbnormal        = 0x0008,
+    [Description("Уставка ОС")]       IsAlarmLevel1     = 0x0010,
+    [Description("Уставка ПС2")]      IsAlarmLevel2     = 0x0020,
+    [Description("Уставка ПС1")]      IsAlarmLevel3     = 0x0040,
+    [Description("Уставка АС")]       IsAlarmLevel4     = 0x0080,
   }
 }

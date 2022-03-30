@@ -433,6 +433,57 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public bool IsTmStatusManuallyBlocked(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      return tmStatus.IsManuallyBlocked;
+    }
+
+
+    public bool IsTmStatusAbnormal(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      return tmStatus.IsAbnormal;
+    }
+
+
+    public bool IsTmStatusUnacked(int idx)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      return tmStatus.IsUnacked;
+    }
+
+
+    public bool IsTmStatusCustomFlagRaised(int idx, int level)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return false;
+      }
+      switch (level)
+      {
+        case 1:  return tmStatus.IsFlag1;
+        case 2:  return tmStatus.IsFlag2;
+        case 3:  return tmStatus.IsFlag3;
+        case 4:  return tmStatus.IsFlag4;
+        default: return false;
+      }
+    }
+
+
     public bool IsTmStatusUnderMaintenance(int idx)
     {
       var tmStatus = TmStatuses.ElementAtOrDefault(idx);
@@ -466,6 +517,50 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public bool IsTmAnalogManuallySet(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      return tmAnalog.IsManuallySet;
+    }
+
+
+    public bool IsTmAnalogManuallyBlocked(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      return tmAnalog.IsManuallyBlocked;
+    }
+
+
+    public bool IsTmAnalogAbnormal(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      return tmAnalog.IsAbnormal;
+    }
+
+
+    public bool IsTmAnalogUnacked(int idx)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      return tmAnalog.IsUnacked;
+    }
+
+
     public bool IsTmAnalogAlarmAlert(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
@@ -485,6 +580,24 @@ namespace Iface.Oik.SvgPlayground.MainWindow
         return false;
       }
       return tmAnalog.IsAlarmLevel3;
+    }
+
+
+    public bool IsTmAnalogAlarmFlagRaised(int idx, int level)
+    {
+      var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
+      if (tmAnalog == null)
+      {
+        return false;
+      }
+      switch (level)
+      {
+        case 1:  return tmAnalog.IsAlarmLevel1;
+        case 2:  return tmAnalog.IsAlarmLevel2;
+        case 3:  return tmAnalog.IsAlarmLevel3;
+        case 4:  return tmAnalog.IsAlarmLevel4;
+        default: return false;
+      }
     }
 
 
