@@ -20,5 +20,6 @@ namespace Iface.Oik.SvgPlayground.Model
     OpenTmAnalogChart,
     OpenTmAnalogEventsArchive,
     CopyTmAnalogToClipboard,
+    OpenDocumentInOverview,
   }
 }
