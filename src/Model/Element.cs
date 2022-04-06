@@ -82,6 +82,7 @@ namespace Iface.Oik.SvgPlayground.Model
           .SetValue("initTmStatusDefaultCommands",     new Action<int>(InitTmStatusDefaultCommands))
           .SetValue("initTmAnalogDefaultCommands",     new Action<int>(InitTmAnalogDefaultCommands))
           .SetValue("initOpenDocumentDefaultCommands", new Action<string>(InitOpenDocumentDefaultCommands))
+          .SetValue("initCustomToolTip",               new Action<string>(InitCustomToolTip))
           .SetValue("initClickIntCommand",             new Action<int, int>(InitClickCommand))
           .SetValue("initContextMenuIntCommand",       new Action<int, int, string>(InitContextMenuCommand))
           .SetValue("initClickStringCommand",          new Action<int, string>(InitClickCommand))
@@ -181,6 +182,11 @@ namespace Iface.Oik.SvgPlayground.Model
 
 
     private void InitOpenDocumentDefaultCommands(string parameter)
+    {
+    }
+
+
+    private void InitCustomToolTip(string text)
     {
     }
 
