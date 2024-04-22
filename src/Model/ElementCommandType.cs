@@ -21,5 +21,13 @@ namespace Iface.Oik.SvgPlayground.Model
     OpenTmAnalogEventsArchive,
     CopyTmAnalogToClipboard,
     OpenDocumentInOverview,
+    StartProcess,
+    AddTmStatusToQuickList,
+    AddTmAnalogToQuickList,
+    OpenTmStatusReport,
+    OpenTmAnalogReport,
+    CopyTmStatusNameToClipboard,
+    CopyTmAnalogNameToClipboard,
+    OpenDocumentInUniqueTab,
   }
 }

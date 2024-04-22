@@ -61,6 +61,7 @@ namespace Iface.Oik.SvgPlayground.Model
           .SetValue("isTmStatusUnderMaintenance",      new Func<int, bool>(_owner.IsTmStatusUnderMaintenance))
           .SetValue("isTmStatusUnderCheckup",          new Func<int, bool>(_owner.IsTmStatusUnderCheckup))
           .SetValue("isTmStatusOn",                    new Func<int, bool>(_owner.IsTmStatusOn))
+          .SetValue("getTmStatusCustomFlagCaption",    new Func<int, int, string>(_owner.GetTmStatusCustomFlagCaption))
           .SetValue("getTmAnalogValue",                new Func<int, float>(_owner.GetTmAnalogValue))
           .SetValue("getTmAnalogUnit",                 new Func<int, string>(_owner.GetTmAnalogUnit))
           .SetValue("getTmAnalogValueString",          new Func<int, string>(_owner.GetTmAnalogValueString))
@@ -88,16 +89,21 @@ namespace Iface.Oik.SvgPlayground.Model
           .SetValue("initClickStringCommand",          new Action<int, string>(InitClickCommand))
           .SetValue("initContextMenuStringCommand",    new Action<int, string, string>(InitContextMenuCommand))
           .SetValue("initEmptyContextMenuCommand",     new Action(InitEmptyContextMenuCommand))
+          .SetValue("initContextMenuSeparator",        new Action(InitContextMenuSeparator))
           .SetValue("NONE",                            ElementCommandType.None)
           .SetValue("OPEN_DOCUMENT_IN_THIS_TAB",       ElementCommandType.OpenDocumentInThisTab)
           .SetValue("OPEN_DOCUMENT_IN_NEW_TAB",        ElementCommandType.OpenDocumentInNewTab)
+          .SetValue("OPEN_DOCUMENT_IN_UNIQUE_TAB",     ElementCommandType.OpenDocumentInUniqueTab)
           .SetValue("OPEN_DOCUMENT_IN_OVERVIEW",       ElementCommandType.OpenDocumentInOverview)
           .SetValue("SHOW_TM_STATUS",                  ElementCommandType.ShowTmStatus)
           .SetValue("TELECONTROL",                     ElementCommandType.Telecontrol)
           .SetValue("SWITCH_TM_STATUS_MANUALLY",       ElementCommandType.SwitchTmStatusManually)
           .SetValue("ACK_TM_STATUS",                   ElementCommandType.AckTmStatus)
           .SetValue("OPEN_TM_STATUS_EVENTS_ARCHIVE",   ElementCommandType.OpenTmStatusEventsArchive)
+          .SetValue("OPEN_TM_STATUS_REPORT",           ElementCommandType.OpenTmStatusReport)
           .SetValue("COPY_TM_STATUS_TO_CLIPBOARD",     ElementCommandType.CopyTmStatusToClipboard)
+          .SetValue("COPY_TM_STATUS_NAME_TO_CLIPBOARD",ElementCommandType.CopyTmStatusNameToClipboard)
+          .SetValue("ADD_TM_STATUS_TO_QUICK_LIST",     ElementCommandType.AddTmStatusToQuickList)
           .SetValue("SHOW_TM_ANALOG",                  ElementCommandType.ShowTmAnalog)
           .SetValue("TELEREGULATE",                    ElementCommandType.Teleregulation)
           .SetValue("SET_TM_ANALOG_MANUALLY",          ElementCommandType.SetTmAnalogManually)
@@ -105,7 +111,11 @@ namespace Iface.Oik.SvgPlayground.Model
           .SetValue("OPEN_TM_ANALOG_ALARMS",           ElementCommandType.OpenTmAnalogAlarms)
           .SetValue("OPEN_TM_ANALOG_CHART",            ElementCommandType.OpenTmAnalogChart)
           .SetValue("OPEN_TM_ANALOG_EVENTS_ARCHIVE",   ElementCommandType.OpenTmAnalogEventsArchive)
+          .SetValue("OPEN_TM_ANALOG_REPORT",           ElementCommandType.OpenTmAnalogReport)
+          .SetValue("COPY_TM_ANALOG_NAME_TO_CLIPBOARD",ElementCommandType.CopyTmAnalogNameToClipboard)
           .SetValue("COPY_TM_ANALOG_TO_CLIPBOARD",     ElementCommandType.CopyTmAnalogToClipboard)
+          .SetValue("ADD_TM_ANALOG_TO_QUICK_LIST",     ElementCommandType.AddTmAnalogToQuickList)
+          .SetValue("START_PROCESS",                   ElementCommandType.StartProcess)
           .Execute(_script, new ParserOptions { Tolerant = true });
       }
       catch (Exception ex)
@@ -202,6 +212,11 @@ namespace Iface.Oik.SvgPlayground.Model
 
 
     private void InitEmptyContextMenuCommand()
+    {
+    }
+
+
+    private void InitContextMenuSeparator()
     {
     }
 

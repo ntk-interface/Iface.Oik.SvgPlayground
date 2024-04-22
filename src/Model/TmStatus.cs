@@ -47,6 +47,12 @@ namespace Iface.Oik.SvgPlayground.Model
     public bool IsIntermediate     => Flag.HasFlag(TmStatusFlag.Intermediate);
     public bool IsUnderMaintenance => Flag.HasFlag(TmStatusFlag.IsUnderMaintenance);
     public bool IsUnderCheckup     => Flag.HasFlag(TmStatusFlag.IsUnderCheckup);
+    
+    public string Flag1Status => !IsFlag1 ? "флаг 1 откл" : "флаг 1 вкл";
+    public string Flag2Status => !IsFlag2 ? "флаг 2 откл" : "флаг 2 вкл";
+    public string Flag3Status => !IsFlag3 ? "флаг 3 откл" : "флаг 3 вкл";
+    public string Flag4Status => !IsFlag4 ? "флаг 4 откл" : "флаг 4 вкл";
+
 
 
     public TmStatus(int ch, int rtu, int point) : base(ch, rtu, point)

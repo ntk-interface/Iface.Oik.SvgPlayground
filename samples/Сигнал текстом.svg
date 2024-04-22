@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:oik="http://iface.ru/oik_svg"
+     width="200"
+     height="70">
+
+    <g oik:oikelement="1">
+        <desc>
+            var ts = initTmStatus(22, 13, 1);
+			
+            initTmStatusDefaultCommands(ts);
+
+            function update()
+            {
+                setElementProperty('status', 'text', getTmStatusCaption(ts));
+                setElementProperty('flag1', 'text', getTmStatusCustomFlagCaption(ts, 1));
+                setElementProperty('flag2', 'text', getTmStatusCustomFlagCaption(ts, 2));
+            }
+
+            return update;
+        </desc>
+        <rect x="0"
+              y="0"
+              width="100%"
+              height="100%"
+              fill="#eee"
+              stroke="#000"/>
+        <text oik:oikid="status"
+              x="10"
+              y="20"
+              fill="#000">
+            ??? (состояние)
+        </text>
+        <text oik:oikid="flag1"
+              x="10"
+              y="40"
+              fill="#000">
+            ??? (флаг 1)
+        </text>
+        <text oik:oikid="flag2"
+              x="10"
+              y="60"
+              fill="#000">
+            ??? (флаг 2)
+        </text>
+    </g>
+</svg>

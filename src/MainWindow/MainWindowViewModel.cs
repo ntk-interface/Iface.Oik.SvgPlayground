@@ -506,6 +506,24 @@ namespace Iface.Oik.SvgPlayground.MainWindow
     }
 
 
+    public string GetTmStatusCustomFlagCaption(int idx, int level)
+    {
+      var tmStatus = TmStatuses.ElementAtOrDefault(idx);
+      if (tmStatus == null)
+      {
+        return "???";
+      }
+      return level switch
+             {
+               1 => tmStatus.Flag1Status,
+               2 => tmStatus.Flag2Status,
+               3 => tmStatus.Flag3Status,
+               4 => tmStatus.Flag4Status,
+               _ => "???"
+             };
+    }
+
+
     public bool IsTmAnalogUnreliable(int idx)
     {
       var tmAnalog = TmAnalogs.ElementAtOrDefault(idx);
