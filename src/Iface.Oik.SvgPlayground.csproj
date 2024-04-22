@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net5.0-windows</TargetFramework>
+        <TargetFramework>net6.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="Jint" Version="2.11.58" />
-      <PackageReference Include="SkiaSharp" Version="2.80.2" />
-      <PackageReference Include="SkiaSharp.Views.WPF" Version="2.80.2" />
+      <PackageReference Include="SkiaSharp" Version="2.88.8" />
+      <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.8" />
       <PackageReference Include="Svg.Skia" Version="0.4.1" />
     </ItemGroup>
 </Project>
