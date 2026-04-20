@@ -1,30 +1,29 @@
 using SkiaSharp.Views.Desktop;
 
-namespace Iface.Oik.SvgPlayground.MainWindow
+namespace Iface.Oik.SvgPlayground.MainWindow;
+
+public partial class MainWindowView
 {
-  public partial class MainWindowView
-  {
-    private readonly MainWindowViewModel _viewModel;
+  private readonly MainWindowViewModel _viewModel;
     
-    public MainWindowView()
-    {
-      InitializeComponent();
+  public MainWindowView()
+  {
+    InitializeComponent();
       
-      _viewModel = new MainWindowViewModel(this);
+    _viewModel = new MainWindowViewModel(this);
 
-      DataContext = _viewModel;
-    }
-
-
-    public void InvalidateCanvas()
-    {
-      Canvas.InvalidateVisual();
-    }
+    DataContext = _viewModel;
+  }
 
 
-    private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
-    {
-      _viewModel?.OnCanvasPaintSurface(e.Surface.Canvas);
-    }
+  public void InvalidateCanvas()
+  {
+    Canvas.InvalidateVisual();
+  }
+
+
+  private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+  {
+    _viewModel?.OnCanvasPaintSurface(e.Surface.Canvas);
   }
 }

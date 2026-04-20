@@ -2,33 +2,32 @@ using SkiaSharp;
 using Svg;
 using Svg.Skia;
 
-namespace Iface.Oik.SvgPlayground.Util
+namespace Iface.Oik.SvgPlayground.Util;
+
+public static class SkiaSvgUtil
 {
-  public static class SkiaSvgUtil
+  public static void PaintSvgDocumentToSkiaCanvas(SvgDocument svgDocument,
+                                                  SKCanvas    canvas,
+                                                  float       x,
+                                                  float       y,
+                                                  float       scale)
   {
-    public static void PaintSvgDocumentToSkiaCanvas(SvgDocument svgDocument,
-                                                    SKCanvas    canvas,
-                                                    float       x,
-                                                    float       y,
-                                                    float       scale)
+    if (svgDocument == null) return;
+
+    canvas.Clear();
+
+    using (var skSvg = new SKSvg())
     {
-      if (svgDocument == null) return;
-
-      canvas.Clear();
-
-      using (var skSvg = new SKSvg())
-      {
-        skSvg.FromSvgDocument(svgDocument);
-        var matrix = SKMatrix.CreateIdentity();
-        SKMatrix.Concat(ref matrix,
-                        SKMatrix.CreateTranslation(x, y),
-                        SKMatrix.CreateScale(scale, scale));
-        var image = SKImage.FromPicture(skSvg.Picture,
-                                        new SKSizeI((int) (skSvg.Picture.CullRect.Width  * scale),
-                                                    (int) (skSvg.Picture.CullRect.Height * scale)),
-                                        matrix);
-        canvas.DrawImage(image, 0, 0);
-      }
+      skSvg.FromSvgDocument(svgDocument);
+      var matrix = SKMatrix.CreateIdentity();
+      SKMatrix.Concat(ref matrix,
+                      SKMatrix.CreateTranslation(x, y),
+                      SKMatrix.CreateScale(scale, scale));
+      var image = SKImage.FromPicture(skSvg.Picture,
+                                      new SKSizeI((int) (skSvg.Picture.CullRect.Width  * scale),
+                                                  (int) (skSvg.Picture.CullRect.Height * scale)),
+                                      matrix);
+      canvas.DrawImage(image, 0, 0);
     }
   }
 }

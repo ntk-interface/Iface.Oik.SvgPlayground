@@ -5,6 +5,7 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
     <ItemGroup>
+      <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
       <PackageReference Include="Jint" Version="2.11.58" />
       <PackageReference Include="SkiaSharp" Version="2.88.8" />
       <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.8" />

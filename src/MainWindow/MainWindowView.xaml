@@ -8,12 +8,12 @@
         mc:Ignorable="d"
         Title="{Binding Title}"
         Width="1000"
-        Height="600"
+        Height="800"
         Background="#FFF3F3F3"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}">
 
     <Window.Resources>
-        <Style TargetType="Button" x:Key="CanvasButton">
+        <Style TargetType="RepeatButton" x:Key="CanvasButton">
             <Setter Property="Width" Value="30" />
             <Setter Property="Height" Value="30" />
             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -25,39 +25,44 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" MinWidth="370" />
+            <ColumnDefinition Width="400" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Button Grid.Row="0"
-                        Command="{Binding OpenFileCommand}"
+        <Grid Grid.Column="0"
+              Margin="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0" 
+                        Orientation="Horizontal">
+                <Button Command="{Binding OpenFileCommand}"
                         Content="Открыть SVG файл"
-                        Width="200"
+                        Width="160"
                         HorizontalAlignment="Left" />
 
-                <Button Grid.Row="1"
-                        Command="{Binding ReloadFileCommand}"
+                <Button Command="{Binding ReloadFileCommand}"
                         Content="Обновить открытый файл"
-                        Width="200"
+                        Width="160"
                         HorizontalAlignment="Left"
-                        Margin="0,10,0,0" />
+                        Margin="16,0,0,0" />
+            </StackPanel>
 
-                <ItemsControl Grid.Row="2"
-                              ItemsSource="{Binding TmStatuses}"
-                              BorderThickness="0"
-                              Margin="0,20,0,0">
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto"
+                          MaxHeight="200"
+                          Margin="0,16,0,0">
+                <ItemsControl ItemsSource="{Binding TmStatuses}"
+                              BorderThickness="0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
-                                        Margin="0,0,0,10">
+                                        Margin="0,0,0,8">
                                 <TextBlock Text="{Binding}"
                                            Width="90"
                                            VerticalAlignment="Center" />
@@ -65,89 +70,116 @@
                                           Content="включен"
                                           Width="90"
                                           VerticalAlignment="Center"
-                                          Margin="10,0,0,0" />
+                                          Margin="8,0,0,0" />
                                 <ComboBox ItemsSource="{Binding FlagsList}"
                                           DisplayMemberPath="Value"
                                           SelectedValuePath="Key"
                                           SelectedValue="{Binding Flag}"
                                           Width="150"
                                           VerticalAlignment="Center"
-                                          Margin="10,0,0,0" />
+                                          Margin="8,0,0,0" />
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+            </ScrollViewer>
 
-                <ItemsControl Grid.Row="3"
-                              ItemsSource="{Binding TmAnalogs}"
-                              BorderThickness="0"
-                              Margin="0,20,0,0">
+            <ScrollViewer Grid.Row="2"
+                          VerticalScrollBarVisibility="Auto"
+                          MaxHeight="200"
+                          Margin="0,16,0,0">
+                <ItemsControl ItemsSource="{Binding TmAnalogs}"
+                              BorderThickness="0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal"
-                                        Margin="0,0,0,10">
+                                        Margin="0,0,0,8">
                                 <TextBlock Text="{Binding}"
                                            Width="90"
                                            VerticalAlignment="Center" />
                                 <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                                          Width="40"
                                          VerticalAlignment="Center"
-                                         Margin="10,0,0,0" />
+                                         Margin="8,0,0,0" />
                                 <TextBox Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
                                          Width="40"
                                          VerticalAlignment="Center"
-                                         Margin="10,0,0,0" />
+                                         Margin="8,0,0,0" />
                                 <ComboBox ItemsSource="{Binding FlagsList}"
                                           DisplayMemberPath="Value"
                                           SelectedValuePath="Key"
                                           SelectedValue="{Binding Flag}"
                                           Width="150"
                                           VerticalAlignment="Center"
-                                          Margin="10,0,0,0" />
+                                          Margin="8,0,0,0" />
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </Grid>
-        </ScrollViewer>
+            </ScrollViewer>
+
+            <ListBox Grid.Row="3"
+                     ItemsSource="{Binding Log}"
+                     Margin="0,16,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Time, StringFormat=\{0:HH:mm:ss\}}"
+                                       Margin="0,0,8,0"
+                                       Opacity=".38" />
+                            <TextBlock Text="{Binding Message}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            
+            <StackPanel Grid.Row="4" 
+                        Orientation="Horizontal"
+                        Margin="0,16,0,0">
+                <Button Command="{Binding ClearLogCommand}"
+                        Content="Очистить лог"
+                        Width="160"
+                        HorizontalAlignment="Left" />
+            </StackPanel>
+        </Grid>
 
         <Grid Grid.Column="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Auto">
-                <Grid Margin="10">
+                <Grid Margin="8">
                     <skia:SKElement x:Name="Canvas"
                                     PaintSurface="OnPaintSurface" />
                 </Grid>
             </ScrollViewer>
-            <Button Command="{Binding ZoomInCommand}"
-                    Content="+"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,10,10,0" />
-            <Button Command="{Binding ZoomOutCommand}"
-                    Content="-"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,50,10,0" />
-            <Button Command="{Binding Zoom1Command}"
-                    Content="1:1"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,90,10,0" />
-            
-            <Button Command="{Binding MoveUpCommand}"
-                    Content="↑"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,10,100,0" />
-            <Button Command="{Binding MoveRightCommand}"
-                    Content="→"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,50,60,0" />
-            <Button Command="{Binding MoveDownCommand}"
-                    Content="↓"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,50,100,0" />
-            <Button Command="{Binding MoveLeftCommand}"
-                    Content="←"
-                    Style="{StaticResource CanvasButton}"
-                    Margin="0,50,140,0" />
+            <RepeatButton Command="{Binding ZoomInCommand}"
+                          Content="+"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,10,10,0" />
+            <RepeatButton Command="{Binding ZoomOutCommand}"
+                          Content="-"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,50,10,0" />
+            <RepeatButton Command="{Binding Zoom1Command}"
+                          Content="1:1"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,90,10,0" />
+
+            <RepeatButton Command="{Binding MoveUpCommand}"
+                          Content="↑"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,10,100,0" />
+            <RepeatButton Command="{Binding MoveRightCommand}"
+                          Content="→"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,50,60,0" />
+            <RepeatButton Command="{Binding MoveDownCommand}"
+                          Content="↓"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,50,100,0" />
+            <RepeatButton Command="{Binding MoveLeftCommand}"
+                          Content="←"
+                          Style="{StaticResource CanvasButton}"
+                          Margin="0,50,140,0" />
         </Grid>
     </Grid>
 </Window>

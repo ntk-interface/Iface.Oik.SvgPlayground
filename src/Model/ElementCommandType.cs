@@ -29,5 +29,6 @@ namespace Iface.Oik.SvgPlayground.Model
     CopyTmStatusNameToClipboard,
     CopyTmAnalogNameToClipboard,
     OpenDocumentInUniqueTab,
+    OpenVideoInOverview,
   }
 }
