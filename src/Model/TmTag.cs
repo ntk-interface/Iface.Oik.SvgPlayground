@@ -1,13 +1,12 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Iface.Oik.SvgPlayground.Model;
 
-public class TmTag : INotifyPropertyChanged
+public class TmTag : ObservableObject
 {
-  public int Ch    { get; set; }
-  public int Rtu   { get; set; }
-  public int Point { get; set; }
+  public int Ch    { get; }
+  public int Rtu   { get; }
+  public int Point { get; }
 
 
   public TmTag(int ch, int rtu, int point)
@@ -41,14 +40,5 @@ public class TmTag : INotifyPropertyChanged
     return Ch    == ch  &&
            Rtu   == rtu &&
            Point == point;
-  }
-
-
-  public event PropertyChangedEventHandler PropertyChanged;
-
-
-  protected void NotifyOnPropertyChanged([CallerMemberName] string propertyName = null)
-  {
-    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
   }
 }

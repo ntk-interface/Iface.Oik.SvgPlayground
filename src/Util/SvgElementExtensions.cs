@@ -9,55 +9,49 @@ public static class SvgElementExtensions
 {
   public static string GetProperty(this SvgElement element, string property)
   {
-    switch (property.ToLower())
-    {
-      case "stroke":       return element.GetStroke();
-      case "fill":         return element.GetFill();
-      case "fill-opacity": return element.GetFillOpacity();
-      case "display":      return element.GetDisplay();
-      case "x1":           return element.GetX1();
-      case "x2":           return element.GetX2();
-      case "y1":           return element.GetY1();
-      case "y2":           return element.GetY2();
-      case "x":            return element.GetX();
-      case "y":            return element.GetY();
-      case "width":        return element.GetWidth();
-      case "height":       return element.GetHeight();
-      case "text":         return element.GetText();
-      default:
-      {
-        Console.WriteLine($"Unknown property {property}");
-        return null;
-      }
-    }
+    return property.ToLower() switch
+           {
+             "stroke"       => element.GetStroke(),
+             "fill"         => element.GetFill(),
+             "fill-opacity" => element.GetFillOpacity(),
+             "display"      => element.GetDisplay(),
+             "x1"           => element.GetX1(),
+             "x2"           => element.GetX2(),
+             "y1"           => element.GetY1(),
+             "y2"           => element.GetY2(),
+             "x"            => element.GetX(),
+             "y"            => element.GetY(),
+             "width"        => element.GetWidth(),
+             "height"       => element.GetHeight(),
+             "text"         => element.GetText(),
+             _              => throw new Exception($"Unknown property {property}"),
+           };
   }
 
 
   public static bool SetProperty(this SvgElement element, string property, string value)
   {
-    switch (property.ToLower())
-    {
-      case "stroke":       return element.SetStroke(value);
-      case "fill":         return element.SetFill(value);
-      case "fill-opacity": return element.SetFillOpacity(value);
-      case "display":      return element.SetDisplay(value);
-      case "x1":           return element.SetX1(value);
-      case "x2":           return element.SetX2(value);
-      case "y1":           return element.SetY1(value);
-      case "y2":           return element.SetY2(value);
-      case "x":            return element.SetX(value);
-      case "y":            return element.SetY(value);
-      case "width":        return element.SetWidth(value);
-      case "height":       return element.SetHeight(value);
-      case "transform":    return element.SetTransform(value);
-      case "text":         return element.SetText(value);
-      default:
-      {
-        Console.WriteLine($"Unknown property {property}");
-        return false;
-      }
-    }
+    return property.ToLower() switch
+           {
+             "stroke"       => element.SetStroke(value),
+             "fill"         => element.SetFill(value),
+             "fill-opacity" => element.SetFillOpacity(value),
+             "display"      => element.SetDisplay(value),
+             "x1"           => element.SetX1(value),
+             "x2"           => element.SetX2(value),
+             "y1"           => element.SetY1(value),
+             "y2"           => element.SetY2(value),
+             "x"            => element.SetX(value),
+             "y"            => element.SetY(value),
+             "width"        => element.SetWidth(value),
+             "height"       => element.SetHeight(value),
+             "transform"    => element.SetTransform(value),
+             "text"         => element.SetText(value),
+             _              => throw new Exception($"Unknown property {property}")
+           };
   }
+  
+  
   private static string GetStroke(this SvgElement element)
   {
     return (element.Stroke as SvgColourServer)?.ToString();
@@ -80,8 +74,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgVisualElement visualElement))
     {
-      Console.WriteLine("Cannot get display from non-visual element");
-      return null;
+      throw new Exception("Cannot get display from non-visual element");
     }
     return visualElement.Display;
   }
@@ -91,8 +84,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return null;
+      throw new Exception("Not a line");
     }
     return lineElement.StartX.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -102,8 +94,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return null;
+      throw new Exception("Not a line");
     }
     return lineElement.EndX.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -113,8 +104,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return null;
+      throw new Exception("Not a line");
     }
     return lineElement.StartY.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -124,8 +114,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return null;
+      throw new Exception("Not a line");
     }
     return lineElement.EndY.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -135,8 +124,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return null;
+      throw new Exception("Not a rectangle");
     }
     return rectElement.X.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -146,8 +134,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return null;
+      throw new Exception("Not a rectangle");
     }
     return rectElement.Y.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -157,8 +144,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return null;
+      throw new Exception("Not a rectangle");
     }
     return rectElement.Width.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -168,8 +154,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return null;
+      throw new Exception("Not a rectangle");
     }
     return rectElement.Height.Value.ToString(CultureInfo.InvariantCulture);
   }
@@ -179,8 +164,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgText textElement))
     {
-      Console.WriteLine("Cannot get text from non-text");
-      return null;
+      throw new Exception("Cannot get text from non-text");
     }
     return textElement.Text;
   }
@@ -204,8 +188,7 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, out var floatValue))
     {
-      Console.WriteLine("Invalid fill opacity");
-      return false;
+      throw new Exception("Invalid fill opacity");
     }
     element.FillOpacity = floatValue;
     return true;
@@ -216,8 +199,7 @@ public static class SvgElementExtensions
   {
     if (!(element is SvgVisualElement visualElement))
     {
-      Console.WriteLine("Not a visual element");
-      return false;
+      throw new Exception("Not a visual element");
     }
     visualElement.Display = value;
     return true;
@@ -228,13 +210,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid x1");
-      return false;
+      throw new Exception("Invalid x1");
     }
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return false;
+      throw new Exception("Not a line");
     }
     lineElement.StartX = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -245,13 +225,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid x2");
-      return false;
+      throw new Exception("Invalid x2");
     }
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return false;
+      throw new Exception("Not a line");
     }
     lineElement.EndX = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -262,13 +240,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid y1");
-      return false;
+      throw new Exception("Invalid y1");
     }
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return false;
+      throw new Exception("Not a line");
     }
     lineElement.StartY = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -279,13 +255,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid y2");
-      return false;
+      throw new Exception("Invalid y2");
     }
     if (!(element is SvgLine lineElement))
     {
-      Console.WriteLine("Not a line");
-      return false;
+      throw new Exception("Not a line");
     }
     lineElement.EndY = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -296,13 +270,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid x");
-      return false;
+      throw new Exception("Invalid x");
     }
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return false;
+      throw new Exception("Not a rectangle");
     }
     rectElement.X = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -313,13 +285,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid y");
-      return false;
+      throw new Exception("Invalid y");
     }
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return false;
+      throw new Exception("Not a rectangle");
     }
     rectElement.Y = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -330,13 +300,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid width");
-      return false;
+      throw new Exception("Invalid width");
     }
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return false;
+      throw new Exception("Not a rectangle");
     }
     rectElement.Width = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -347,13 +315,11 @@ public static class SvgElementExtensions
   {
     if (!float.TryParse(value, NumberStyles.Any, CultureInfo.InvariantCulture, out var floatValue))
     {
-      Console.WriteLine("Invalid height");
-      return false;
+      throw new Exception("Invalid height");
     }
     if (!(element is SvgRectangle rectElement))
     {
-      Console.WriteLine("Not a rectangle");
-      return false;
+      throw new Exception("Not a rectangle");
     }
     rectElement.Height = new SvgUnit(SvgUnitType.Pixel, floatValue);
     return true;
@@ -378,8 +344,7 @@ public static class SvgElementExtensions
         textSpanElement.Text = value;
         return true;
       default:
-        Console.WriteLine("Cannot set text to non-text element");
-        return false;
+        throw new Exception("Cannot set text to non-text element");
     }
   }
 }

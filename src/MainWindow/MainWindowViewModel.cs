@@ -25,8 +25,13 @@ public partial class MainWindowViewModel : ObservableObject
   private          SvgDocument   _svgDocument;
   private readonly List<Element> _elements = new();
 
-  [ObservableProperty]
-  private string _title;
+  [ObservableProperty] private string _title;
+
+  public int     Width              { get; private set; }
+  public int     Height             { get; private set; }
+  public SKColor BgColor            { get; private set; }
+  public float   ViewBoxWidthCoeff  { get; private set; }
+  public float   ViewBoxHeightCoeff { get; private set; }
 
   private float _scale = 1;
   private float _x     = 0;
@@ -36,7 +41,7 @@ public partial class MainWindowViewModel : ObservableObject
   public ObservableCollection<TmStatus> TmStatuses { get; } = new();
   public ObservableCollection<TmAnalog> TmAnalogs  { get; } = new();
   public ObservableCollection<Variable> Variables  { get; } = new();
-  
+
 
   public ObservableCollection<LogItem> Log { get; } = new();
 
@@ -92,11 +97,13 @@ public partial class MainWindowViewModel : ObservableObject
     try
     {
       ClearEverything();
+
       _svgDocument = SvgDocument.Open(filename);
-      Title        = SvgUtil.FindTitleElement(_svgDocument)?.Content ?? "SVG";
+
+      SetBaseInfo();
       ParseElements();
-      RunTickTimerIfNeeded();
       Update();
+      RunTickTimerIfNeeded();
     }
     catch (Exception ex)
     {
@@ -112,10 +119,57 @@ public partial class MainWindowViewModel : ObservableObject
     TmAnalogs.Clear();
     Variables.Clear();
     _elements.Clear();
-    
+
     ClearLog();
 
     _tickTimer?.Dispose();
+  }
+
+
+  private void SetBaseInfo()
+  {
+    Width  = (int)_svgDocument.Width.ToDeviceValue(null, UnitRenderingType.Horizontal, _svgDocument);
+    Height = (int)_svgDocument.Height.ToDeviceValue(null, UnitRenderingType.Vertical, _svgDocument);
+
+    var viewBoxWidth  = _svgDocument.ViewBox.Width  - _svgDocument.ViewBox.MinX;
+    var viewBoxHeight = _svgDocument.ViewBox.Height - _svgDocument.ViewBox.MinY;
+
+    if (viewBoxWidth  > 0 &&
+        viewBoxHeight > 0)
+    {
+      ViewBoxWidthCoeff  = _svgDocument.Width.Value  / viewBoxWidth;
+      ViewBoxHeightCoeff = _svgDocument.Height.Value / viewBoxHeight;
+    }
+    else
+    {
+      ViewBoxWidthCoeff  = 1;
+      ViewBoxHeightCoeff = 1;
+    }
+
+    Title = SvgUtil.FindTitleElement(_svgDocument)?.Content ?? "SVG";
+
+    BgColor = SKColors.White;
+
+    foreach (var node in _svgDocument.Children)
+    {
+      switch (node)
+      {
+        case SvgRectangle rect when rect.Width.Type == SvgUnitType.Percentage  &&
+                                    rect.Width.Value.Equals(100)               &&
+                                    rect.Height.Type == SvgUnitType.Percentage &&
+                                    rect.Height.Value.Equals(100):
+          BgColor = SkiaSvgUtil.GetSkColor((rect.Fill as SvgColourServer)?.Colour);
+          break;
+
+        case NonSvgElement nonSvg when nonSvg.Name == "namedview": // фон страницы в Inkscape
+          if (nonSvg.CustomAttributes.TryGetValue("pagecolor", out var color))
+          {
+            BgColor = SkiaSvgUtil.GetSkColor(color);
+          }
+
+          break;
+      }
+    }
   }
 
 
@@ -138,14 +192,17 @@ public partial class MainWindowViewModel : ObservableObject
     catch (Exception ex)
     {
       _elements.Clear();
-      MessageBox.Show("Ошибка при разборе SVG, схема не будет оживлена: " + Environment.NewLine + ex.Message);
+      AddToLog($"Ошибка при разборе SVG, схема не будет оживлена {ex.Message}");
     }
   }
 
 
   private void Update()
   {
-    if (_svgDocument == null) return;
+    if (_svgDocument == null)
+    {
+      return;
+    }
 
     foreach (var element in _elements)
     {
@@ -162,8 +219,9 @@ public partial class MainWindowViewModel : ObservableObject
     {
       return;
     }
+
     _tickTimer = new PeriodicTimer(TimeSpan.FromMilliseconds(_tickInterval));
-    try 
+    try
     {
       while (await _tickTimer.WaitForNextTickAsync())
       {
@@ -200,12 +258,85 @@ public partial class MainWindowViewModel : ObservableObject
   {
     try
     {
-      SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, canvas, _x, _y, _scale);
+      SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, BgColor, canvas, _x, _y, _scale);
     }
     catch (Exception ex)
     {
-      MessageBox.Show("Ошибка при попытке отрисовки: " + ex.Message);
+      AddToLog($"Ошибка при попытке отрисовки: {ex.Message}");
     }
+  }
+
+
+  public void OnClick(float x, float y)
+  {
+    var element = FindElementUnderCursor(CorrectedX(x), CorrectedY(y));
+
+    if (element == null)
+    {
+      return;
+    }
+
+    if (!string.IsNullOrEmpty(element.CustomToolTip))
+    {
+      AddToLog($"Вспл. подсказка \"{element.CustomToolTip}\"");
+    }
+
+    if (element.ClickCommand != null)
+    {
+      AddToLog(GetCommandDescription(element.ClickCommand));
+    }
+
+    foreach (var command in element.ContextMenuCommands.Where(cmd => cmd.Type != ElementCommandType.None))
+    {
+      AddToLog(GetCommandDescription(command));
+    }
+  }
+
+
+  private string GetCommandDescription(ElementCommand command)
+  {
+    var result = $"{command.Level.GetDescription()}   {command.Type.GetDescription()}";
+
+    switch (command.Type)
+    {
+      case ElementCommandType.ShowTmStatus:
+      case ElementCommandType.Telecontrol:
+      case ElementCommandType.SwitchTmStatusManually:
+      case ElementCommandType.AckTmStatus:
+      case ElementCommandType.OpenTmStatusEventsArchive:
+      case ElementCommandType.CopyTmStatusToClipboard:
+      case ElementCommandType.AddTmStatusToQuickList:
+      case ElementCommandType.OpenTmStatusReport:
+      case ElementCommandType.CopyTmStatusNameToClipboard:
+      case ElementCommandType.OpenTmStatusChart:
+        result += $"   {GetTmStatus(command.ParameterInt)}";
+        break;
+      
+      case ElementCommandType.ShowTmAnalog:
+      case ElementCommandType.Teleregulation:
+      case ElementCommandType.SetTmAnalogManually:
+      case ElementCommandType.OpenTmAnalogTechProperties:
+      case ElementCommandType.OpenTmAnalogAlarms:
+      case ElementCommandType.OpenTmAnalogChart:
+      case ElementCommandType.OpenTmAnalogEventsArchive:
+      case ElementCommandType.CopyTmAnalogToClipboard:
+      case ElementCommandType.AddTmAnalogToQuickList:
+      case ElementCommandType.OpenTmAnalogReport:
+      case ElementCommandType.CopyTmAnalogNameToClipboard:
+        result += $"   {GetTmAnalog(command.ParameterInt)}";
+        break;
+      
+      case ElementCommandType.OpenDocumentInThisTab:
+      case ElementCommandType.OpenDocumentInNewTab:
+      case ElementCommandType.OpenDocumentInUniqueTab:
+      case ElementCommandType.OpenDocumentInOverview:
+      case ElementCommandType.StartProcess:
+      case ElementCommandType.OpenVideoInOverview:
+        result += $"   {command.ParameterString}";
+        break;
+    }
+
+    return result;
   }
 
 
@@ -281,6 +412,24 @@ public partial class MainWindowViewModel : ObservableObject
   }
 
 
+  private Element FindElementUnderCursor(float x, float y)
+  {
+    return _elements.FirstOrDefault(el => el.BoundContains(x, y));
+  }
+
+
+  private float CorrectedX(float x)
+  {
+    return (x - _x) / _scale;
+  }
+
+
+  private float CorrectedY(float y)
+  {
+    return (y - _y) / _scale;
+  }
+
+
   private int FindTmStatus(int ch, int rtu, int point)
   {
     var index = 0;
@@ -335,7 +484,7 @@ public partial class MainWindowViewModel : ObservableObject
   public void OverrideTickInterval(int interval)
   {
     _tickInterval = interval;
-    
+
     AddToLog($"Установлен интервал циклического обновления tick: {interval}мс");
   }
 
@@ -366,7 +515,7 @@ public partial class MainWindowViewModel : ObservableObject
     var tmStatus = new TmStatus(ch, rtu, point);
 
     TmStatuses.Add(tmStatus);
-
+    
     tmStatus.PropertyChanged += (_, _) => Update();
 
     return TmStatuses.Count - 1;
@@ -384,10 +533,16 @@ public partial class MainWindowViewModel : ObservableObject
     var tmAnalog = new TmAnalog(ch, rtu, point);
 
     TmAnalogs.Add(tmAnalog);
-
+    
     tmAnalog.PropertyChanged += (_, _) => Update();
 
     return TmAnalogs.Count - 1;
+  }
+
+
+  public TmStatus GetTmStatus(int idx)
+  {
+    return TmStatuses.ElementAtOrDefault(idx);
   }
 
 
@@ -508,14 +663,14 @@ public partial class MainWindowViewModel : ObservableObject
     {
       return false;
     }
-    switch (level)
-    {
-      case 1:  return tmStatus.IsFlag1;
-      case 2:  return tmStatus.IsFlag2;
-      case 3:  return tmStatus.IsFlag3;
-      case 4:  return tmStatus.IsFlag4;
-      default: return false;
-    }
+    return level switch
+           {
+             1 => tmStatus.IsFlag1,
+             2 => tmStatus.IsFlag2,
+             3 => tmStatus.IsFlag3,
+             4 => tmStatus.IsFlag4,
+             _ => false
+           };
   }
 
 
@@ -556,6 +711,12 @@ public partial class MainWindowViewModel : ObservableObject
              4 => tmStatus.Flag4Status,
              _ => "???"
            };
+  }
+
+
+  public TmAnalog GetTmAnalog(int idx)
+  {
+    return TmAnalogs.ElementAtOrDefault(idx);
   }
 
 
@@ -643,14 +804,14 @@ public partial class MainWindowViewModel : ObservableObject
     {
       return false;
     }
-    switch (level)
-    {
-      case 1:  return tmAnalog.IsAlarmLevel1;
-      case 2:  return tmAnalog.IsAlarmLevel2;
-      case 3:  return tmAnalog.IsAlarmLevel3;
-      case 4:  return tmAnalog.IsAlarmLevel4;
-      default: return false;
-    }
+    return level switch
+           {
+             1 => tmAnalog.IsAlarmLevel1,
+             2 => tmAnalog.IsAlarmLevel2,
+             3 => tmAnalog.IsAlarmLevel3,
+             4 => tmAnalog.IsAlarmLevel4,
+             _ => false
+           };
   }
 
 
@@ -763,7 +924,7 @@ public partial class MainWindowViewModel : ObservableObject
     variable.IsManuallySet = isManuallySet;
   }
 
-  
+
   [RelayCommand]
   private void ClearLog()
   {
@@ -771,22 +932,29 @@ public partial class MainWindowViewModel : ObservableObject
   }
 
 
-  public void AddToLog(object message)
+  public void AddToLog(string message, Element element = null)
   {
-    Log.Add(new LogItem(message));
+    if (element != null)
+    {
+      Log.Add(new LogItem($"{message}   {element}"));
+    }
+    else
+    {
+      Log.Add(new LogItem(message));
+    }
   }
-    
-    
+
+
   public class LogItem
   {
     public DateTime Time    { get; }
     public string   Message { get; }
 
 
-    public LogItem(object message)
+    public LogItem(string message)
     {
       Time    = DateTime.Now;
-      Message = message.ToString();
+      Message = message;
     }
   }
 }

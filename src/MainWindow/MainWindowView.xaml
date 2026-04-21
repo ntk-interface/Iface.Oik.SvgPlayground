@@ -148,7 +148,9 @@
                           HorizontalScrollBarVisibility="Auto">
                 <Grid Margin="8">
                     <skia:SKElement x:Name="Canvas"
-                                    PaintSurface="OnPaintSurface" />
+                                    IgnorePixelScaling="True"
+                                    PaintSurface="OnPaintSurface"
+                                    MouseLeftButtonUp="OnMouseLeftButtonUp" />
                 </Grid>
             </ScrollViewer>
             <RepeatButton Command="{Binding ZoomInCommand}"

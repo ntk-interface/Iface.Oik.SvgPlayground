@@ -1,3 +1,5 @@
+using System.Windows;
+using System.Windows.Input;
 using SkiaSharp.Views.Desktop;
 
 namespace Iface.Oik.SvgPlayground.MainWindow;
@@ -5,11 +7,12 @@ namespace Iface.Oik.SvgPlayground.MainWindow;
 public partial class MainWindowView
 {
   private readonly MainWindowViewModel _viewModel;
-    
+
+
   public MainWindowView()
   {
     InitializeComponent();
-      
+
     _viewModel = new MainWindowViewModel(this);
 
     DataContext = _viewModel;
@@ -25,5 +28,13 @@ public partial class MainWindowView
   private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
   {
     _viewModel?.OnCanvasPaintSurface(e.Surface.Canvas);
+  }
+
+
+  private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+  {
+    var cursor = e.GetPosition(sender as IInputElement);
+
+    _viewModel?.OnClick((float)cursor.X, (float)cursor.Y);
   }
 }

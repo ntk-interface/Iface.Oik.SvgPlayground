@@ -1,3 +1,4 @@
+using System.Drawing;
 using SkiaSharp;
 using Svg;
 using Svg.Skia;
@@ -7,6 +8,7 @@ namespace Iface.Oik.SvgPlayground.Util;
 public static class SkiaSvgUtil
 {
   public static void PaintSvgDocumentToSkiaCanvas(SvgDocument svgDocument,
+                                                  SKColor     bgColor,
                                                   SKCanvas    canvas,
                                                   float       x,
                                                   float       y,
@@ -14,7 +16,7 @@ public static class SkiaSvgUtil
   {
     if (svgDocument == null) return;
 
-    canvas.Clear();
+    canvas.Clear(bgColor);
 
     using (var skSvg = new SKSvg())
     {
@@ -29,5 +31,23 @@ public static class SkiaSvgUtil
                                       matrix);
       canvas.DrawImage(image, 0, 0);
     }
+  }
+
+
+  public static SKColor GetSkColor(Color? color)
+  {
+    if (!color.HasValue) return SKColor.Empty;
+
+    return new SKColor(color.Value.R,
+                       color.Value.G,
+                       color.Value.B,
+                       color.Value.A);
+  }
+
+
+  public static SKColor GetSkColor(string rgbString)
+  {
+    SKColor.TryParse(rgbString, out SKColor color);
+    return color;
   }
 }

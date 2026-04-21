@@ -2,34 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Iface.Oik.SvgPlayground.Util;
 
 namespace Iface.Oik.SvgPlayground.Model;
 
-public class TmStatus : TmTag
+public partial class TmStatus : TmTag
 {
-  private bool         _isOn;
+  [ObservableProperty]
+  private bool _isOn;
+  
+  [ObservableProperty]
   private TmStatusFlag _flag;
-
-  public bool IsOn
-  {
-    get => _isOn;
-    set
-    {
-      _isOn = value;
-      NotifyOnPropertyChanged();
-    }
-  }
-
-  public TmStatusFlag Flag
-  {
-    get => _flag;
-    set
-    {
-      _flag = value;
-      NotifyOnPropertyChanged();
-    }
-  }
 
   public bool IsUnreliable      => Flag.HasFlag(TmStatusFlag.Unreliable);
   public bool IsManuallySet     => Flag.HasFlag(TmStatusFlag.IsManuallySet);

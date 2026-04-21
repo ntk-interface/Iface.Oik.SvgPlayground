@@ -3,51 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Iface.Oik.SvgPlayground.Util;
 
 namespace Iface.Oik.SvgPlayground.Model;
 
-public class TmAnalog : TmTag
+public partial class TmAnalog : TmTag
 {
   public static readonly string InvalidValueString = "???";
-
-
+  
+  [ObservableProperty]
   private TmAnalogFlag _flag;
+  
+  [ObservableProperty]
   private float        _value;
+  
+  [ObservableProperty]
   private string       _unit;
-
-
-  public float Value
-  {
-    get => _value;
-    set
-    {
-      _value = value;
-      NotifyOnPropertyChanged();
-    }
-  }
-
-
-  public string Unit
-  {
-    get => _unit;
-    set
-    {
-      _unit = value;
-      NotifyOnPropertyChanged();
-    }
-  }
-
-
-  public TmAnalogFlag Flag
-  {
-    get => _flag;
-    set
-    {
-      _flag = value;
-      NotifyOnPropertyChanged();
-    }
-  }
 
 
   public bool IsUnreliable      => Flag.HasFlag(TmAnalogFlag.Unreliable);
