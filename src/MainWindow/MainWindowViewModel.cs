@@ -414,7 +414,7 @@ public partial class MainWindowViewModel : ObservableObject
 
   private Element FindElementUnderCursor(float x, float y)
   {
-    return _elements.FirstOrDefault(el => el.BoundContains(x, y));
+    return _elements.LastOrDefault(el => el.BoundContains(x, y) && el.IsSvgElementVisible());
   }
 
 

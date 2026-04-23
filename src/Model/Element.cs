@@ -194,6 +194,12 @@ public class Element
   }
 
 
+  public bool IsSvgElementVisible()
+  {
+    return _svgElement.IsVisible();
+  }
+
+
   private RectangleF GetSvgElementBound()
   {
     var bound = _svgElement.Bounds;

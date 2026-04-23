@@ -7,6 +7,26 @@ namespace Iface.Oik.SvgPlayground.Util;
 
 public static class SvgElementExtensions
 {
+  public static bool IsVisible(this SvgElement element)
+  {
+    if (string.Equals(element.Display.Trim(), "none", StringComparison.OrdinalIgnoreCase) ||
+        !string.Equals(element.Visibility.Trim(), "visible", StringComparison.OrdinalIgnoreCase))
+    {
+      return false;
+    }
+
+    if (element.Parent is SvgGroup parentGroup)
+    {
+      if (!IsVisible(parentGroup))
+      {
+        return false;
+      }
+    }
+
+    return true;
+  }
+  
+  
   public static string GetProperty(this SvgElement element, string property)
   {
     return property.ToLower() switch
