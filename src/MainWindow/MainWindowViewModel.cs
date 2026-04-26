@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -10,7 +11,9 @@ using Iface.Oik.SvgPlayground.Model;
 using Iface.Oik.SvgPlayground.Util;
 using Microsoft.Win32;
 using SkiaSharp;
+using SkiaSharp.Views.Desktop;
 using Svg;
+using Svg.Skia;
 
 namespace Iface.Oik.SvgPlayground.MainWindow;
 
@@ -21,17 +24,17 @@ public partial class MainWindowViewModel : ObservableObject
 
   private readonly MainWindowView _view;
 
-  private          string        _svgFilename;
-  private          SvgDocument   _svgDocument;
+  private string _svgFilename;
+  private SKSvg  _svg;
+  
+  
   private readonly List<Element> _elements = new();
 
   [ObservableProperty] private string _title;
 
-  public int     Width              { get; private set; }
-  public int     Height             { get; private set; }
-  public SKColor BgColor            { get; private set; }
-  public float   ViewBoxWidthCoeff  { get; private set; }
-  public float   ViewBoxHeightCoeff { get; private set; }
+  public int     Width   { get; private set; }
+  public int     Height  { get; private set; }
+  public SKColor BgColor { get; private set; }
 
   private float _scale = 1;
   private float _x     = 0;
@@ -46,6 +49,9 @@ public partial class MainWindowViewModel : ObservableObject
   public ObservableCollection<LogItem> Log { get; } = new();
 
 
+  private readonly bool _isBenchmarkingEnabled;
+
+
   private int           _tickInterval = 1000;
   private PeriodicTimer _tickTimer;
 
@@ -57,6 +63,8 @@ public partial class MainWindowViewModel : ObservableObject
     Title = "SVG";
 
     FixTextBoxFloatValue();
+
+    _isBenchmarkingEnabled = Environment.GetCommandLineArgs().Contains("/benchmark");
   }
 
 
@@ -91,23 +99,44 @@ public partial class MainWindowViewModel : ObservableObject
 
   private void ExecuteOpenFile(string filename)
   {
-    if (filename == null) return;
+    if (string.IsNullOrEmpty(filename))
+    {
+      return;
+    }
 
     _svgFilename = filename;
+
     try
     {
       ClearEverything();
 
-      _svgDocument = SvgDocument.Open(filename);
+      var sw = new Stopwatch();
+      if (_isBenchmarkingEnabled)
+      {
+        sw.Start();
+      }
+      _svg = new SKSvg();
+      _svg.Load(filename);
+
+      if (_isBenchmarkingEnabled)
+      {
+        AddToLog($"Загрузка файла SVG {sw.ElapsedMilliseconds}мс");
+        sw.Restart();
+      }
 
       SetBaseInfo();
       ParseElements();
-      Update();
+      if (_isBenchmarkingEnabled)
+      {
+        AddToLog($"Определение активных элементов {sw.ElapsedMilliseconds}мс");
+      }
+      Update(updateElements: true);
+      
       RunTickTimerIfNeeded();
     }
     catch (Exception ex)
     {
-      _svgDocument = null;
+      _svg = null;
       MessageBox.Show("Ошибка при открытии файла: " + ex.Message);
     }
   }
@@ -128,45 +157,28 @@ public partial class MainWindowViewModel : ObservableObject
 
   private void SetBaseInfo()
   {
-    Width  = (int)_svgDocument.Width.ToDeviceValue(null, UnitRenderingType.Horizontal, _svgDocument);
-    Height = (int)_svgDocument.Height.ToDeviceValue(null, UnitRenderingType.Vertical, _svgDocument);
-
-    var viewBoxWidth  = _svgDocument.ViewBox.Width  - _svgDocument.ViewBox.MinX;
-    var viewBoxHeight = _svgDocument.ViewBox.Height - _svgDocument.ViewBox.MinY;
-
-    if (viewBoxWidth  > 0 &&
-        viewBoxHeight > 0)
-    {
-      ViewBoxWidthCoeff  = _svgDocument.Width.Value  / viewBoxWidth;
-      ViewBoxHeightCoeff = _svgDocument.Height.Value / viewBoxHeight;
-    }
-    else
-    {
-      ViewBoxWidthCoeff  = 1;
-      ViewBoxHeightCoeff = 1;
-    }
-
-    Title = SvgUtil.FindTitleElement(_svgDocument)?.Content ?? "SVG";
+    Width  = (int)_svg.Picture!.CullRect.Width;
+    Height = (int)_svg.Picture!.CullRect.Height;
+    Title  = _svg.SourceDocument!.Descendants().OfType<SvgTitle>().FirstOrDefault()?.Content ?? "SVG";
 
     BgColor = SKColors.White;
 
-    foreach (var node in _svgDocument.Children)
+    foreach (var node in _svg.SourceDocument!.Children)
     {
       switch (node)
       {
-        case SvgRectangle rect when rect.Width.Type == SvgUnitType.Percentage  &&
-                                    rect.Width.Value.Equals(100)               &&
-                                    rect.Height.Type == SvgUnitType.Percentage &&
-                                    rect.Height.Value.Equals(100):
-          BgColor = SkiaSvgUtil.GetSkColor((rect.Fill as SvgColourServer)?.Colour);
+        case SvgRectangle rect when rect.Width is { Type : SvgUnitType.Percentage, Value: 100 } &&
+                                    rect.Height is { Type: SvgUnitType.Percentage, Value: 100 } &&
+                                    rect.Fill is SvgColourServer svgColourServer:
+          BgColor = svgColourServer.Colour.ToSKColor();
           break;
 
         case NonSvgElement nonSvg when nonSvg.Name == "namedview": // фон страницы в Inkscape
-          if (nonSvg.CustomAttributes.TryGetValue("pagecolor", out var color))
+          if (nonSvg.CustomAttributes.TryGetValue("pagecolor", out var pageColorStr) &&
+              SKColor.TryParse(pageColorStr, out var pageColor))
           {
-            BgColor = SkiaSvgUtil.GetSkColor(color);
+            BgColor = pageColor;
           }
-
           break;
       }
     }
@@ -176,16 +188,18 @@ public partial class MainWindowViewModel : ObservableObject
   private void ParseElements()
   {
     _elements.Clear();
-
+    
     try
     {
-      var svgElements = SvgUtil.GetElementsCollectionWithAttribute(_svgDocument, "oikelement");
-      foreach (var svgElement in svgElements)
+      if (_svg.TryEnsureRetainedSceneGraph(out var svgSceneDocument) && svgSceneDocument != null)
       {
-        var element = Element.Create(this, svgElement);
-        if (element != null)
+        foreach (var svgNode in GetOikElementsSceneNodesRecursive(svgSceneDocument.Root))
         {
-          _elements.Add(element);
+          var element = Element.Create(this, svgNode);
+          if (element != null)
+          {
+            _elements.Add(element);
+          }
         }
       }
     }
@@ -197,19 +211,52 @@ public partial class MainWindowViewModel : ObservableObject
   }
 
 
-  private void Update()
+  private IEnumerable<SvgSceneNode> GetOikElementsSceneNodesRecursive(SvgSceneNode node)
   {
-    if (_svgDocument == null)
+    foreach (var childNode in node.Children)
+    {
+      foreach (var oikElementChildNode in GetOikElementsSceneNodesRecursive(childNode))
+      {
+        yield return oikElementChildNode;
+      }
+    }
+    
+    if (node.Element is SvgGroup groupElement && 
+        groupElement.CustomAttributes.Keys.Any(k => k.EndsWith("oikelement")))
+    {
+      yield return node;
+    }
+  }
+
+
+  private void Update(bool updateElements = false)
+  {
+    if (_svg == null)
     {
       return;
     }
 
-    foreach (var element in _elements)
+    if (updateElements)
     {
-      element.Update();
-    }
+      var sw = new Stopwatch();
+      if (_isBenchmarkingEnabled)
+      {
+        sw.Start();
+      }
 
-    InvalidateCanvas();
+      foreach (var element in _elements)
+      {
+        element.Update();
+      }
+
+      if (_isBenchmarkingEnabled)
+      {
+        AddToLog($"Элементы обновлены {sw.ElapsedMilliseconds}мс");
+      }
+    }
+    
+
+    InvalidateCanvas(updateElements);
   }
 
 
@@ -242,15 +289,29 @@ public partial class MainWindowViewModel : ObservableObject
       element.InvokeTick();
     }
 
-    InvalidateCanvas();
+    InvalidateCanvas(areElementsUpdated: true);
   }
 
 
-  private void InvalidateCanvas()
+  private void InvalidateCanvas(bool areElementsUpdated)
   {
-    Application.Current
-               .Dispatcher
-              ?.Invoke(() => _view?.InvalidateCanvas());
+    if (areElementsUpdated)
+    {
+      var sw = new Stopwatch();
+      if (_isBenchmarkingEnabled)
+      {
+        sw.Start();
+      }
+
+      _svg.FromSvgDocument(_svg.SourceDocument);
+    
+      if (_isBenchmarkingEnabled)
+      {
+        AddToLog($"Рендер SVG в память {sw.ElapsedMilliseconds}мс");
+      }
+    }
+    
+    Application.Current.Dispatcher?.Invoke(() => _view?.InvalidateCanvas());
   }
 
 
@@ -258,7 +319,23 @@ public partial class MainWindowViewModel : ObservableObject
   {
     try
     {
-      SkiaSvgUtil.PaintSvgDocumentToSkiaCanvas(_svgDocument, BgColor, canvas, _x, _y, _scale);
+      if (_svg?.Picture == null)
+      {
+        return;
+      }
+      var sw = new Stopwatch();
+      if (_isBenchmarkingEnabled)
+      {
+        sw.Start();
+      }
+      canvas.Clear(BgColor);
+      canvas.Translate(_x, _y);
+      canvas.Scale(_scale);
+      canvas.DrawPicture(_svg.Picture);
+      if (_isBenchmarkingEnabled)
+      {
+        AddToLog($"Рендер SVG на экран {sw.ElapsedMilliseconds}мс");
+      }
     }
     catch (Exception ex)
     {
@@ -414,7 +491,7 @@ public partial class MainWindowViewModel : ObservableObject
 
   private Element FindElementUnderCursor(float x, float y)
   {
-    return _elements.LastOrDefault(el => el.BoundContains(x, y) && el.IsSvgElementVisible());
+    return _elements.FirstOrDefault(el => el.BoundContains(x, y) && el.IsVisible());
   }
 
 
@@ -516,7 +593,7 @@ public partial class MainWindowViewModel : ObservableObject
 
     TmStatuses.Add(tmStatus);
     
-    tmStatus.PropertyChanged += (_, _) => Update();
+    tmStatus.PropertyChanged += (_, _) => Update(updateElements: true);
 
     return TmStatuses.Count - 1;
   }
@@ -534,7 +611,7 @@ public partial class MainWindowViewModel : ObservableObject
 
     TmAnalogs.Add(tmAnalog);
     
-    tmAnalog.PropertyChanged += (_, _) => Update();
+    tmAnalog.PropertyChanged += (_, _) => Update(updateElements: true);
 
     return TmAnalogs.Count - 1;
   }

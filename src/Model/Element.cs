@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
+using System.Linq;
 using Iface.Oik.SvgPlayground.MainWindow;
 using Iface.Oik.SvgPlayground.Util;
 using Jint;
 using Jint.Parser;
+using ShimSkiaSharp;
 using Svg;
-using Svg.Transforms;
+using Svg.Skia;
 
 namespace Iface.Oik.SvgPlayground.Model;
 
@@ -14,12 +15,12 @@ public class Element
 {
   private readonly MainWindowViewModel _owner;
   private readonly SvgVisualElement    _svgElement;
+  private readonly SvgSceneNode        _svgNode;
 
-  private readonly string                          _script;
-  private readonly Engine                          _scriptEngine;
-  private readonly IDictionary<string, SvgElement> _elementsWithId;
-  private readonly bool                            _isUpdatable;
-  private readonly RectangleF                      _bound;
+  private readonly string                         _script;
+  private readonly Engine                         _scriptEngine;
+  private readonly Dictionary<string, SvgElement> _elementsWithId;
+  private readonly bool                           _isUpdatable;
 
   public ElementCommand       ClickCommand        { get; private set; }
   public List<ElementCommand> ContextMenuCommands { get; } = new();
@@ -30,21 +31,22 @@ public class Element
   public string CustomToolTip { get; set; }
 
 
-  private Element(MainWindowViewModel owner,
-                  SvgVisualElement    svgElement)
+  private Element(MainWindowViewModel owner, SvgVisualElement svgElement, SvgSceneNode svgNode)
   {
     _owner      = owner;
     _svgElement = svgElement;
+    _svgNode    = svgNode;
 
-    var scriptElement = SvgUtil.FindDescriptionElement(_svgElement);
+    var scriptElement = _svgElement.Descendants().OfType<SvgDescription>().FirstOrDefault();
     if (scriptElement == null)
     {
       return;
     }
     _script = scriptElement.Content;
 
-    _elementsWithId = new Dictionary<string, SvgElement>(SvgUtil.GetElementsDictionaryWithAttribute(_svgElement,
-                                                           "oikid"));
+    _elementsWithId = new(_svgElement.Descendants()
+                                     .Where(el => el.CustomAttributes.Keys.Any(k => k.EndsWith("oikid")))
+                                     .ToDictionary(el => el.CustomAttributes.First(kvp => kvp.Key.EndsWith("oikid")).Value));
 
     _scriptEngine = new Engine();
 
@@ -138,21 +140,18 @@ public class Element
     _isUpdatable  = _scriptEngine.Global.HasProperty("update");
     IsTickEnabled = _scriptEngine.Global.HasProperty("tick");
 
-    _bound = GetSvgElementBound();
-
     IsInit = true;
   }
 
 
-  public static Element Create(MainWindowViewModel owner, SvgElement rootElement)
+  public static Element Create(MainWindowViewModel owner, SvgSceneNode svgNode)
   {
-    if (owner == null ||
-        !(rootElement is SvgVisualElement visualRootElement))
+    if (owner == null || svgNode?.Element is not SvgVisualElement svgElement)
     {
       return null;
     }
 
-    var oikSvgElement = new Element(owner, visualRootElement);
+    var oikSvgElement = new Element(owner, svgElement, svgNode);
 
     return (oikSvgElement.IsInit) ? oikSvgElement : null;
   }
@@ -190,37 +189,13 @@ public class Element
 
   public bool BoundContains(float x, float y)
   {
-    return _bound.Contains(x, y);
+    return _svgNode.TransformedBounds.Contains(new SKPoint(x, y));
   }
 
 
-  public bool IsSvgElementVisible()
+  public bool IsVisible()
   {
-    return _svgElement.IsVisible();
-  }
-
-
-  private RectangleF GetSvgElementBound()
-  {
-    var bound = _svgElement.Bounds;
-
-    if (_svgElement.Parent is SvgGroup parentGroup)
-    {
-      parentGroup.Transforms?.ForEach(t =>
-      {
-        if (t is SvgTranslate translate)
-        {
-          bound.X += translate.X;
-          bound.Y += translate.Y;
-        }
-      });
-    }
-    bound.X      *= _owner.ViewBoxWidthCoeff;
-    bound.Y      *= _owner.ViewBoxHeightCoeff;
-    bound.Width  *= _owner.ViewBoxWidthCoeff;
-    bound.Height *= _owner.ViewBoxHeightCoeff;
-    
-    return bound;
+    return _svgElement.IsVisibleRecursive();
   }
 
 
