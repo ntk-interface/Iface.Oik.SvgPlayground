@@ -19,6 +19,9 @@
             <Setter Property="HorizontalContentAlignment" Value="Center" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#DDDDDD" />
+        </Style>
         
         <Style Selector="RepeatButton.canvas-button">
             <Setter Property="Background" Value="#CCCCCC" />
@@ -31,9 +34,12 @@
             <Setter Property="Opacity" Value=".9" />
             <Setter Property="FontSize" Value="12" />
         </Style>
+        <Style Selector="RepeatButton.canvas-button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#DDDDDD" />
+        </Style>
     </Window.Styles>
 
-    <Grid ColumnDefinitions="400,*">
+    <Grid ColumnDefinitions="420,*">
         <Grid Grid.Column="0"
               Margin="8" 
               RowDefinitions="Auto,Auto,Auto,*,Auto">
@@ -63,18 +69,18 @@
                             <StackPanel Orientation="Horizontal"
                                         Margin="0,0,0,8">
                                 <TextBlock Text="{Binding}"
-                                           Width="90"
+                                           Width="96"
                                            VerticalAlignment="Center" />
                                 <CheckBox IsChecked="{Binding IsOn}"
                                           Content="включен"
-                                          Width="90"
+                                          Width="96"
                                           VerticalAlignment="Center"
                                           Margin="8,0,0,0" />
                                 <ComboBox ItemsSource="{Binding FlagsList}"
                                           DisplayMemberBinding="{Binding Value}"
                                           SelectedValueBinding="{Binding Key}"
                                           SelectedValue="{Binding Flag}"
-                                          Width="150"
+                                          Width="160"
                                           VerticalAlignment="Center"
                                           Margin="8,0,0,0" />
                             </StackPanel>
@@ -94,21 +100,23 @@
                             <StackPanel Orientation="Horizontal"
                                         Margin="0,0,0,8">
                                 <TextBlock Text="{Binding}"
-                                           Width="90"
+                                           Width="96"
                                            VerticalAlignment="Center" />
                                 <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
-                                         Width="40"
+                                         Width="48"
+                                         MinWidth="0"
                                          VerticalAlignment="Center"
                                          Margin="8,0,0,0" />
                                 <TextBox Text="{Binding Unit, UpdateSourceTrigger=PropertyChanged}"
                                          Width="40"
+                                         MinWidth="0"
                                          VerticalAlignment="Center"
                                          Margin="8,0,0,0" />
                                 <ComboBox ItemsSource="{Binding FlagsList}"
                                           DisplayMemberBinding="{Binding Value}"
                                           SelectedValueBinding="{Binding Key}"
                                           SelectedValue="{Binding Flag}"
-                                          Width="150"
+                                          Width="160"
                                           VerticalAlignment="Center"
                                           Margin="8,0,0,0" />
                             </StackPanel>
@@ -153,33 +161,33 @@
                 </Grid>
             </ScrollViewer>
             <RepeatButton Command="{Binding ZoomInCommand}"
-                          Content="+"
                           Classes="canvas-button"
+                          Content="+"
                           Margin="0,10,10,0" />
             <RepeatButton Command="{Binding ZoomOutCommand}"
-                          Content="-"
                           Classes="canvas-button"
+                          Content="-"
                           Margin="0,50,10,0" />
             <RepeatButton Command="{Binding Zoom1Command}"
-                          Content="1:1"
                           Classes="canvas-button"
+                          Content="1:1"
                           Margin="0,90,10,0" />
 
             <RepeatButton Command="{Binding MoveUpCommand}"
-                          Content="↑"
                           Classes="canvas-button"
+                          Content="↑"
                           Margin="0,10,100,0" />
             <RepeatButton Command="{Binding MoveRightCommand}"
-                          Content="→"
                           Classes="canvas-button"
+                          Content="→"
                           Margin="0,50,60,0" />
             <RepeatButton Command="{Binding MoveDownCommand}"
-                          Content="↓"
                           Classes="canvas-button"
+                          Content="↓"
                           Margin="0,50,100,0" />
             <RepeatButton Command="{Binding MoveLeftCommand}"
-                          Content="←"
                           Classes="canvas-button"
+                          Content="←"
                           Margin="0,50,140,0" />
         </Grid>
     </Grid>
