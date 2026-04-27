@@ -4,14 +4,15 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using System.Windows;
+using System.Threading.Tasks;
+using Avalonia.Controls;
+using Avalonia.Platform.Storage;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Iface.Oik.SvgPlayground.Model;
 using Iface.Oik.SvgPlayground.Util;
-using Microsoft.Win32;
 using SkiaSharp;
-using SkiaSharp.Views.Desktop;
 using Svg;
 using Svg.Skia;
 
@@ -24,7 +25,7 @@ public partial class MainWindowViewModel : ObservableObject
 
   private readonly MainWindowView _view;
 
-  private string _svgFilename;
+  private Uri _svgUri;
   private SKSvg  _svg;
   
   
@@ -70,41 +71,38 @@ public partial class MainWindowViewModel : ObservableObject
 
   private static void FixTextBoxFloatValue()
   {
-    FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
+    // FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
   }
 
 
   [RelayCommand]
-  private void OpenFile()
+  private async Task OpenFile()
   {
-    var openFileDialog = new OpenFileDialog
+    var files = await TopLevel.GetTopLevel(_view)!.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
     {
-      Filter = "SVG (*.svg)|*.svg",
-    };
-    if (openFileDialog.ShowDialog() != true)
+      AllowMultiple  = false,
+      FileTypeFilter = new[] { new FilePickerFileType("SVG") { Patterns = new[] { "*.svg" } } }
+    });
+    
+    if (files.Count == 0)
     {
       return;
     }
 
-    ExecuteOpenFile(openFileDialog.FileName);
+    ExecuteOpenFile(files[0].Path);
   }
 
 
   [RelayCommand]
   private void ReloadFile()
   {
-    ExecuteOpenFile(_svgFilename);
+    ExecuteOpenFile(_svgUri);
   }
 
 
-  private void ExecuteOpenFile(string filename)
+  private void ExecuteOpenFile(Uri uri)
   {
-    if (string.IsNullOrEmpty(filename))
-    {
-      return;
-    }
-
-    _svgFilename = filename;
+    _svgUri = uri;
 
     try
     {
@@ -116,7 +114,7 @@ public partial class MainWindowViewModel : ObservableObject
         sw.Start();
       }
       _svg = new SKSvg();
-      _svg.Load(filename);
+      _svg.Load(uri.LocalPath);
 
       if (_isBenchmarkingEnabled)
       {
@@ -136,8 +134,9 @@ public partial class MainWindowViewModel : ObservableObject
     }
     catch (Exception ex)
     {
+      _svg?.Dispose();
       _svg = null;
-      MessageBox.Show("Ошибка при открытии файла: " + ex.Message);
+      AddToLog($"Ошибка при открытии файла: {ex.Message}");
     }
   }
 
@@ -170,7 +169,7 @@ public partial class MainWindowViewModel : ObservableObject
         case SvgRectangle rect when rect.Width is { Type : SvgUnitType.Percentage, Value: 100 } &&
                                     rect.Height is { Type: SvgUnitType.Percentage, Value: 100 } &&
                                     rect.Fill is SvgColourServer svgColourServer:
-          BgColor = svgColourServer.Colour.ToSKColor();
+          BgColor = (uint) svgColourServer.Colour.ToArgb();
           break;
 
         case NonSvgElement nonSvg when nonSvg.Name == "namedview": // фон страницы в Inkscape
@@ -311,7 +310,7 @@ public partial class MainWindowViewModel : ObservableObject
       }
     }
     
-    Application.Current.Dispatcher?.Invoke(() => _view?.InvalidateCanvas());
+    Dispatcher.UIThread.Post(() => _view?.InvalidateCanvas());
   }
 
 
