@@ -16,18 +16,22 @@
 string getElementProperty(string id, string propertyName)
 
 Получает значение свойства элемента с заданным oik:oikid. Возвращает null в случае ошибки
+Можно обращаться непосредственно к группе, для этого указать в качестве аргумента строку '_self'
 
 var breakerFill = getElementProperty('breaker', 'fill');
 var y = getElementProperty('rectangle', 'y');
+var display = getElementProperty('_self', 'display');
 ```
 
 ```
 void setElementProperty(string id, string propertyName, string value)
 
 Устанавливает значение свойства элемента с заданным oik:oikid
+Можно обращаться непосредственно к группе, для этого указать в качестве аргумента строку '_self'
 
 setElementProperty('breaker', 'fill', 'white');
 setElementProperty('value', 'text', getTmAnalogValueString(ti1));
+setElementProperty('_self', 'display', 'none');
 ```
 
 #### Фунции работы с телеметрией

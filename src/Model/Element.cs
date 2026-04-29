@@ -47,6 +47,7 @@ public class Element
     _elementsWithId = new(_svgElement.Descendants()
                                      .Where(el => el.CustomAttributes.Keys.Any(k => k.EndsWith("oikid")))
                                      .ToDictionary(el => el.CustomAttributes.First(kvp => kvp.Key.EndsWith("oikid")).Value));
+    _elementsWithId.Add("_self", svgElement);
 
     _scriptEngine = new Engine();
 
