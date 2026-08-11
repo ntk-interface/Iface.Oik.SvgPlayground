@@ -9,8 +9,15 @@ public static class SvgElementExtensions
 {
   public static bool IsVisibleRecursive(this SvgElement element)
   {
-    if (string.Equals(element.Display.Trim(), "none", StringComparison.OrdinalIgnoreCase) ||
-        !string.Equals(element.Visibility.Trim(), "visible", StringComparison.OrdinalIgnoreCase))
+    if (element == null)
+    {
+      return false;
+    }
+
+    var display    = element.Display?.Trim();
+    var visibility = element.Visibility?.Trim();
+    if (string.Equals(display, "none", StringComparison.OrdinalIgnoreCase) ||
+        (visibility != null && !string.Equals(visibility, "visible", StringComparison.OrdinalIgnoreCase)))
     {
       return false;
     }
