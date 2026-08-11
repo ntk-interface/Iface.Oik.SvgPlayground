@@ -33,6 +33,7 @@ public enum ElementCommandType
   [Description("Открыть в уник. вкладке")]    OpenDocumentInUniqueTab,
   [Description("Открыть видео в окне")]       OpenVideoInOverview,
   [Description("Открыть график")]             OpenTmStatusChart,
+  [Description("Вызвать функцию скрипта")]    InvokeScriptFunction,
 }
 
 

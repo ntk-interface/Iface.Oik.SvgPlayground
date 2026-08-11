@@ -131,6 +131,7 @@ public class Element
        .SetValue("START_PROCESS",                    ElementCommandType.StartProcess)
        .SetValue("OPEN_VIDEO_IN_OVERVIEW",           ElementCommandType.OpenVideoInOverview)
        .SetValue("OPEN_TM_STATUS_CHART",             ElementCommandType.OpenTmStatusChart)
+       .SetValue("INVOKE_SCRIPT_FUNCTION",           ElementCommandType.InvokeScriptFunction)
        .Execute(_script, new ParserOptions { Tolerant = true });
     }
     catch (Exception ex)
@@ -184,6 +185,30 @@ public class Element
     catch (Exception ex)
     {
       LogMessage("Ошибка выполнения циклической функции скрипта дорасчета: " + ex.Message);
+    }
+  }
+
+
+  public void InvokeFunction(string functionInfo)
+  {
+    if (string.IsNullOrEmpty(functionInfo))
+    {
+      return;
+    }
+
+    var (functionName, arguments) = ScriptUtil.SplitFunctionArguments(functionInfo);
+    if (string.IsNullOrEmpty(functionName))
+    {
+      return;
+    }
+
+    try
+    {
+      _scriptEngine.Invoke(functionName, arguments.ToArray<object>());
+    }
+    catch (Exception ex)
+    {
+      LogMessage($"Ошибка вызова функции {functionName}: " + ex.Message);
     }
   }
 

@@ -63,15 +63,7 @@ public partial class MainWindowViewModel : ObservableObject
 
     Title = "SVG";
 
-    FixTextBoxFloatValue();
-
     _isBenchmarkingEnabled = Environment.GetCommandLineArgs().Contains("/benchmark");
-  }
-
-
-  private static void FixTextBoxFloatValue()
-  {
-    // FrameworkCompatibilityPreferences.KeepTextBoxDisplaySynchronizedWithTextProperty = false;
   }
 
 
@@ -292,6 +284,14 @@ public partial class MainWindowViewModel : ObservableObject
   }
 
 
+  private void InvokeScriptFunction(Element element, string functionInfo)
+  {
+    element.InvokeFunction(functionInfo);
+
+    InvalidateCanvas(areElementsUpdated: true);
+  }
+
+
   private void InvalidateCanvas(bool areElementsUpdated)
   {
     if (areElementsUpdated)
@@ -360,6 +360,12 @@ public partial class MainWindowViewModel : ObservableObject
     if (element.ClickCommand != null)
     {
       AddToLog(GetCommandDescription(element.ClickCommand));
+      
+      if (element.ClickCommand.Type == ElementCommandType.InvokeScriptFunction &&
+          !string.IsNullOrEmpty(element.ClickCommand.ParameterString))
+      {
+        InvokeScriptFunction(element, element.ClickCommand.ParameterString);
+      }
     }
 
     foreach (var command in element.ContextMenuCommands.Where(cmd => cmd.Type != ElementCommandType.None))
@@ -409,6 +415,11 @@ public partial class MainWindowViewModel : ObservableObject
       case ElementCommandType.StartProcess:
       case ElementCommandType.OpenVideoInOverview:
         result += $"   {command.ParameterString}";
+        break;
+      
+      case ElementCommandType.InvokeScriptFunction:
+        var (functionName, arguments) =  ScriptUtil.SplitFunctionArguments(command.ParameterString);
+        result += $"   {functionName}({string.Join(", ", arguments)})";
         break;
     }
 
