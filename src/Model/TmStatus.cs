@@ -9,6 +9,9 @@ namespace Iface.Oik.SvgPlayground.Model;
 
 public partial class TmStatus : TmTag
 {
+  protected override string ToStringPrefix => "#TC";
+  
+  
   [ObservableProperty]
   private bool _isOn;
   

@@ -12,6 +12,8 @@ public partial class TmAnalog : TmTag
 {
   public static readonly string InvalidValueString = "???";
   
+  protected override string ToStringPrefix => "#TT";
+  
   [ObservableProperty]
   private TmAnalogFlag _flag;
   

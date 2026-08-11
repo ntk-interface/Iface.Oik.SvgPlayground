@@ -406,6 +406,7 @@ OPEN_DOCUMENT_IN_NEW_TAB          - открыть документ в ново�
 OPEN_DOCUMENT_IN_UNIQUE_TAB       - открыть документ в уникальной вкладке
 OPEN_DOCUMENT_IN_OVERVIEW         - открыть документ во всплывающем окне
 START_PROCESS                     - запустить процесс
+INVOKE_SCRIPT_FUNCTION            - вызвать функцию скрипта элемента
 OPEN_VIDEO_IN_OVERVIEW            - открыть видео во всплывающем окне
 SHOW_TM_STATUS                    - показать окно сигнала
 TELECONTROL                       - подать команду ТУ (через окно сигнала)

@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Iface.Oik.SvgPlayground.Model;
 
-public class TmTag : ObservableObject
+public abstract class TmTag : ObservableObject
 {
   public int Ch    { get; }
   public int Rtu   { get; }
@@ -17,21 +17,12 @@ public class TmTag : ObservableObject
   }
 
 
+  protected abstract string ToStringPrefix { get; }
+
+
   public override string ToString()
   {
-    string prefix;
-    switch (this)
-    {
-      case TmStatus _:
-        prefix = "#TC";
-        break;
-      case TmAnalog _:
-        prefix = "#TT";
-        break;
-      default:
-        return string.Empty;
-    }
-    return $"{prefix}{Ch}:{Rtu}:{Point}";
+    return $"{ToStringPrefix}{Ch}:{Rtu}:{Point}";
   }
 
 
