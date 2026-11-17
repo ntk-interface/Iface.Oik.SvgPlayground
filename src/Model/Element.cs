@@ -27,8 +27,12 @@ public class Element
   public bool                 IsInit              { get; }
   public bool                 IsTickEnabled       { get; }
   
+  public SKRect Bound => _svgNode.TransformedBounds;
+  
   
   public string CustomToolTip { get; set; }
+  
+  public bool IsUnackedMarkVisible { get; private set; }
 
 
   private Element(MainWindowViewModel owner, SvgVisualElement svgElement, SvgSceneNode svgNode)
@@ -59,6 +63,7 @@ public class Element
        .SetValue("logMessage",                       new Action<string>(LogMessage))
        .SetValue("setElementProperty",               new Action<string, string, string>(SetElementProperty))
        .SetValue("getElementProperty",               new Func<string, string, string>(GetElementProperty))
+       .SetValue("setElementUnackedMarkVisible",     new Action<bool>(SetElementUnackedMarkVisible))
        .SetValue("initTmStatus",                     new Func<int, int, int, string, int>(_owner.InitTmStatus))
        .SetValue("initTmAnalog",                     new Func<int, int, int, string, int>(_owner.InitTmAnalog))
        .SetValue("initVariable",                     new Func<string, string, int>(_owner.InitVariable))
@@ -215,7 +220,7 @@ public class Element
 
   public bool BoundContains(float x, float y)
   {
-    return _svgNode.TransformedBounds.Contains(new SKPoint(x, y));
+    return Bound.Contains(new SKPoint(x, y));
   }
 
 
@@ -259,6 +264,12 @@ public class Element
       LogMessage(ex.Message);
       return null;
     }
+  }
+  
+  
+  private void SetElementUnackedMarkVisible(bool isVisible)
+  {
+    IsUnackedMarkVisible = isVisible;
   }
 
 

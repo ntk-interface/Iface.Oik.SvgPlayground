@@ -34,6 +34,12 @@ setElementProperty('value', 'text', getTmAnalogValueString(ti1));
 setElementProperty('_self', 'display', 'none');
 ```
 
+```
+void setElementUnackedMarkVisible(bool isVisible)
+
+Взводит или снимает отметку неквитированности у элемента схемы
+```
+
 #### Фунции работы с телеметрией
 
 

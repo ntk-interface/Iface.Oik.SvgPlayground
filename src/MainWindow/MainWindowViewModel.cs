@@ -23,6 +23,8 @@ public partial class MainWindowViewModel : ObservableObject
   private const float ScaleStep = 1.5f;
   private const float MoveStep  = 50f;
 
+  private const float UnackedMarkMargin = 4f;
+
   private readonly MainWindowView _view;
 
   private Uri _svgUri;
@@ -331,6 +333,7 @@ public partial class MainWindowViewModel : ObservableObject
       canvas.Translate(_x, _y);
       canvas.Scale(_scale);
       canvas.DrawPicture(_svg.Picture);
+      PaintUnackedMarks(canvas);
       if (_isBenchmarkingEnabled)
       {
         AddToLog($"Рендер SVG на экран {sw.ElapsedMilliseconds}мс");
@@ -339,6 +342,33 @@ public partial class MainWindowViewModel : ObservableObject
     catch (Exception ex)
     {
       AddToLog($"Ошибка при попытке отрисовки: {ex.Message}");
+    }
+  }
+  
+  
+  private void PaintUnackedMarks(SKCanvas canvas)
+  {
+    using var paint = new SKPaint
+    {
+      IsStroke    = true,
+      StrokeWidth = 3,
+      Color       = SKColors.Red,
+    };
+
+    foreach (var element in _elements)
+    {
+      if (!element.IsUnackedMarkVisible || !element.IsVisible())
+      {
+        continue;
+      }
+
+      var bound = element.Bound;
+      canvas.DrawRect(new SKRect(bound.Left   - UnackedMarkMargin,
+                                 bound.Top    - UnackedMarkMargin,
+                                 bound.Right  + UnackedMarkMargin,
+                                 bound.Bottom + UnackedMarkMargin),
+                      paint
+      );
     }
   }
 
