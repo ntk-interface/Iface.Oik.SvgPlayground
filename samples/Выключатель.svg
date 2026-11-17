@@ -14,7 +14,9 @@
 			initTmStatusDefaultCommands(ts);
 
             function update() {
-            	if (isTmStatusUnreliable(ts)) {
+            	setElementUnackedMarkVisible(isTmStatusUnacked(ts));
+				
+				if (isTmStatusUnreliable(ts)) {
             		setElementProperty('breaker', 'fill', 'white');
             		setElementProperty('unreliable', 'display', 'block');
             		setElementProperty('malfunction', 'display', 'none');
