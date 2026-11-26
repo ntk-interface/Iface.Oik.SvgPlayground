@@ -108,6 +108,8 @@ public partial class MainWindowViewModel : ObservableObject
         sw.Start();
       }
       _svg = new SKSvg();
+      SvgFontUtil.SetupDefaultFont();
+      SvgFontUtil.RegisterSvgTypeface(_svg);
       _svg.Load(uri.LocalPath);
 
       if (_isBenchmarkingEnabled)
